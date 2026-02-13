@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
+  flutter_svg: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +44,13 @@ flutter:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/app_logo.png"
+  image_path: "assets/images/app_icon.png"
   min_sdk_android: 21
 
+flutter_assets:
+  assets_path: assets/images/
+  output_path: lib/core/utils/
+  filename: app_images.dart
+  field_prefix: null
+  ignore_comments: true
+  classname: AppImages
