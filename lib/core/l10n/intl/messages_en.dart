@@ -21,5 +21,20 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "onBoardingSearchSubTitle": MessageLookupByLibrary.simpleMessage(
+      "We offer you the best carefully selected fruits. Check details, photos and reviews to ensure you choose the perfect fruit.",
+    ),
+    "onBoardingSearchTitle": MessageLookupByLibrary.simpleMessage(
+      "Search & Shop",
+    ),
+    "onBoardingWelcomeSubTitle": MessageLookupByLibrary.simpleMessage(
+      "Discover a unique shopping experience with FruitHUB. Explore our wide selection of premium fresh fruits and get the best deals with high quality.",
+    ),
+    "onBoardingWelcomeTitle": MessageLookupByLibrary.simpleMessage(
+      "Welcome to ",
+    ),
+    "skip": MessageLookupByLibrary.simpleMessage("skip"),
+    "startNowButton": MessageLookupByLibrary.simpleMessage("Start Now"),
+  };
 }

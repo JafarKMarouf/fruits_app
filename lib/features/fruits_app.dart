@@ -12,7 +12,7 @@ class FruitsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Cairo'),
-      locale: const Locale('en'),
+      locale: const Locale('ar'),
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

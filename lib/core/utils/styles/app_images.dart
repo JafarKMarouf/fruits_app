@@ -15,7 +15,7 @@ class AppImages {
 
   static const String imagesFacebook = 'assets/images/facebook.svg';
 
-  static const String imagesFruitBasket1 = 'assets/images/fruit-basket1.svg';
+  static const String imagesFruitBasket = 'assets/images/fruit-basket.svg';
 
   static const String imagesGoogle = 'assets/images/google.svg';
 
@@ -30,7 +30,8 @@ class AppImages {
 
   static const String imagesPlant = 'assets/images/plant.svg';
 
-  static const String imagesSearchNormal = 'assets/images/search-normal.svg';
+  static const String imagesSearchNormal =
+      'assets/images/search.svg-normal.svg';
 
   static const String imagesSetting = 'assets/images/setting.svg';
 

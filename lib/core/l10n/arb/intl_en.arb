@@ -1,1 +1,9 @@
-{}
+{
+  "@@locale": "en",
+  "onBoardingWelcomeTitle": "Welcome to ",
+  "onBoardingWelcomeSubTitle": "Discover a unique shopping experience with FruitHUB. Explore our wide selection of premium fresh fruits and get the best deals with high quality.",
+  "onBoardingSearchTitle": "Search & Shop",
+  "onBoardingSearchSubTitle": "We offer you the best carefully selected fruits. Check details, photos and reviews to ensure you choose the perfect fruit.",
+  "startNowButton": "Start Now",
+  "skip": "skip"
+}

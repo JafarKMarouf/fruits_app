@@ -53,6 +53,61 @@ class AppLocalizations {
   static AppLocalizations? maybeOf(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
+
+  /// `Welcome to `
+  String get onBoardingWelcomeTitle {
+    return Intl.message(
+      'Welcome to ',
+      name: 'onBoardingWelcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discover a unique shopping experience with FruitHUB. Explore our wide selection of premium fresh fruits and get the best deals with high quality.`
+  String get onBoardingWelcomeSubTitle {
+    return Intl.message(
+      'Discover a unique shopping experience with FruitHUB. Explore our wide selection of premium fresh fruits and get the best deals with high quality.',
+      name: 'onBoardingWelcomeSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search & Shop`
+  String get onBoardingSearchTitle {
+    return Intl.message(
+      'Search & Shop',
+      name: 'onBoardingSearchTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We offer you the best carefully selected fruits. Check details, photos and reviews to ensure you choose the perfect fruit.`
+  String get onBoardingSearchSubTitle {
+    return Intl.message(
+      'We offer you the best carefully selected fruits. Check details, photos and reviews to ensure you choose the perfect fruit.',
+      name: 'onBoardingSearchSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Now`
+  String get startNowButton {
+    return Intl.message(
+      'Start Now',
+      name: 'startNowButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `skip`
+  String get skip {
+    return Intl.message('skip', name: 'skip', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
