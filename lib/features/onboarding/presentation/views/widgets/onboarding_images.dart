@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruits_app/core/l10n/l10n.dart';
+import 'package:fruits_app/core/services/shared_preferences_service.dart';
+import 'package:fruits_app/core/utils/constants.dart';
 import 'package:fruits_app/core/utils/styles/app_colors.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 import 'package:fruits_app/core/widgets/app_text_widget.dart';
@@ -46,6 +48,7 @@ class OnboardingImages extends StatelessWidget {
               alignment: Alignment.topRight,
               child: InkWell(
                 onTap: () {
+                  SharedPreferencesService.setBool(kIsOnBoardingSeen, true);
                   Navigator.pushReplacementNamed(context, LoginView.routeName);
                 },
                 child: AppTextWidget(

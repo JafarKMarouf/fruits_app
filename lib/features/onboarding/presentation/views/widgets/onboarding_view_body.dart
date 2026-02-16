@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/l10n/l10n.dart';
+import 'package:fruits_app/core/services/shared_preferences_service.dart';
 import 'package:fruits_app/core/utils/constants.dart';
 import 'package:fruits_app/core/utils/styles/app_colors.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
@@ -59,7 +60,8 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
             padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
             child: AppPrimaryButton(
               onPressed: () {
-                 Navigator.pushReplacementNamed(context, LoginView.routeName);
+                SharedPreferencesService.setBool(kIsOnBoardingSeen, true);
+                Navigator.pushReplacementNamed(context, LoginView.routeName);
               },
               backgroundColor: AppColors.green1_500,
               text: AppLocalizations.of(context).startNowButton,
