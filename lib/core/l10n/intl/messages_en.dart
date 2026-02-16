@@ -22,6 +22,18 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "doCreateAccount": MessageLookupByLibrary.simpleMessage("Create account"),
+    "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Dont have an account? ",
+    ),
+    "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
+    "forgetPassword": MessageLookupByLibrary.simpleMessage("?forget password"),
+    "loginByApple": MessageLookupByLibrary.simpleMessage("Login with Apple"),
+    "loginByFacebook": MessageLookupByLibrary.simpleMessage(
+      "Login with Facebook",
+    ),
+    "loginByGoogle": MessageLookupByLibrary.simpleMessage("Login with Google"),
+    "loginTitle": MessageLookupByLibrary.simpleMessage("Log in"),
     "onBoardingSearchSubTitle": MessageLookupByLibrary.simpleMessage(
       "We offer you the best carefully selected fruits. Check details, photos and reviews to ensure you choose the perfect fruit.",
     ),
@@ -34,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "onBoardingWelcomeTitle": MessageLookupByLibrary.simpleMessage(
       "Welcome to ",
     ),
+    "or": MessageLookupByLibrary.simpleMessage("Or"),
+    "password": MessageLookupByLibrary.simpleMessage("Password"),
     "skip": MessageLookupByLibrary.simpleMessage("skip"),
     "startNowButton": MessageLookupByLibrary.simpleMessage("Start Now"),
   };

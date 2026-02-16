@@ -22,6 +22,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "doCreateAccount": MessageLookupByLibrary.simpleMessage("قم بإنشاء حساب"),
+    "dontHaveAccount": MessageLookupByLibrary.simpleMessage("لا تمتلك حساب؟ "),
+    "emailAddress": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "forgetPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+    "loginByApple": MessageLookupByLibrary.simpleMessage("تسجيل بواسطة أبل"),
+    "loginByFacebook": MessageLookupByLibrary.simpleMessage(
+      "تسجيل بواسطة فيسبوك",
+    ),
+    "loginByGoogle": MessageLookupByLibrary.simpleMessage("تسجيل بواسطة جوجل"),
+    "loginTitle": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "onBoardingSearchSubTitle": MessageLookupByLibrary.simpleMessage(
       "نقدم لك أفضل الفواكه المختارة بعناية. اطلع على التفاصيل والصور والتقييمات لتتأكد من اختيار الفاكهة المثالية",
     ),
@@ -32,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "onBoardingWelcomeTitle": MessageLookupByLibrary.simpleMessage(
       "مرحباً بك في ",
     ),
+    "or": MessageLookupByLibrary.simpleMessage("أو"),
+    "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطِ"),
     "startNowButton": MessageLookupByLibrary.simpleMessage("ابدأ الان"),
   };

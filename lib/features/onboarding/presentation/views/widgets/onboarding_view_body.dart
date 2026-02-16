@@ -63,7 +63,6 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
                 SharedPreferencesService.setBool(kIsOnBoardingSeen, true);
                 Navigator.pushReplacementNamed(context, LoginView.routeName);
               },
-              backgroundColor: AppColors.green1_500,
               text: AppLocalizations.of(context).startNowButton,
               textStyle: AppTextStyles.styleBold16.copyWith(
                 color: Colors.white,

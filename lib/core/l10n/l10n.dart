@@ -108,6 +108,91 @@ class AppLocalizations {
   String get skip {
     return Intl.message('skip', name: 'skip', desc: '', args: []);
   }
+
+  /// `Log in`
+  String get loginTitle {
+    return Intl.message('Log in', name: 'loginTitle', desc: '', args: []);
+  }
+
+  /// `Email Address`
+  String get emailAddress {
+    return Intl.message(
+      'Email Address',
+      name: 'emailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message('Password', name: 'password', desc: '', args: []);
+  }
+
+  /// `?forget password`
+  String get forgetPassword {
+    return Intl.message(
+      '?forget password',
+      name: 'forgetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dont have an account? `
+  String get dontHaveAccount {
+    return Intl.message(
+      'Dont have an account? ',
+      name: 'dontHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create account`
+  String get doCreateAccount {
+    return Intl.message(
+      'Create account',
+      name: 'doCreateAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Or`
+  String get or {
+    return Intl.message('Or', name: 'or', desc: '', args: []);
+  }
+
+  /// `Login with Google`
+  String get loginByGoogle {
+    return Intl.message(
+      'Login with Google',
+      name: 'loginByGoogle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login with Apple`
+  String get loginByApple {
+    return Intl.message(
+      'Login with Apple',
+      name: 'loginByApple',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login with Facebook`
+  String get loginByFacebook {
+    return Intl.message(
+      'Login with Facebook',
+      name: 'loginByFacebook',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

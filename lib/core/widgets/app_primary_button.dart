@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/utils/constants.dart';
+import 'package:fruits_app/core/utils/styles/app_colors.dart';
+import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 import 'package:fruits_app/core/widgets/app_text_widget.dart';
 
 class AppPrimaryButton extends StatelessWidget {
   const AppPrimaryButton({
     super.key,
-    required this.backgroundColor,
+    this.backgroundColor,
     required this.text,
     required this.onPressed,
     this.width,
@@ -15,7 +17,7 @@ class AppPrimaryButton extends StatelessWidget {
     this.textStyle,
   });
 
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final String text;
   final void Function()? onPressed;
   final bool isLoading;
@@ -26,12 +28,23 @@ class AppPrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: width,
       height: height ?? 54,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.green1_900,
+            blurRadius: 4,
+            offset: const Offset(0, 4),
+            spreadRadius: 0,
+          ),
+        ],
+      ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
+          backgroundColor: backgroundColor ?? AppColors.green1_500,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
@@ -42,7 +55,12 @@ class AppPrimaryButton extends StatelessWidget {
         child: Center(
           child: isLoading
               ? const CircularProgressIndicator()
-              : AppTextWidget(text: text, style: textStyle),
+              : AppTextWidget(
+                  text: text,
+                  style: AppTextStyles.styleBold16.copyWith(
+                    color: Colors.white,
+                  ),
+                ),
         ),
       ),
     );

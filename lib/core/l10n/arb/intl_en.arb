@@ -5,5 +5,15 @@
   "onBoardingSearchTitle": "Search & Shop",
   "onBoardingSearchSubTitle": "We offer you the best carefully selected fruits. Check details, photos and reviews to ensure you choose the perfect fruit.",
   "startNowButton": "Start Now",
-  "skip": "skip"
+  "skip": "skip",
+  "loginTitle" : "Log in",
+  "emailAddress" : "Email Address",
+  "password": "Password",
+  "forgetPassword": "?forget password",
+  "dontHaveAccount":"Dont have an account? ",
+  "doCreateAccount": "Create account",
+  "or": "Or",
+  "loginByGoogle": "Login with Google",
+  "loginByApple": "Login with Apple",
+  "loginByFacebook": "Login with Facebook"
 }
