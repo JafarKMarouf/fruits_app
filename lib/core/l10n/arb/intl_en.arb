@@ -7,6 +7,8 @@
   "startNowButton": "Start Now",
   "skip": "skip",
   "loginTitle" : "Log in",
+  "signupTitle" : "Sign up",
+  "fullName": "Full Name",
   "emailAddress" : "Email Address",
   "password": "Password",
   "forgetPassword": "?forget password",
@@ -15,5 +17,8 @@
   "or": "Or",
   "loginByGoogle": "Login with Google",
   "loginByApple": "Login with Apple",
-  "loginByFacebook": "Login with Facebook"
+  "loginByFacebook": "Login with Facebook",
+  "byCreatingAccount": "By creating an account, you agree to ",
+  "termsAndConditions": "Our Terms and Conditions",
+  "alreadyHaveAccount": "Already have an account? "
 }

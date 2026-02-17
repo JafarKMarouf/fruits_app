@@ -36,4 +36,5 @@ class AppImages {
   static const String imagesSetting = 'assets/images/setting.svg';
 
   static const String imagesSplashBottom = 'assets/images/splash_bottom.svg';
+  static const String imagesCheck = 'assets/images/check.svg';
 }

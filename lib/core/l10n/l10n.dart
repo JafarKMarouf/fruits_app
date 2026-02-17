@@ -114,6 +114,16 @@ class AppLocalizations {
     return Intl.message('Log in', name: 'loginTitle', desc: '', args: []);
   }
 
+  /// `Sign up`
+  String get signupTitle {
+    return Intl.message('Sign up', name: 'signupTitle', desc: '', args: []);
+  }
+
+  /// `Full Name`
+  String get fullName {
+    return Intl.message('Full Name', name: 'fullName', desc: '', args: []);
+  }
+
   /// `Email Address`
   String get emailAddress {
     return Intl.message(
@@ -189,6 +199,36 @@ class AppLocalizations {
     return Intl.message(
       'Login with Facebook',
       name: 'loginByFacebook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By creating an account, you agree to `
+  String get byCreatingAccount {
+    return Intl.message(
+      'By creating an account, you agree to ',
+      name: 'byCreatingAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our Terms and Conditions`
+  String get termsAndConditions {
+    return Intl.message(
+      'Our Terms and Conditions',
+      name: 'termsAndConditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account? `
+  String get alreadyHaveAccount {
+    return Intl.message(
+      'Already have an account? ',
+      name: 'alreadyHaveAccount',
       desc: '',
       args: [],
     );

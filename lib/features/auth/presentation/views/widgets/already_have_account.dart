@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:fruits_app/core/l10n/l10n.dart';
 import 'package:fruits_app/core/utils/styles/app_colors.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
-import 'package:fruits_app/features/auth/presentation/views/signup_view.dart';
 
-class DontHaveAccount extends StatelessWidget {
-  const DontHaveAccount({super.key});
+class AlreadyHaveAccount extends StatelessWidget {
+  const AlreadyHaveAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +13,7 @@ class DontHaveAccount extends StatelessWidget {
       TextSpan(
         children: [
           TextSpan(
-            text: AppLocalizations.of(context).dontHaveAccount,
+            text: AppLocalizations.of(context).alreadyHaveAccount,
             style: AppTextStyles.styleSemiBold16.copyWith(
               color: AppColors.grayscale400,
             ),
@@ -22,16 +21,16 @@ class DontHaveAccount extends StatelessWidget {
           TextSpan(
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                Navigator.pushNamed(context, SignupView.routeName);
+                Navigator.pop(context);
               },
-            text: AppLocalizations.of(context).doCreateAccount,
+            text: AppLocalizations.of(context).loginTitle,
             style: AppTextStyles.styleSemiBold16.copyWith(
               color: AppColors.green1_500,
             ),
           ),
         ],
       ),
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.right,
     );
   }
 }

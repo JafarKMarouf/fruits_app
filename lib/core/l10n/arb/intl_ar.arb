@@ -7,6 +7,8 @@
   "startNowButton": "ابدأ الان",
   "skip": "تخطِ",
   "loginTitle" : "تسجيل الدخول",
+  "signupTitle" : "حساب جديد",
+  "fullName": "الاسم كامل",
   "emailAddress" : "البريد الإلكتروني",
   "password": "كلمة المرور",
   "forgetPassword": "نسيت كلمة المرور؟",
@@ -15,5 +17,8 @@
   "or": "أو",
   "loginByGoogle": "تسجيل بواسطة جوجل",
   "loginByApple": "تسجيل بواسطة أبل",
-  "loginByFacebook": "تسجيل بواسطة فيسبوك"
+  "loginByFacebook": "تسجيل بواسطة فيسبوك",
+  "byCreatingAccount": "من خلال إنشاء حساب ، فإنك توافق على ",
+  "termsAndConditions": "الشروط والأحكام الخاصة بنا",
+  "alreadyHaveAccount": "تمتلك حساب بالفعل؟ "
 }
