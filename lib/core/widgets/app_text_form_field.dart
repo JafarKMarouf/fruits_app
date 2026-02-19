@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_app/core/l10n/l10n.dart';
 import 'package:fruits_app/core/utils/styles/app_colors.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 
@@ -7,34 +8,36 @@ class AppTextFormField extends StatelessWidget {
     super.key,
     this.controller,
     required this.hintText,
-    this.obscureText,
+    this.obscureText = false,
     this.suffixIcon,
     required this.textInputType,
     this.textInputAction,
     this.validator,
-    this.isShowShadowing = false,
+    this.showShadow = true,
+    this.onSaved,
   });
 
   final TextEditingController? controller;
   final String? hintText;
-  final bool? obscureText;
+  final bool obscureText;
   final Widget? suffixIcon;
   final TextInputType? textInputType;
   final TextInputAction? textInputAction;
   final String? Function(String?)? validator;
-  final bool isShowShadowing;
+  final bool showShadow;
+  final void Function(String?)? onSaved;
 
-  InputBorder _buildBorder() {
+  InputBorder _buildBorder([Color? color]) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(4),
-      borderSide: BorderSide(color: AppColors.border, width: 1),
+      borderSide: BorderSide(color: color ?? AppColors.border, width: 1),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: !isShowShadowing
+      decoration: showShadow
           ? const BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -47,9 +50,14 @@ class AppTextFormField extends StatelessWidget {
             )
           : null,
       child: TextFormField(
-        validator: validator,
+        validator:
+            validator ??
+            (value) => (value == null || value.isEmpty)
+                ? AppLocalizations.of(context).requiredField
+                : null,
+        onSaved: onSaved,
         controller: controller,
-        obscureText: obscureText ?? false,
+        obscureText: obscureText,
         keyboardType: textInputType,
         textInputAction: textInputAction ?? TextInputAction.done,
         decoration: InputDecoration(
@@ -63,6 +71,11 @@ class AppTextFormField extends StatelessWidget {
           border: _buildBorder(),
           enabledBorder: _buildBorder(),
           focusedBorder: _buildBorder(),
+          errorBorder: _buildBorder(AppColors.error),
+          focusedErrorBorder: _buildBorder(AppColors.error),
+          errorStyle: AppTextStyles.styleBold13.copyWith(
+            color: AppColors.error,
+          ),
         ),
       ),
     );

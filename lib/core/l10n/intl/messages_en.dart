@@ -33,14 +33,26 @@ class MessageLookup extends MessageLookupByLibrary {
       "Dont have an account? ",
     ),
     "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
+    "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+      "The account already exists for that email.",
+    ),
     "forgetPassword": MessageLookupByLibrary.simpleMessage("?forget password"),
     "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
+    "genericError": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong. Please try again later.",
+    ),
+    "invalidEmail": MessageLookupByLibrary.simpleMessage(
+      "The email address is invalid.",
+    ),
     "loginByApple": MessageLookupByLibrary.simpleMessage("Login with Apple"),
     "loginByFacebook": MessageLookupByLibrary.simpleMessage(
       "Login with Facebook",
     ),
     "loginByGoogle": MessageLookupByLibrary.simpleMessage("Login with Google"),
     "loginTitle": MessageLookupByLibrary.simpleMessage("Log in"),
+    "networkRequestFailed": MessageLookupByLibrary.simpleMessage(
+      "Network request failed. Please check your internet connection.",
+    ),
     "onBoardingSearchSubTitle": MessageLookupByLibrary.simpleMessage(
       "We offer you the best carefully selected fruits. Check details, photos and reviews to ensure you choose the perfect fruit.",
     ),
@@ -55,11 +67,23 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "or": MessageLookupByLibrary.simpleMessage("Or"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "requiredField": MessageLookupByLibrary.simpleMessage(
+      "This field is required",
+    ),
     "signupTitle": MessageLookupByLibrary.simpleMessage("Sign up"),
     "skip": MessageLookupByLibrary.simpleMessage("skip"),
     "startNowButton": MessageLookupByLibrary.simpleMessage("Start Now"),
+    "successRegister": MessageLookupByLibrary.simpleMessage(
+      "Registered account successfully!",
+    ),
+    "termsAcceptedError": MessageLookupByLibrary.simpleMessage(
+      "You must agree to the terms and conditions",
+    ),
     "termsAndConditions": MessageLookupByLibrary.simpleMessage(
       "Our Terms and Conditions",
+    ),
+    "weakPassword": MessageLookupByLibrary.simpleMessage(
+      "The password provided is too weak.",
     ),
   };
 }

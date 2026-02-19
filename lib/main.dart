@@ -1,9 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_app/core/services/bloc_observer.dart';
+import 'package:fruits_app/core/services/get_it_service.dart';
 import 'package:fruits_app/core/services/shared_preferences_service.dart';
 import 'package:fruits_app/features/fruits_app.dart';
+import 'package:fruits_app/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SharedPreferencesService.init();
+  Bloc.observer = const AppBlocObserver();
+
+  await Future.wait([
+    SharedPreferencesService.init(),
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
+  ]);
+
+  await setupServiceLocator();
   runApp(const FruitsApp());
 }

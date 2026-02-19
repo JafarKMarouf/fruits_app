@@ -233,6 +233,86 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `The password provided is too weak.`
+  String get weakPassword {
+    return Intl.message(
+      'The password provided is too weak.',
+      name: 'weakPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The account already exists for that email.`
+  String get emailAlreadyInUse {
+    return Intl.message(
+      'The account already exists for that email.',
+      name: 'emailAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong. Please try again later.`
+  String get genericError {
+    return Intl.message(
+      'Something went wrong. Please try again later.',
+      name: 'genericError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network request failed. Please check your internet connection.`
+  String get networkRequestFailed {
+    return Intl.message(
+      'Network request failed. Please check your internet connection.',
+      name: 'networkRequestFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The email address is invalid.`
+  String get invalidEmail {
+    return Intl.message(
+      'The email address is invalid.',
+      name: 'invalidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You must agree to the terms and conditions`
+  String get termsAcceptedError {
+    return Intl.message(
+      'You must agree to the terms and conditions',
+      name: 'termsAcceptedError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registered account successfully!`
+  String get successRegister {
+    return Intl.message(
+      'Registered account successfully!',
+      name: 'successRegister',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field is required`
+  String get requiredField {
+    return Intl.message(
+      'This field is required',
+      name: 'requiredField',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
