@@ -1,8 +1,11 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fruits_app/core/errors/custom_exceptions.dart';
 import 'package:fruits_app/features/auth/domain/requests/user_request.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthService {
   Future<User> createUserWithEmailAndPassword({
@@ -70,6 +73,37 @@ class FirebaseAuthService {
         'Exception in FirebaseAuthService.signinWithEmailAndPassword: ${e.toString()}',
       );
 
+      throw CustomException(message: 'genericError');
+    }
+  }
+
+  Future<User> signInWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn.instance;
+
+      await googleSignIn.initialize(
+        serverClientId: dotenv.env['GOOGLE_WEB_CLIENT_ID']!,
+      );
+
+      final GoogleSignInAccount googleUser = await googleSignIn.authenticate();
+
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+      );
+
+      final UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithCredential(credential);
+
+      return userCredential.user!;
+    } on GoogleSignInException catch (e) {
+      log(
+        'GoogleSignInException in FirebaseAuthService.signInWithGoogle: ${e.toString()}',
+      );
+      throw CustomException(message: 'genericError');
+    } catch (e) {
+      log('Exception in FirebaseAuthService.signInWithGoogle: ${e.toString()}');
       throw CustomException(message: 'genericError');
     }
   }

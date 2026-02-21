@@ -11,4 +11,6 @@ abstract class AuthRepo {
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword({
     required UserRequest request,
   });
+
+  Future<Either<Failure, UserEntity>> signInWithGoogle();
 }

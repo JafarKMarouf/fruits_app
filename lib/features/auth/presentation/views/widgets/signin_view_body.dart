@@ -87,7 +87,9 @@ class _SigninViewBodyState extends State<SigninViewBody> {
               SocialLogin(
                 title: AppLocalizations.of(context).loginByGoogle,
                 image: AppImages.imagesGoogle,
-                onTap: () {},
+                onTap: () {
+                  context.read<SigninCubit>().signInWithGoogle();
+                },
               ),
               const SizedBox(height: 16),
               SocialLogin(
