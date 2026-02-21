@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruits_app/core/services/shared_preferences_service.dart';
 import 'package:fruits_app/core/utils/constants.dart';
 import 'package:fruits_app/core/utils/styles/app_images.dart';
-import 'package:fruits_app/features/auth/presentation/views/login_view.dart';
+import 'package:fruits_app/features/auth/presentation/views/signin_view.dart';
 import 'package:fruits_app/features/onboarding/presentation/views/onboarding_view.dart';
 
 class SplashViewBody extends StatefulWidget {
@@ -42,7 +42,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
         kIsOnBoardingSeen,
       );
       if (isOnBoardingSeen) {
-        Navigator.pushReplacementNamed(context, LoginView.routeName);
+        Navigator.pushReplacementNamed(context, SigninView.routeName);
       } else {
         Navigator.pushReplacementNamed(context, OnboardingView.routeName);
       }

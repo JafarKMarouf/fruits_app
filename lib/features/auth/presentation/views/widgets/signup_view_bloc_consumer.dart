@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruits_app/core/helper/build_error_bar.dart';
+import 'package:fruits_app/core/helper/build_messages_bar.dart';
 import 'package:fruits_app/core/l10n/l10n.dart';
 import 'package:fruits_app/core/widgets/build_app_bar.dart';
+import 'package:fruits_app/core/widgets/custom_progress_hud.dart';
 import 'package:fruits_app/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import 'package:fruits_app/features/auth/presentation/views/widgets/signup_view_body.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:fruits_app/features/home/presentation/views/home_view.dart';
 
-class SignupViewBodyBlocConsumer extends StatelessWidget {
-  const SignupViewBodyBlocConsumer({super.key});
+class SignupViewBlocConsumer extends StatelessWidget {
+  const SignupViewBlocConsumer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +29,20 @@ class SignupViewBodyBlocConsumer extends StatelessWidget {
         if (state is SignupSuccess) {
           buildSuccessMessage(
             context,
-            AppLocalizations.of(context).successRegister,
+            AppLocalizations.of(context).registerSuccess,
           );
-          Future.delayed(const Duration(milliseconds: 200), () {
-            Navigator.pop(context);
+          Future.delayed(const Duration(seconds: 5), () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              HomeView.routeName,
+              (route) => false,
+            );
           });
         }
       },
       builder: (context, state) {
-        return ModalProgressHUD(
-          inAsyncCall: state is SignupLoading,
+        return CustomProgressHud(
+          isLoading: state is SignupLoading,
           child: Scaffold(
             appBar: buildAppBar(
               context,

@@ -41,6 +41,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "genericError": MessageLookupByLibrary.simpleMessage(
       "Something went wrong. Please try again later.",
     ),
+    "homeTitle": MessageLookupByLibrary.simpleMessage("Home"),
+    "invalidCredential": MessageLookupByLibrary.simpleMessage(
+      "Email or password invalid.",
+    ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "The email address is invalid.",
     ),
@@ -49,6 +53,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Login with Facebook",
     ),
     "loginByGoogle": MessageLookupByLibrary.simpleMessage("Login with Google"),
+    "loginSuccess": MessageLookupByLibrary.simpleMessage(
+      "Logged in successfully!",
+    ),
     "loginTitle": MessageLookupByLibrary.simpleMessage("Log in"),
     "networkRequestFailed": MessageLookupByLibrary.simpleMessage(
       "Network request failed. Please check your internet connection.",
@@ -67,15 +74,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "or": MessageLookupByLibrary.simpleMessage("Or"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "registerSuccess": MessageLookupByLibrary.simpleMessage(
+      "Registered account successfully!",
+    ),
     "requiredField": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),
     "signupTitle": MessageLookupByLibrary.simpleMessage("Sign up"),
     "skip": MessageLookupByLibrary.simpleMessage("skip"),
     "startNowButton": MessageLookupByLibrary.simpleMessage("Start Now"),
-    "successRegister": MessageLookupByLibrary.simpleMessage(
-      "Registered account successfully!",
-    ),
     "termsAcceptedError": MessageLookupByLibrary.simpleMessage(
       "You must agree to the terms and conditions",
     ),

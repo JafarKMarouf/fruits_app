@@ -21,15 +21,15 @@
   "byCreatingAccount": "من خلال إنشاء حساب ، فإنك توافق على ",
   "termsAndConditions": "الشروط والأحكام الخاصة بنا",
   "alreadyHaveAccount": "تمتلك حساب بالفعل؟ ",
-
   "weakPassword": "كلمة المرور المقدمة ضعيفة جداً.",
   "emailAlreadyInUse": "الحساب موجود بالفعل لهذا البريد الإلكتروني.",
   "genericError": "حدث خطأ ما. يرجى المحاولة مرة أخرى في وقت لاحق.",
   "termsAcceptedError": "يجب الموافقة على الشروط والأحكام",
   "networkRequestFailed": "فشل الاتصال بالشبكة. يرجى التحقق من اتصالك بالإنترنت.",
   "invalidEmail": "عنوان البريد الإلكتروني غير صالح.",
-  "successRegister": "تم إنشاء الحساب بنجاح",
-
-  "requiredField": " هذا الحقل مطلوب"
-
+  "registerSuccess": "تم إنشاء الحساب بنجاح",
+  "requiredField": " هذا الحقل مطلوب",
+  "invalidCredential": "البريد الإلكتروني أو كلمة المرور غير صالحة.",
+  "loginSuccess": "تم تسجيل الدخول بنجاح",
+  "homeTitle": "الصفحة الرئيسية"
 }

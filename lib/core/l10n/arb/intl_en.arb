@@ -22,12 +22,14 @@
   "termsAndConditions": "Our Terms and Conditions",
   "alreadyHaveAccount": "Already have an account? ",
   "weakPassword": "The password provided is too weak.",
-  "emailAlreadyInUse": "The account already exists for that email.",
   "genericError": "Something went wrong. Please try again later.",
   "networkRequestFailed": "Network request failed. Please check your internet connection.",
   "invalidEmail": "The email address is invalid.",
   "termsAcceptedError": "You must agree to the terms and conditions",
-  "successRegister": "Registered account successfully!",
-
-  "requiredField": "This field is required"
+  "invalidCredential": "Email or password invalid.",
+  "registerSuccess": "Registered account successfully!",
+  "requiredField": "This field is required",
+  "loginSuccess": "Logged in successfully!",
+  "emailAlreadyInUse": "The account already exists for that email.",
+  "homeTitle": "Home"
 }

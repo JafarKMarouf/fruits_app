@@ -244,16 +244,6 @@ class AppLocalizations {
     );
   }
 
-  /// `The account already exists for that email.`
-  String get emailAlreadyInUse {
-    return Intl.message(
-      'The account already exists for that email.',
-      name: 'emailAlreadyInUse',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Something went wrong. Please try again later.`
   String get genericError {
     return Intl.message(
@@ -294,11 +284,21 @@ class AppLocalizations {
     );
   }
 
+  /// `Email or password invalid.`
+  String get invalidCredential {
+    return Intl.message(
+      'Email or password invalid.',
+      name: 'invalidCredential',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Registered account successfully!`
-  String get successRegister {
+  String get registerSuccess {
     return Intl.message(
       'Registered account successfully!',
-      name: 'successRegister',
+      name: 'registerSuccess',
       desc: '',
       args: [],
     );
@@ -312,6 +312,31 @@ class AppLocalizations {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Logged in successfully!`
+  String get loginSuccess {
+    return Intl.message(
+      'Logged in successfully!',
+      name: 'loginSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The account already exists for that email.`
+  String get emailAlreadyInUse {
+    return Intl.message(
+      'The account already exists for that email.',
+      name: 'emailAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get homeTitle {
+    return Intl.message('Home', name: 'homeTitle', desc: '', args: []);
   }
 }
 

@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:fruits_app/core/l10n/l10n.dart';
 import 'package:fruits_app/core/utils/styles/app_colors.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
-import 'package:fruits_app/features/auth/presentation/views/signup_view.dart';
 
 class DontHaveAccount extends StatelessWidget {
-  const DontHaveAccount({super.key});
+  const DontHaveAccount({super.key, required this.onTap});
+
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +21,7 @@ class DontHaveAccount extends StatelessWidget {
             ),
           ),
           TextSpan(
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                Navigator.pushNamed(context, SignupView.routeName);
-              },
+            recognizer: TapGestureRecognizer()..onTap = onTap,
             text: AppLocalizations.of(context).doCreateAccount,
             style: AppTextStyles.styleSemiBold16.copyWith(
               color: AppColors.green1_500,

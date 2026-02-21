@@ -39,6 +39,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "genericError": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ ما. يرجى المحاولة مرة أخرى في وقت لاحق.",
     ),
+    "homeTitle": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
+    "invalidCredential": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني أو كلمة المرور غير صالحة.",
+    ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "عنوان البريد الإلكتروني غير صالح.",
     ),
@@ -47,6 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "تسجيل بواسطة فيسبوك",
     ),
     "loginByGoogle": MessageLookupByLibrary.simpleMessage("تسجيل بواسطة جوجل"),
+    "loginSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم تسجيل الدخول بنجاح",
+    ),
     "loginTitle": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "networkRequestFailed": MessageLookupByLibrary.simpleMessage(
       "فشل الاتصال بالشبكة. يرجى التحقق من اتصالك بالإنترنت.",
@@ -63,13 +70,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "or": MessageLookupByLibrary.simpleMessage("أو"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "registerSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم إنشاء الحساب بنجاح",
+    ),
     "requiredField": MessageLookupByLibrary.simpleMessage(" هذا الحقل مطلوب"),
     "signupTitle": MessageLookupByLibrary.simpleMessage("حساب جديد"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطِ"),
     "startNowButton": MessageLookupByLibrary.simpleMessage("ابدأ الان"),
-    "successRegister": MessageLookupByLibrary.simpleMessage(
-      "تم إنشاء الحساب بنجاح",
-    ),
     "termsAcceptedError": MessageLookupByLibrary.simpleMessage(
       "يجب الموافقة على الشروط والأحكام",
     ),

@@ -6,7 +6,7 @@ import 'package:fruits_app/core/utils/constants.dart';
 import 'package:fruits_app/core/utils/styles/app_colors.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 import 'package:fruits_app/core/widgets/app_text_widget.dart';
-import 'package:fruits_app/features/auth/presentation/views/login_view.dart';
+import 'package:fruits_app/features/auth/presentation/views/signin_view.dart';
 
 class OnboardingImages extends StatelessWidget {
   const OnboardingImages({
@@ -49,7 +49,7 @@ class OnboardingImages extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   SharedPreferencesService.setBool(kIsOnBoardingSeen, true);
-                  Navigator.pushReplacementNamed(context, LoginView.routeName);
+                  Navigator.pushReplacementNamed(context, SigninView.routeName);
                 },
                 child: AppTextWidget(
                   text: AppLocalizations.of(context).skip,
