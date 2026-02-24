@@ -11,7 +11,7 @@ void buildErrorBar(BuildContext context, String message) {
     dragToClose: false,
     closeOnClick: false,
     title: AppTextWidget(text: message, style: AppTextStyles.styleSemiBold13),
-    autoCloseDuration: const Duration(seconds: 5),
+    autoCloseDuration: const Duration(seconds: 3),
   );
 }
 
@@ -23,6 +23,6 @@ void buildSuccessMessage(BuildContext context, String message) {
     closeOnClick: false,
     title: AppTextWidget(text: message, style: AppTextStyles.styleSemiBold13),
     style: ToastificationStyle.flatColored,
-    autoCloseDuration: const Duration(seconds: 5),
+    autoCloseDuration: const Duration(seconds: 2),
   );
 }

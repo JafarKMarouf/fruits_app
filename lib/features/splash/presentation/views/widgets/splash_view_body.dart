@@ -4,6 +4,7 @@ import 'package:fruits_app/core/services/shared_preferences_service.dart';
 import 'package:fruits_app/core/utils/constants.dart';
 import 'package:fruits_app/core/utils/styles/app_images.dart';
 import 'package:fruits_app/features/auth/presentation/views/signin_view.dart';
+import 'package:fruits_app/features/home/presentation/views/home_view.dart';
 import 'package:fruits_app/features/onboarding/presentation/views/onboarding_view.dart';
 
 class SplashViewBody extends StatefulWidget {
@@ -38,11 +39,16 @@ class _SplashViewBodyState extends State<SplashViewBody> {
 
   void handleNavigation() {
     Future.delayed(const Duration(seconds: 4), () async {
-      bool isOnBoardingSeen = await SharedPreferencesService.getBool(
+      bool isOnBoardingSeen = SharedPreferencesService.getBool(
         kIsOnBoardingSeen,
       );
       if (isOnBoardingSeen) {
-        Navigator.pushReplacementNamed(context, SigninView.routeName);
+        bool isUserLogged = SharedPreferencesService.getBool(kIsUserLoggedIn);
+        if (isUserLogged) {
+          Navigator.pushReplacementNamed(context, HomeView.routeName);
+        } else {
+          Navigator.pushReplacementNamed(context, SigninView.routeName);
+        }
       } else {
         Navigator.pushReplacementNamed(context, OnboardingView.routeName);
       }

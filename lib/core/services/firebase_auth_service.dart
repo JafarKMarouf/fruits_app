@@ -107,4 +107,8 @@ class FirebaseAuthService {
       throw CustomException(message: 'genericError');
     }
   }
+
+  Future<void> deleteAuthUser() async {
+    await FirebaseAuth.instance.currentUser!.delete();
+  }
 }

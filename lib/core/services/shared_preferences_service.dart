@@ -7,11 +7,23 @@ class SharedPreferencesService {
     _preferences = await SharedPreferences.getInstance();
   }
 
-  static Future<bool> setBool(String key, bool value) async {
-    return await _preferences.setBool(key, value);
+  static Future<void> setBool(String key, bool value) async {
+    await _preferences.setBool(key, value);
   }
 
-  static Future<bool> getBool(String key) async {
+  static bool getBool(String key) {
     return _preferences.getBool(key) ?? false;
+  }
+
+  static Future<void> setString(String key, String value) async {
+    await _preferences.setString(key, value);
+  }
+
+  static String? getString(String key) {
+    return _preferences.getString(key);
+  }
+
+  static Future<void> remove(String key) async {
+    await _preferences.remove(key);
   }
 }

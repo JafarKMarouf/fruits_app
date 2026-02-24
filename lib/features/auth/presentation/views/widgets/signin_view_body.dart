@@ -92,17 +92,6 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                 },
               ),
               const SizedBox(height: 16),
-              SocialLogin(
-                title: AppLocalizations.of(context).loginByApple,
-                image: AppImages.imagesApple,
-                onTap: () {},
-              ),
-              const SizedBox(height: 16),
-              SocialLogin(
-                title: AppLocalizations.of(context).loginByFacebook,
-                image: AppImages.imagesFacebook,
-                onTap: () {},
-              ),
             ],
           ),
         ),

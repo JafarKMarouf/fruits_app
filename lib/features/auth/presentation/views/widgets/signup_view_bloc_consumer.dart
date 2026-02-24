@@ -6,7 +6,6 @@ import 'package:fruits_app/core/widgets/build_app_bar.dart';
 import 'package:fruits_app/core/widgets/custom_progress_hud.dart';
 import 'package:fruits_app/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import 'package:fruits_app/features/auth/presentation/views/widgets/signup_view_body.dart';
-import 'package:fruits_app/features/home/presentation/views/home_view.dart';
 
 class SignupViewBlocConsumer extends StatelessWidget {
   const SignupViewBlocConsumer({super.key});
@@ -31,12 +30,8 @@ class SignupViewBlocConsumer extends StatelessWidget {
             context,
             AppLocalizations.of(context).registerSuccess,
           );
-          Future.delayed(const Duration(seconds: 5), () {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              HomeView.routeName,
-              (route) => false,
-            );
+          Future.delayed(const Duration(seconds: 1), () {
+            Navigator.pop(context);
           });
         }
       },
