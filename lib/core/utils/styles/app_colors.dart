@@ -4,7 +4,7 @@ abstract class AppColors {
   // ==================== GRAYSCALE ====================
   static final Color grayscale50 = const Color(0xfff2f3f3);
   static final Color grayscale100 = const Color(0xffe4e6e7);
-  static final Color grayscale200 = const Color(0xffcacece);
+  static final Color grayscale200 = const Color(0xffdee1e2);
   static final Color grayscale300 = const Color(0xffafb5b6);
   static final Color grayscale400 = const Color(0xff949d9e);
   static final Color grayscale500 = const Color(0xff4e5556);

@@ -22,6 +22,44 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Already have an account? ",
+    ),
+    "byCreatingAccount": MessageLookupByLibrary.simpleMessage(
+      "By creating an account, you agree to ",
+    ),
+    "doCreateAccount": MessageLookupByLibrary.simpleMessage("Create account"),
+    "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Dont have an account? ",
+    ),
+    "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
+    "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+      "The account already exists for that email.",
+    ),
+    "forgetPassword": MessageLookupByLibrary.simpleMessage("?forget password"),
+    "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
+    "genericError": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong. Please try again later.",
+    ),
+    "homeTitle": MessageLookupByLibrary.simpleMessage("Home"),
+    "invalidCredential": MessageLookupByLibrary.simpleMessage(
+      "Email or password invalid.",
+    ),
+    "invalidEmail": MessageLookupByLibrary.simpleMessage(
+      "The email address is invalid.",
+    ),
+    "loginByApple": MessageLookupByLibrary.simpleMessage("Login with Apple"),
+    "loginByFacebook": MessageLookupByLibrary.simpleMessage(
+      "Login with Facebook",
+    ),
+    "loginByGoogle": MessageLookupByLibrary.simpleMessage("Login with Google"),
+    "loginSuccess": MessageLookupByLibrary.simpleMessage(
+      "Logged in successfully!",
+    ),
+    "loginTitle": MessageLookupByLibrary.simpleMessage("Log in"),
+    "networkRequestFailed": MessageLookupByLibrary.simpleMessage(
+      "Network request failed. Please check your internet connection.",
+    ),
     "onBoardingSearchSubTitle": MessageLookupByLibrary.simpleMessage(
       "We offer you the best carefully selected fruits. Check details, photos and reviews to ensure you choose the perfect fruit.",
     ),
@@ -34,7 +72,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "onBoardingWelcomeTitle": MessageLookupByLibrary.simpleMessage(
       "Welcome to ",
     ),
+    "or": MessageLookupByLibrary.simpleMessage("Or"),
+    "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "registerSuccess": MessageLookupByLibrary.simpleMessage(
+      "Registered account successfully!",
+    ),
+    "requiredField": MessageLookupByLibrary.simpleMessage(
+      "This field is required",
+    ),
+    "signupTitle": MessageLookupByLibrary.simpleMessage("Sign up"),
     "skip": MessageLookupByLibrary.simpleMessage("skip"),
     "startNowButton": MessageLookupByLibrary.simpleMessage("Start Now"),
+    "termsAcceptedError": MessageLookupByLibrary.simpleMessage(
+      "You must agree to the terms and conditions",
+    ),
+    "termsAndConditions": MessageLookupByLibrary.simpleMessage(
+      "Our Terms and Conditions",
+    ),
+    "weakPassword": MessageLookupByLibrary.simpleMessage(
+      "The password provided is too weak.",
+    ),
   };
 }

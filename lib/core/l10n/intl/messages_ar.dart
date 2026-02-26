@@ -22,6 +22,42 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "تمتلك حساب بالفعل؟ ",
+    ),
+    "byCreatingAccount": MessageLookupByLibrary.simpleMessage(
+      "من خلال إنشاء حساب ، فإنك توافق على ",
+    ),
+    "doCreateAccount": MessageLookupByLibrary.simpleMessage("قم بإنشاء حساب"),
+    "dontHaveAccount": MessageLookupByLibrary.simpleMessage("لا تمتلك حساب؟ "),
+    "emailAddress": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+      "الحساب موجود بالفعل لهذا البريد الإلكتروني.",
+    ),
+    "forgetPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+    "fullName": MessageLookupByLibrary.simpleMessage("الاسم كامل"),
+    "genericError": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ ما. يرجى المحاولة مرة أخرى في وقت لاحق.",
+    ),
+    "homeTitle": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
+    "invalidCredential": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني أو كلمة المرور غير صالحة.",
+    ),
+    "invalidEmail": MessageLookupByLibrary.simpleMessage(
+      "عنوان البريد الإلكتروني غير صالح.",
+    ),
+    "loginByApple": MessageLookupByLibrary.simpleMessage("تسجيل بواسطة أبل"),
+    "loginByFacebook": MessageLookupByLibrary.simpleMessage(
+      "تسجيل بواسطة فيسبوك",
+    ),
+    "loginByGoogle": MessageLookupByLibrary.simpleMessage("تسجيل بواسطة جوجل"),
+    "loginSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم تسجيل الدخول بنجاح",
+    ),
+    "loginTitle": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "networkRequestFailed": MessageLookupByLibrary.simpleMessage(
+      "فشل الاتصال بالشبكة. يرجى التحقق من اتصالك بالإنترنت.",
+    ),
     "onBoardingSearchSubTitle": MessageLookupByLibrary.simpleMessage(
       "نقدم لك أفضل الفواكه المختارة بعناية. اطلع على التفاصيل والصور والتقييمات لتتأكد من اختيار الفاكهة المثالية",
     ),
@@ -32,7 +68,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "onBoardingWelcomeTitle": MessageLookupByLibrary.simpleMessage(
       "مرحباً بك في ",
     ),
+    "or": MessageLookupByLibrary.simpleMessage("أو"),
+    "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "registerSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم إنشاء الحساب بنجاح",
+    ),
+    "requiredField": MessageLookupByLibrary.simpleMessage(" هذا الحقل مطلوب"),
+    "signupTitle": MessageLookupByLibrary.simpleMessage("حساب جديد"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطِ"),
     "startNowButton": MessageLookupByLibrary.simpleMessage("ابدأ الان"),
+    "termsAcceptedError": MessageLookupByLibrary.simpleMessage(
+      "يجب الموافقة على الشروط والأحكام",
+    ),
+    "termsAndConditions": MessageLookupByLibrary.simpleMessage(
+      "الشروط والأحكام الخاصة بنا",
+    ),
+    "weakPassword": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور المقدمة ضعيفة جداً.",
+    ),
   };
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_app/core/utils/styles/app_colors.dart';
 
 class AppTextWidget extends StatelessWidget {
   const AppTextWidget({
@@ -48,7 +49,7 @@ class AppTextWidget extends StatelessWidget {
           TextStyle(
             fontSize: fontSize,
             fontWeight: fontWeight,
-            color: color,
+            color: color ?? AppColors.grayscale950,
             decoration: textDecoration,
             decorationColor: decorationColor,
             height: height,

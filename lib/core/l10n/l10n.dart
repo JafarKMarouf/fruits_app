@@ -108,6 +108,236 @@ class AppLocalizations {
   String get skip {
     return Intl.message('skip', name: 'skip', desc: '', args: []);
   }
+
+  /// `Log in`
+  String get loginTitle {
+    return Intl.message('Log in', name: 'loginTitle', desc: '', args: []);
+  }
+
+  /// `Sign up`
+  String get signupTitle {
+    return Intl.message('Sign up', name: 'signupTitle', desc: '', args: []);
+  }
+
+  /// `Full Name`
+  String get fullName {
+    return Intl.message('Full Name', name: 'fullName', desc: '', args: []);
+  }
+
+  /// `Email Address`
+  String get emailAddress {
+    return Intl.message(
+      'Email Address',
+      name: 'emailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message('Password', name: 'password', desc: '', args: []);
+  }
+
+  /// `?forget password`
+  String get forgetPassword {
+    return Intl.message(
+      '?forget password',
+      name: 'forgetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dont have an account? `
+  String get dontHaveAccount {
+    return Intl.message(
+      'Dont have an account? ',
+      name: 'dontHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create account`
+  String get doCreateAccount {
+    return Intl.message(
+      'Create account',
+      name: 'doCreateAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Or`
+  String get or {
+    return Intl.message('Or', name: 'or', desc: '', args: []);
+  }
+
+  /// `Login with Google`
+  String get loginByGoogle {
+    return Intl.message(
+      'Login with Google',
+      name: 'loginByGoogle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login with Apple`
+  String get loginByApple {
+    return Intl.message(
+      'Login with Apple',
+      name: 'loginByApple',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login with Facebook`
+  String get loginByFacebook {
+    return Intl.message(
+      'Login with Facebook',
+      name: 'loginByFacebook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By creating an account, you agree to `
+  String get byCreatingAccount {
+    return Intl.message(
+      'By creating an account, you agree to ',
+      name: 'byCreatingAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Our Terms and Conditions`
+  String get termsAndConditions {
+    return Intl.message(
+      'Our Terms and Conditions',
+      name: 'termsAndConditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account? `
+  String get alreadyHaveAccount {
+    return Intl.message(
+      'Already have an account? ',
+      name: 'alreadyHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The password provided is too weak.`
+  String get weakPassword {
+    return Intl.message(
+      'The password provided is too weak.',
+      name: 'weakPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong. Please try again later.`
+  String get genericError {
+    return Intl.message(
+      'Something went wrong. Please try again later.',
+      name: 'genericError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network request failed. Please check your internet connection.`
+  String get networkRequestFailed {
+    return Intl.message(
+      'Network request failed. Please check your internet connection.',
+      name: 'networkRequestFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The email address is invalid.`
+  String get invalidEmail {
+    return Intl.message(
+      'The email address is invalid.',
+      name: 'invalidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You must agree to the terms and conditions`
+  String get termsAcceptedError {
+    return Intl.message(
+      'You must agree to the terms and conditions',
+      name: 'termsAcceptedError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email or password invalid.`
+  String get invalidCredential {
+    return Intl.message(
+      'Email or password invalid.',
+      name: 'invalidCredential',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registered account successfully!`
+  String get registerSuccess {
+    return Intl.message(
+      'Registered account successfully!',
+      name: 'registerSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field is required`
+  String get requiredField {
+    return Intl.message(
+      'This field is required',
+      name: 'requiredField',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logged in successfully!`
+  String get loginSuccess {
+    return Intl.message(
+      'Logged in successfully!',
+      name: 'loginSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The account already exists for that email.`
+  String get emailAlreadyInUse {
+    return Intl.message(
+      'The account already exists for that email.',
+      name: 'emailAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get homeTitle {
+    return Intl.message('Home', name: 'homeTitle', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
