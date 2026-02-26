@@ -1,0 +1,67 @@
+workflows:
+  android-release:
+    name: Android Release
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+    environment:
+      groups:
+        - app_env_vars
+      flutter: stable
+
+    scripts:
+      - name: Generate .env file
+        script: |
+          cat > $CM_BUILD_DIR/.env << EOF
+          API_BASE_URL=$API_BASE_URL
+          STRIPE_KEY=$STRIPE_KEY
+          MAPS_API_KEY=$MAPS_API_KEY
+          EOF
+
+      - name: Get Flutter packages
+        script: flutter pub get
+
+      - name: Build Android release
+        script: |
+          flutter build apk --release
+          # or for AAB (recommended for Play Store):
+          flutter build appbundle --release
+
+    artifacts:
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/*.apk
+
+  ios-release:
+    name: iOS Release
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+    environment:
+      groups:
+        - app_env_vars
+      flutter: stable
+      xcode: latest
+
+    scripts:
+      - name: Generate .env file
+        script: |
+          cat > $CM_BUILD_DIR/.env << EOF
+          API_BASE_URL=$API_BASE_URL
+          STRIPE_KEY=$STRIPE_KEY
+          MAPS_API_KEY=$MAPS_API_KEY
+          EOF
+
+      - name: Get Flutter packages
+        script: flutter pub get
+
+      - name: Build iOS release
+        script: |
+          flutter build ipa --release \
+            --export-options-plist=/users/builder/export_options.plist
+
+    artifacts:
+      - build/ios/ipa/*.ipa
