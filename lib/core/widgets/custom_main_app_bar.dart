@@ -16,22 +16,26 @@ class CustomMainAppBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Container(
-            width: 44,
-            height: 44,
-            decoration: const ShapeDecoration(
-              color: Colors.white,
-              shape: OvalBorder(
-                side: BorderSide(width: 1, color: Color(0xFFF1F1F5)),
-              ),
-            ),
-            child: Center(child: SvgPicture.asset(AppImages.imagesArrowBack)),
-          ),
-        ),
+        Navigator.canPop(context)
+            ? GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  width: 44,
+                  height: 44,
+                  decoration: const ShapeDecoration(
+                    color: Colors.white,
+                    shape: OvalBorder(
+                      side: BorderSide(width: 1, color: Color(0xFFF1F1F5)),
+                    ),
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(AppImages.imagesArrowBack),
+                  ),
+                ),
+              )
+            : const SizedBox(),
         AppTextWidget(
           text: title,
           style: AppTextStyles.styleBold19.copyWith(

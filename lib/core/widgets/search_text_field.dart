@@ -6,9 +6,16 @@ import 'package:fruits_app/core/utils/styles/app_images.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 
 class SearchTextField extends StatelessWidget {
-  const SearchTextField({super.key, this.onTap, this.readOnly = false});
+  const SearchTextField({
+    super.key,
+    this.onTap,
+    this.readOnly = false,
+    this.filter,
+  });
+
   final void Function()? onTap;
   final bool readOnly;
+  final void Function()? filter;
 
   InputBorder _buildBorder() {
     return OutlineInputBorder(
@@ -49,8 +56,13 @@ class SearchTextField extends StatelessWidget {
             color: AppColors.grayscale400,
           ),
           suffixIcon: SizedBox(
-            width: 20,
-            child: Center(child: SvgPicture.asset(AppImages.imagesFilter)),
+            width: 23,
+            child: Center(
+              child: GestureDetector(
+                onTap: filter,
+                child: SvgPicture.asset(AppImages.imagesFilter),
+              ),
+            ),
           ),
           border: _buildBorder(),
           enabledBorder: _buildBorder(),

@@ -73,4 +73,10 @@ class AppImages {
       'assets/images/notification_sale.png';
   static const String imagesNotificationDiscount =
       'assets/images/notification_discount.png';
+
+  static const String imagesArrowSwap =
+      'assets/images/arrow-swap-horizontal.svg';
+
+  static const String imagesStrawberry = 'assets/images/strawberry.png';
+  static const String imagesTag = 'assets/images/tag.svg';
 }

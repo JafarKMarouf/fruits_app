@@ -4,6 +4,7 @@ import 'package:fruits_app/features/home/presentation/views/notification_view.da
 import 'package:fruits_app/features/home/presentation/views/search_view.dart';
 import 'package:fruits_app/features/home/presentation/views/widgets/custom_bottom_navigation_bar.dart';
 import 'package:fruits_app/features/home/presentation/views/widgets/home_view_body.dart';
+import 'package:fruits_app/features/products/presentation/views/products_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -19,47 +20,50 @@ class _HomeViewState extends State<HomeView> {
 
   final GlobalKey<NavigatorState> _nestedNavKey = GlobalKey<NavigatorState>();
 
-  Future<bool> _onWillPop() async {
-    final nestedNav = _nestedNavKey.currentState;
-    if (nestedNav != null && nestedNav.canPop()) {
-      nestedNav.pop();
-      return false;
-    }
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (_) => _onWillPop(),
-      child: Scaffold(
-        body: Navigator(
-          key: _nestedNavKey,
-          onGenerateRoute: (settings) {
-            switch (settings.name) {
-              case BestSellingView.routeName:
-                return _fadeRoute(const BestSellingView());
-              case SearchView.routeName:
-                return _fadeRoute(const SearchView());
-              case NotificationView.routeName:
-                return _fadeRoute(const NotificationView());
-              default:
-                return _fadeRoute(
-                  HomeViewBody(
-                    onShowMoreTapped: _navigateToBestSelling,
-                    onSearchTapped: _navigateToSearch,
-                    onNotificationTapped: _navigateToNotification,
-                  ),
-                );
-            }
-          },
-        ),
-        bottomNavigationBar: CustomBottomNavigationBar(
-          selectedIndex: _selectedIndex,
-          onItemTapped: (index) => setState(() => _selectedIndex = index),
-        ),
+    return Scaffold(
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [
+          _buildHomeTab(),
+          const ProductView(),
+          const Center(child: Text('Cart View')),
+          const Center(child: Text('Profile View')),
+        ],
       ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _buildHomeTab() {
+    return Navigator(
+      key: _nestedNavKey,
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case BestSellingView.routeName:
+            return _fadeRoute(const BestSellingView());
+          case SearchView.routeName:
+            return _fadeRoute(const SearchView());
+          case NotificationView.routeName:
+            return _fadeRoute(const NotificationView());
+          default:
+            return _fadeRoute(
+              HomeViewBody(
+                onShowMoreTapped: _navigateToBestSelling,
+                onSearchTapped: _navigateToSearch,
+                onNotificationTapped: _navigateToNotification,
+              ),
+            );
+        }
+      },
     );
   }
 
