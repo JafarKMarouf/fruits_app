@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:fruits_app/features/home/domain/entities/bottom_navigation_bar_entity.dart';
 import 'package:fruits_app/features/home/presentation/views/widgets/navigation_bar_item.dart';
 
-class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({super.key});
+class CustomBottomNavigationBar extends StatelessWidget {
+  const CustomBottomNavigationBar({
+    super.key,
+    required this.selectedIndex,
+    required this.onItemTapped,
+  });
 
-  @override
-  State<CustomBottomNavigationBar> createState() =>
-      _CustomBottomNavigationBarState();
-}
-
-class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
-  int selectedIndex = 0;
+  final int selectedIndex;
+  final ValueChanged<int> onItemTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +37,10 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: bottomNavigationBarItems.asMap().entries.map((e) {
-          int index = e.key;
-          var entity = e.value;
-
           return NavigationBarItem(
-            isSelected: selectedIndex == index,
-            bottomNavigationBarEntity: entity,
-            onTap: () {
-              setState(() {
-                selectedIndex = index;
-              });
-            },
+            isSelected: selectedIndex == e.key,
+            bottomNavigationBarEntity: e.value,
+            onTap: () => onItemTapped(e.key),
           );
         }).toList(),
       ),

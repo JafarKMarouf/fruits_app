@@ -25,7 +25,7 @@ class FeaturedItem extends StatelessWidget {
                 right: itemWidth * .4,
                 bottom: 0,
                 top: 0,
-                child: SvgPicture.asset(AppImages.imagesPineappleCuate),
+                child: SvgPicture.asset(AppImages.imagesPineapple),
               ),
               Container(
                 width: itemWidth * .5,

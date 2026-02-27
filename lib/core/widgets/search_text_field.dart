@@ -6,7 +6,9 @@ import 'package:fruits_app/core/utils/styles/app_images.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 
 class SearchTextField extends StatelessWidget {
-  const SearchTextField({super.key});
+  const SearchTextField({super.key, this.onTap, this.readOnly = false});
+  final void Function()? onTap;
+  final bool readOnly;
 
   InputBorder _buildBorder() {
     return OutlineInputBorder(
@@ -29,6 +31,8 @@ class SearchTextField extends StatelessWidget {
         ],
       ),
       child: TextField(
+        readOnly: readOnly,
+        onTap: onTap,
         keyboardType: TextInputType.text,
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
