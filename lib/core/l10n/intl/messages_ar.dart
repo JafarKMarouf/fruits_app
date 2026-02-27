@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "genericError": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ ما. يرجى المحاولة مرة أخرى في وقت لاحق.",
     ),
+    "goodMorning": MessageLookupByLibrary.simpleMessage("صباح الخير !.."),
     "homeTitle": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
     "invalidCredential": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني أو كلمة المرور غير صالحة.",
@@ -74,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم إنشاء الحساب بنجاح",
     ),
     "requiredField": MessageLookupByLibrary.simpleMessage(" هذا الحقل مطلوب"),
+    "searchAbout": MessageLookupByLibrary.simpleMessage("ابحث عن......."),
     "signupTitle": MessageLookupByLibrary.simpleMessage("حساب جديد"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطِ"),
     "startNowButton": MessageLookupByLibrary.simpleMessage("ابدأ الان"),

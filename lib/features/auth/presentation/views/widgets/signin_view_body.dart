@@ -108,6 +108,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
   }
 
   void _onSubmit() {
+    FocusManager.instance.primaryFocus?.unfocus();
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       context.read<SigninCubit>().signin(

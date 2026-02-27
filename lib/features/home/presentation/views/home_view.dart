@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_app/core/helper/get_user.dart';
-import 'package:fruits_app/core/services/get_it_service.dart';
-import 'package:fruits_app/core/widgets/app_text_widget.dart';
-import 'package:fruits_app/features/auth/domain/repos/auth_repo.dart';
-import 'package:fruits_app/features/auth/presentation/views/signin_view.dart';
+import 'package:fruits_app/features/home/presentation/views/widgets/custom_bottom_navigation_bar.dart';
+import 'package:fruits_app/features/home/presentation/views/widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -12,22 +9,9 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: AppTextWidget(text: getUser().name),
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () async {
-            await getIt<AuthRepo>().signOut();
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              SigninView.routeName,
-              (route) => false,
-            );
-          },
-          icon: const Icon(Icons.logout),
-        ),
-      ),
+    return const Scaffold(
+      body: HomeViewBody(),
+      bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }

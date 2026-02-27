@@ -78,6 +78,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
   }
 
   void _onSubmit() {
+    FocusManager.instance.primaryFocus?.unfocus();
     if (formKey.currentState!.validate()) {
       if (!isTermsAccepted) {
         buildErrorBar(context, AppLocalizations.of(context).termsAcceptedError);
