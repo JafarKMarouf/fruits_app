@@ -12,10 +12,13 @@ class HomeViewBody extends StatelessWidget {
     super.key,
     required this.onShowMoreTapped,
     required this.onSearchTapped,
+    required this.onNotificationTapped,
   });
 
   final VoidCallback onShowMoreTapped;
   final VoidCallback onSearchTapped;
+  final VoidCallback onNotificationTapped;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,9 +30,8 @@ class HomeViewBody extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: kTopPadding),
-                  const HomeAppBar(),
+                  HomeAppBar(onNotificationTapped: onNotificationTapped),
                   const SizedBox(height: 16),
-
                   SearchTextField(readOnly: true, onTap: onSearchTapped),
                   const SizedBox(height: 12),
                   const FeaturedList(),

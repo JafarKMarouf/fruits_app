@@ -68,4 +68,9 @@ class AppImages {
 
   static const String imagesSearchWithoutResult =
       "assets/images/search_without_result.svg";
+
+  static const String imagesNotificationSale =
+      'assets/images/notification_sale.png';
+  static const String imagesNotificationDiscount =
+      'assets/images/notification_discount.png';
 }

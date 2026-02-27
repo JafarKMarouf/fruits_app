@@ -8,7 +8,9 @@ import 'package:fruits_app/core/widgets/app_text_widget.dart';
 import 'package:fruits_app/features/home/presentation/views/widgets/custom_notification.dart';
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({super.key});
+  const HomeAppBar({super.key, required this.onNotificationTapped});
+
+  final void Function()? onNotificationTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,10 @@ class HomeAppBar extends StatelessWidget {
           color: AppColors.grayscale950,
         ),
       ),
-      trailing: const CustomNotification(),
+      trailing: GestureDetector(
+        onTap: onNotificationTapped,
+        child: const CustomNotification(),
+      ),
     );
   }
 }

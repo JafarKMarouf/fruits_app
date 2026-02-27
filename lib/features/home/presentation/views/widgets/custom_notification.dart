@@ -8,7 +8,7 @@ class CustomNotification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(8),
       decoration: const ShapeDecoration(
         color: Color(0xFFEEF8ED),
         shape: OvalBorder(),
