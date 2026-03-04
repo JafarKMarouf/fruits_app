@@ -39,9 +39,7 @@ class ProductsViewBody extends StatelessWidget {
                 ],
               ),
             ),
-
             const FruitItemGridView(),
-
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
           ],
         ),

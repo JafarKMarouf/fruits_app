@@ -93,7 +93,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             const SizedBox(height: 20),
 
             // ── Title ────────────────────────────────────────────────────
-            AppTextWidget(
+            const AppTextWidget(
               text: 'تصنيف حسب :',
               style: AppTextStyles.styleBold19,
             ),
@@ -104,7 +104,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               children: [
                 SvgPicture.asset(AppImages.imagesTag),
                 const SizedBox(width: 6),
-                AppTextWidget(
+                const AppTextWidget(
                   text: 'السعر :',
                   style: AppTextStyles.styleBold13,
                 ),
@@ -122,7 +122,10 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                   ),
                 ),
                 const SizedBox(width: 10),
-                AppTextWidget(text: 'الى', style: AppTextStyles.styleBold13),
+                const AppTextWidget(
+                  text: 'الى',
+                  style: AppTextStyles.styleBold13,
+                ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: _PriceField(

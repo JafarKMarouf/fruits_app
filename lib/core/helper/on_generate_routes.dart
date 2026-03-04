@@ -1,24 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/features/auth/presentation/views/signin_view.dart';
 import 'package:fruits_app/features/auth/presentation/views/signup_view.dart';
-import 'package:fruits_app/features/home/presentation/views/home_view.dart';
 import 'package:fruits_app/features/onboarding/presentation/views/onboarding_view.dart';
 
 import '../../features/splash/presentation/views/splash_view.dart';
+import '../widgets/app_text_widget.dart';
+import '../widgets/bottom_nav_bar/app_shell.dart';
 
 Route<dynamic> onGenerateRoutes(RouteSettings settings) {
   switch (settings.name) {
     case SplashView.routeName:
-      return MaterialPageRoute(builder: (context) => const SplashView());
+      return _fade(const SplashView());
     case OnboardingView.routeName:
-      return MaterialPageRoute(builder: (context) => const OnboardingView());
+      return _fade(const OnboardingView());
     case SigninView.routeName:
-      return MaterialPageRoute(builder: (context) => const SigninView());
+      return _slide(const SigninView());
     case SignupView.routeName:
-      return MaterialPageRoute(builder: (context) => const SignupView());
-    case HomeView.routeName:
-      return MaterialPageRoute(builder: (context) => const HomeView());
+      return _slide(const SignupView());
+
+    case AppShell.routeName:
+      return _fade(const AppShell());
+
     default:
-      return MaterialPageRoute(builder: (context) => const Scaffold());
+      return _fade(
+        const Scaffold(
+          body: Center(child: AppTextWidget(text: '404 – Route not found')),
+        ),
+      );
   }
 }
+
+PageRoute<T> _fade<T>(Widget page) => PageRouteBuilder<T>(
+  pageBuilder: (_, _, _) => page,
+  transitionsBuilder: (_, animation, _, child) => FadeTransition(
+    opacity: CurvedAnimation(parent: animation, curve: Curves.easeOut),
+    child: child,
+  ),
+  transitionDuration: const Duration(milliseconds: 350),
+);
+
+PageRoute<T> _slide<T>(Widget page) => PageRouteBuilder<T>(
+  pageBuilder: (_, _, _) => page,
+  transitionsBuilder: (_, animation, _, child) => SlideTransition(
+    position: Tween<Offset>(
+      begin: const Offset(1.0, 0),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOutCubic)),
+    child: child,
+  ),
+  transitionDuration: const Duration(milliseconds: 350),
+);

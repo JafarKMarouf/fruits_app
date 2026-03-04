@@ -69,9 +69,9 @@ class FruitItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         backgroundColor: AppColors.green1_500,
-                        child: const Icon(Icons.add, color: Colors.white),
+                        child: Icon(Icons.add, color: Colors.white),
                       ),
                     ],
                   ),

@@ -14,8 +14,8 @@ class SearchWithoutResult extends StatelessWidget {
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        shadows: [
-          const BoxShadow(
+        shadows: const [
+          BoxShadow(
             color: Color(0x0F000000),
             blurRadius: 12,
             offset: Offset(0, 4),

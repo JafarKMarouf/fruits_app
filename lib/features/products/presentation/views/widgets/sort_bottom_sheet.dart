@@ -49,7 +49,7 @@ class _SortBottomSheetState extends State<SortBottomSheet> {
             const SizedBox(height: 20),
 
             // ── Title ────────────────────────────────────────────────────
-            AppTextWidget(
+            const AppTextWidget(
               text: 'ترتيب حسب :',
               style: AppTextStyles.styleBold19,
             ),

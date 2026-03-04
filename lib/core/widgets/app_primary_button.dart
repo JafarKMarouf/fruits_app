@@ -33,11 +33,11 @@ class AppPrimaryButton extends StatelessWidget {
       height: height ?? 54,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: AppColors.green1_900,
             blurRadius: 4,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
             spreadRadius: 0,
           ),
         ],

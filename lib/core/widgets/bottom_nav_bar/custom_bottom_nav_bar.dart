@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_app/features/home/domain/entities/bottom_navigation_bar_entity.dart';
-import 'package:fruits_app/features/home/presentation/views/widgets/navigation_bar_item.dart';
+
+import 'bottom_nav_item_entity.dart';
+import 'nav_bar_item.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({
@@ -37,7 +38,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: bottomNavigationBarItems.asMap().entries.map((e) {
-          return NavigationBarItem(
+          return NavBarItem(
             isSelected: selectedIndex == e.key,
             bottomNavigationBarEntity: e.value,
             onTap: () => onItemTapped(e.key),

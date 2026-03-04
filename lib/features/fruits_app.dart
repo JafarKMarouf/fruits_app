@@ -18,13 +18,13 @@ class FruitsApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       locale: const Locale('ar'),
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [const Locale('ar'), const Locale('en')],
+      supportedLocales: const [Locale('ar'), Locale('en')],
 
       debugShowCheckedModeBanner: false,
       onGenerateRoute: onGenerateRoutes,

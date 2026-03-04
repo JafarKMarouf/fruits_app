@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fruits_app/core/utils/styles/app_colors.dart';
-import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
-import 'package:fruits_app/core/widgets/app_text_widget.dart';
-import 'package:fruits_app/features/home/domain/entities/bottom_navigation_bar_entity.dart';
+import 'package:flutter_svg/svg.dart';
 
-class NavigationBarItem extends StatelessWidget {
-  const NavigationBarItem({
+import '../../utils/styles/app_colors.dart';
+import '../../utils/styles/app_text_styles.dart';
+import '../app_text_widget.dart';
+import 'bottom_nav_item_entity.dart';
+
+class NavBarItem extends StatelessWidget {
+  const NavBarItem({
     super.key,
     required this.isSelected,
     required this.bottomNavigationBarEntity,
@@ -14,7 +15,7 @@ class NavigationBarItem extends StatelessWidget {
   });
 
   final bool isSelected;
-  final BottomNavigationBarEntity bottomNavigationBarEntity;
+  final BottomNavBarEntity bottomNavigationBarEntity;
   final VoidCallback onTap;
 
   @override
@@ -45,9 +46,9 @@ class NavigationBarItem extends StatelessWidget {
                     Container(
                       width: 40,
                       height: 40,
-                      decoration: ShapeDecoration(
+                      decoration: const ShapeDecoration(
                         color: AppColors.green1_500,
-                        shape: const OvalBorder(),
+                        shape: OvalBorder(),
                       ),
                       child: Center(
                         child: SvgPicture.asset(

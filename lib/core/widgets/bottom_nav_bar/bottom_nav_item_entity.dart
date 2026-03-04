@@ -1,34 +1,34 @@
-import 'package:fruits_app/core/utils/styles/app_images.dart';
+import '../../utils/styles/app_images.dart';
 
-class BottomNavigationBarEntity {
+class BottomNavBarEntity {
   final String activeIcon;
   final String inactiveIcon;
   final String title;
 
-  BottomNavigationBarEntity({
+  BottomNavBarEntity({
     required this.activeIcon,
     required this.inactiveIcon,
     required this.title,
   });
 }
 
-List<BottomNavigationBarEntity> get bottomNavigationBarItems => [
-  BottomNavigationBarEntity(
+List<BottomNavBarEntity> get bottomNavigationBarItems => [
+  BottomNavBarEntity(
     activeIcon: AppImages.imagesBottomNavBarActiveHome,
     inactiveIcon: AppImages.imagesBottomNavBarInactiveHome,
     title: 'الرئيسية',
   ),
-  BottomNavigationBarEntity(
+  BottomNavBarEntity(
     activeIcon: AppImages.imagesBottomNavBarActiveProduct,
     inactiveIcon: AppImages.imagesBottomNavBarInactiveProduct,
     title: 'المنتجات',
   ),
-  BottomNavigationBarEntity(
+  BottomNavBarEntity(
     activeIcon: AppImages.imagesBottomNavBarActiveShoppingCart,
     inactiveIcon: AppImages.imagesBottomNavBarInactiveShoppingCart,
     title: 'السلة',
   ),
-  BottomNavigationBarEntity(
+  BottomNavBarEntity(
     activeIcon: AppImages.imagesBottomNavBarActiveProfile,
     inactiveIcon: AppImages.imagesBottomNavBarInactiveProfile,
     title: 'حسابي',
