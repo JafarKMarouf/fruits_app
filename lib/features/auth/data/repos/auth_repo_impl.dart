@@ -38,7 +38,9 @@ class AuthRepoImpl extends AuthRepo {
       await addUserData(user: userEntity);
       return Right(userEntity);
     } on CustomException catch (e) {
-      await firebaseAuthService.deleteAuthUser();
+      if (user != null) {
+        await firebaseAuthService.deleteAuthUser();
+      }
       return Left(ServerFailure(e.message));
     } catch (e) {
       log(
@@ -95,7 +97,9 @@ class AuthRepoImpl extends AuthRepo {
       await saveUserData(user: userEntity);
       return Right(userEntity);
     } on CustomException catch (e) {
-      await firebaseAuthService.deleteAuthUser();
+      if (user != null) {
+        await firebaseAuthService.deleteAuthUser();
+      }
       return Left(ServerFailure(e.message));
     } catch (e) {
       log('Exception in AuthRepoImpl.signInWithGoogle: ${e.toString()}');

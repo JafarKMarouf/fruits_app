@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_app/core/utils/constants.dart';
-import 'package:fruits_app/core/widgets/search_text_field.dart';
-import 'package:fruits_app/features/home/presentation/views/widgets/fruit_item_grid_view.dart';
-import 'package:fruits_app/features/home/presentation/views/widgets/home_app_bar.dart';
-import 'package:fruits_app/features/home/presentation/views/widgets/show_more_best_selling.dart';
 
+import '../../../../../core/utils/constants.dart';
+import '../../../../../core/widgets/search_text_field.dart';
+import '../best_selling_view.dart';
+import '../notification_view.dart';
+import '../search_view.dart';
 import 'featured_list.dart';
+import 'fruit_item_grid_view.dart';
+import 'home_app_bar.dart';
+import 'show_more_best_selling.dart';
 
 class HomeViewBody extends StatelessWidget {
-  const HomeViewBody({
-    super.key,
-    required this.onShowMoreTapped,
-    required this.onSearchTapped,
-    required this.onNotificationTapped,
-  });
-
-  final VoidCallback onShowMoreTapped;
-  final VoidCallback onSearchTapped;
-  final VoidCallback onNotificationTapped;
+  const HomeViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +24,25 @@ class HomeViewBody extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: kTopPadding),
-                  HomeAppBar(onNotificationTapped: onNotificationTapped),
+                  HomeAppBar(
+                    onNotificationTapped: () => Navigator.of(
+                      context,
+                    ).pushNamed(NotificationView.routeName),
+                  ),
                   const SizedBox(height: 16),
-                  SearchTextField(readOnly: true, onTap: onSearchTapped),
+                  SearchTextField(
+                    readOnly: true,
+                    onTap: () =>
+                        Navigator.of(context).pushNamed(SearchView.routeName),
+                  ),
                   const SizedBox(height: 12),
                   const FeaturedList(),
                   const SizedBox(height: 12),
-                  ShowMoreBestSelling(onTap: onShowMoreTapped),
+                  ShowMoreBestSelling(
+                    onTap: () => Navigator.of(
+                      context,
+                    ).pushNamed(BestSellingView.routeName),
+                  ),
                   const SizedBox(height: 8),
                 ],
               ),
