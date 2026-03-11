@@ -338,6 +338,26 @@ class AppLocalizations {
   String get homeTitle {
     return Intl.message('Home', name: 'homeTitle', desc: '', args: []);
   }
+
+  /// `Good Morning !..`
+  String get goodMorning {
+    return Intl.message(
+      'Good Morning !..',
+      name: 'goodMorning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `search about.......`
+  String get searchAbout {
+    return Intl.message(
+      'search about.......',
+      name: 'searchAbout',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

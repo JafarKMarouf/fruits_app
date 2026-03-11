@@ -31,5 +31,7 @@
   "requiredField": "This field is required",
   "loginSuccess": "Logged in successfully!",
   "emailAlreadyInUse": "The account already exists for that email.",
-  "homeTitle": "Home"
+  "homeTitle": "Home",
+  "goodMorning": "Good Morning !..",
+  "searchAbout": "search about......."
 }

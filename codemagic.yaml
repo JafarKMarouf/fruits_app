@@ -1,0 +1,43 @@
+workflows:
+  android-release:
+    name: Android Release
+    triggering:
+      events:
+        - push
+        - tag
+      branch_patterns:
+        - pattern: main
+      tag_patterns:
+        pattern: 'v*'
+
+    environment:
+      groups:
+        - app_env_vars
+      flutter: stable
+
+    scripts:
+      - name: Generate .env file
+        script: |
+          cat > $CM_BUILD_DIR/.env << EOF
+          GOOGLE_WEB_CLIENT_ID=$GOOGLE_WEB_CLIENT_ID
+          EOF
+
+      - name: Get Flutter packages
+        script: flutter pub get
+
+      - name: Build Android release
+        script: |
+          flutter build apk --release --split-per-abi
+          flutter build appbundle --release
+
+    artifacts:
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/*.apk
+
+    publishing:
+      github:
+        artifact_patterns:
+          - build/**/outputs/**/*.aab
+          - build/**/outputs/**/*.apk
+        release: true
+        prerelease: false

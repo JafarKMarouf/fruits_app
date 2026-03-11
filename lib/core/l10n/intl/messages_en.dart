@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "genericError": MessageLookupByLibrary.simpleMessage(
       "Something went wrong. Please try again later.",
     ),
+    "goodMorning": MessageLookupByLibrary.simpleMessage("Good Morning !.."),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Home"),
     "invalidCredential": MessageLookupByLibrary.simpleMessage(
       "Email or password invalid.",
@@ -80,6 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "requiredField": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),
+    "searchAbout": MessageLookupByLibrary.simpleMessage("search about......."),
     "signupTitle": MessageLookupByLibrary.simpleMessage("Sign up"),
     "skip": MessageLookupByLibrary.simpleMessage("skip"),
     "startNowButton": MessageLookupByLibrary.simpleMessage("Start Now"),
