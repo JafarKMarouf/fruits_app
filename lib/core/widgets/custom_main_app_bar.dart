@@ -37,7 +37,7 @@ class CustomMainAppBar extends StatelessWidget {
               )
             : const SizedBox(),
         AppTextWidget(
-          text: title,
+          title,
           style: AppTextStyles.styleBold19.copyWith(
             color: AppColors.grayscale950,
           ),

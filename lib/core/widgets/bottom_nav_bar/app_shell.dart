@@ -19,7 +19,7 @@ class AppShell extends StatefulWidget {
 
 class _AppShellState extends State<AppShell> {
   int _currentIndex = 0;
-
+  final Set<int> _visitedTabs = {0};
   final List<GlobalKey<NavigatorState>> _navigatorKeys = List.generate(
     4,
     (_) => GlobalKey<NavigatorState>(),
@@ -27,7 +27,7 @@ class _AppShellState extends State<AppShell> {
 
   final List<Widget> _tabRoots = const [
     HomeView(),
-    ProductView(),
+    ProductsView(),
     Center(child: Text('Cart View')),
     ProfileView(),
   ];
@@ -35,7 +35,10 @@ class _AppShellState extends State<AppShell> {
     if (index == _currentIndex) {
       _navigatorKeys[index].currentState?.popUntil((route) => route.isFirst);
     } else {
-      setState(() => _currentIndex = index);
+      setState(() {
+        _visitedTabs.add(index);
+        _currentIndex = index;
+      });
     }
   }
 
@@ -62,11 +65,13 @@ class _AppShellState extends State<AppShell> {
           index: _currentIndex,
           children: List.generate(
             _tabRoots.length,
-            (index) => Navigator(
-              key: _navigatorKeys[index],
-              onGenerateRoute: (settings) =>
-                  _onGenerateTabRoute(settings, index),
-            ),
+            (index) => _visitedTabs.contains(index)
+                ? Navigator(
+                    key: _navigatorKeys[index],
+                    onGenerateRoute: (settings) =>
+                        _onGenerateTabRoute(settings, index),
+                  )
+                : const SizedBox.shrink(),
           ),
         ),
         bottomNavigationBar: CustomBottomNavigationBar(
@@ -110,7 +115,6 @@ class _AppShellState extends State<AppShell> {
       case NotificationView.routeName:
         return const NotificationView();
 
-      // Fallthrough → show the tab's root widget
       default:
         return _tabRoots[tabIndex];
     }

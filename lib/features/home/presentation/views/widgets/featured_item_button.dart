@@ -21,7 +21,7 @@ class FeaturedItemButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: AppTextWidget(
-          text: 'تسوق الان',
+          'تسوق الان',
           style: AppTextStyles.styleBold13.copyWith(color: AppColors.info),
         ),
       ),

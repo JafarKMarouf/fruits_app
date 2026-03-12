@@ -17,13 +17,13 @@ class NoResultBody extends StatelessWidget {
         SvgPicture.asset(AppImages.imagesSearchWithoutResult),
         const SizedBox(height: 20),
         AppTextWidget(
-          text: 'البحث',
+          'البحث',
           style: AppTextStyles.styleBold16.copyWith(
             color: AppColors.grayscale600,
           ),
         ),
         AppTextWidget(
-          text: 'عفوًا... هذه المعلومات غير متوفرة للحظة',
+          'عفوًا... هذه المعلومات غير متوفرة للحظة',
           style: AppTextStyles.styleRegular13.copyWith(
             color: AppColors.grayscale400,
           ),

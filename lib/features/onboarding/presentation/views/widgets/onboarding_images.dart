@@ -52,7 +52,7 @@ class OnboardingImages extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, SigninView.routeName);
                 },
                 child: AppTextWidget(
-                  text: AppLocalizations.of(context).skip,
+                  AppLocalizations.of(context).skip,
                   style: AppTextStyles.styleRegular13.copyWith(
                     color: AppColors.grayscale400,
                   ),

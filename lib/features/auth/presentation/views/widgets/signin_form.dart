@@ -79,7 +79,7 @@ class _SigninFormState extends State<SigninForm> {
               TextButton(
                 onPressed: () {},
                 child: AppTextWidget(
-                  text: AppLocalizations.of(context).forgetPassword,
+                  AppLocalizations.of(context).forgetPassword,
                   style: AppTextStyles.styleBold13.copyWith(
                     color: AppColors.primary,
                   ),

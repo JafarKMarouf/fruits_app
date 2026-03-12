@@ -12,7 +12,7 @@ class PageViewItem extends StatelessWidget {
     required this.title,
     required this.subTitle,
     this.backgroundColor,
-    required this.isVisible 
+    required this.isVisible,
   });
 
   final String image, backgroundImage, subTitle;
@@ -41,7 +41,7 @@ class PageViewItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: AppTextWidget(
-                text: subTitle,
+                subTitle,
                 textAlign: TextAlign.center,
                 maxLines: 3,
                 style: AppTextStyles.styleSemiBold13.copyWith(

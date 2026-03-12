@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_app/core/entities/product_entity.dart';
 import 'package:fruits_app/core/utils/styles/app_colors.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 import 'package:fruits_app/core/widgets/app_text_widget.dart';
+import 'package:fruits_app/core/widgets/custom_network_image.dart';
 
-class OurProductItem extends StatelessWidget {
-  final String title, image;
+class FeaturedProductItem extends StatelessWidget {
+  final ProductEntity product;
 
-  const OurProductItem({super.key, required this.title, required this.image});
+  const FeaturedProductItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: 64,
-          height: 64,
-          decoration: const ShapeDecoration(
-            color: Color(0xFFF3F5F7),
-            shape: OvalBorder(),
+        CircleAvatar(
+          radius: 34.5,
+          backgroundColor: const Color(0xFFF3F5F7),
+          child: CustomNetworkImage(
+            imageUrl: product.imageUrl,
+            color: Colors.white,
           ),
-          child: Image.asset(image),
         ),
         const SizedBox(height: 2),
         AppTextWidget(
-          text: title,
+          product.name,
           style: AppTextStyles.styleSemiBold13.copyWith(
             color: AppColors.grayscale950,
           ),

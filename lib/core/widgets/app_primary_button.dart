@@ -56,7 +56,7 @@ class AppPrimaryButton extends StatelessWidget {
           child: isLoading
               ? const CircularProgressIndicator()
               : AppTextWidget(
-                  text: text,
+                  text,
                   style: AppTextStyles.styleBold16.copyWith(
                     color: Colors.white,
                   ),

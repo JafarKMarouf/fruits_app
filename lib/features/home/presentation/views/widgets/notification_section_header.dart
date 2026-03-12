@@ -24,7 +24,7 @@ class NotificationSectionHeader extends StatelessWidget {
       children: [
         Row(
           children: [
-            AppTextWidget(text: label, style: AppTextStyles.styleBold16),
+            AppTextWidget(label, style: AppTextStyles.styleBold16),
 
             const SizedBox(width: 8),
 
@@ -35,7 +35,7 @@ class NotificationSectionHeader extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: AppTextWidget(
-                text: '$count',
+                '$count',
                 style: AppTextStyles.styleBold13.copyWith(
                   color: AppColors.green1_500,
                 ),
@@ -46,7 +46,7 @@ class NotificationSectionHeader extends StatelessWidget {
         GestureDetector(
           onTap: () => onSelectAll(!isAllSelected),
           child: AppTextWidget(
-            text: 'تحديد الكل مقروء',
+            'تحديد الكل مقروء',
             style: AppTextStyles.styleRegular13.copyWith(
               color: AppColors.grayscale400,
             ),

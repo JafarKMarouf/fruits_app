@@ -14,7 +14,7 @@ class ShowMoreBestSelling extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         AppTextWidget(
-          text: 'الأكثر مبيعاً',
+          'الأكثر مبيعاً',
           style: AppTextStyles.styleBold16.copyWith(
             color: AppColors.grayscale950,
           ),
@@ -22,7 +22,7 @@ class ShowMoreBestSelling extends StatelessWidget {
         TextButton(
           onPressed: onTap,
           child: AppTextWidget(
-            text: 'المزيد',
+            'المزيد',
             style: AppTextStyles.styleRegular13.copyWith(
               color: AppColors.grayscale400,
             ),

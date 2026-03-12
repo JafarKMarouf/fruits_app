@@ -47,7 +47,7 @@ class SocialLogin extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: AppTextWidget(
-                  text: title,
+                  title,
                   style: AppTextStyles.styleSemiBold16,
                   textAlign: TextAlign.center,
                 ),

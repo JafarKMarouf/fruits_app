@@ -42,14 +42,14 @@ class FeaturedItem extends StatelessWidget {
                     children: [
                       const SizedBox(height: 25),
                       AppTextWidget(
-                        text: 'عروض العيد',
+                        'عروض العيد',
                         style: AppTextStyles.styleRegular13.copyWith(
                           color: Colors.white,
                         ),
                       ),
                       const Spacer(),
                       AppTextWidget(
-                        text: 'خصم 25%',
+                        'خصم 25%',
                         style: AppTextStyles.styleBold19.copyWith(
                           color: Colors.white,
                         ),
