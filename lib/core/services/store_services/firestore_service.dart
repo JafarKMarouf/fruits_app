@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fruits_app/core/services/database_service.dart';
+import 'package:fruits_app/core/services/store_services/database_service.dart';
 
 class FirestoreService extends DatabaseService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -13,10 +13,11 @@ class FirestoreService extends DatabaseService {
     String? documentId,
   }) async {
     try {
+      final collectionRef = firestore.collection(path);
       if (documentId != null) {
-        await firestore.collection(path).doc(documentId).set(data);
+        await collectionRef.doc(documentId).set(data, SetOptions(merge: true));
       } else {
-        await firestore.collection(path).add(data);
+        await collectionRef.add(data);
       }
     } on FirebaseException catch (e) {
       log('FirebaseException in FirestoreService.addData: ${e.toString()}');

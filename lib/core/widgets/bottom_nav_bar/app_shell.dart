@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_app/features/cart/presentation/views/cart_view.dart';
 import 'package:fruits_app/features/home/presentation/views/home_view.dart';
 
 import '../../../features/home/presentation/views/best_selling_view.dart';
@@ -28,9 +29,10 @@ class _AppShellState extends State<AppShell> {
   final List<Widget> _tabRoots = const [
     HomeView(),
     ProductsView(),
-    Center(child: Text('Cart View')),
+    CartView(),
     ProfileView(),
   ];
+
   void _onTabTapped(int index) {
     if (index == _currentIndex) {
       _navigatorKeys[index].currentState?.popUntil((route) => route.isFirst);

@@ -2,7 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/l10n/l10n.dart';
 import 'package:fruits_app/core/services/shared_preferences_service.dart';
-import 'package:fruits_app/core/utils/constants.dart';
+import 'package:fruits_app/core/utils/constants/app_constants.dart';
 import 'package:fruits_app/core/utils/styles/app_colors.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 import 'package:fruits_app/core/widgets/app_primary_button.dart';

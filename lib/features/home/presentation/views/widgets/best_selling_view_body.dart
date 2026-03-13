@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_app/core/utils/constants.dart';
+import 'package:fruits_app/core/utils/constants/app_constants.dart';
 import 'package:fruits_app/core/widgets/custom_main_app_bar.dart';
 import 'package:fruits_app/features/home/presentation/views/widgets/products_grid_view_bloc_builder.dart';
 
@@ -10,13 +10,15 @@ class BestSellingViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+        padding: EdgeInsets.symmetric(
+          horizontal: kHorizontalPadding,
+          vertical: kTopPadding,
+        ),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
               child: Column(
                 children: [
-                  SizedBox(height: kTopPadding),
                   CustomMainAppBar(title: 'الأكثر مبيعاً'),
                   SizedBox(height: 24),
                 ],

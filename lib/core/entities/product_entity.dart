@@ -1,4 +1,4 @@
-import 'review_enitity.dart';
+import 'review_entity.dart';
 
 class ProductEntity {
   final String name;

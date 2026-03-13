@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_app/core/cubits/featured_products/featured_product_cubit.dart';
 import 'package:fruits_app/core/cubits/product/product_cubit.dart';
 import 'package:fruits_app/core/helper/show_filter_bottom_sheet.dart';
-import 'package:fruits_app/core/utils/constants.dart';
+import 'package:fruits_app/core/utils/constants/app_constants.dart';
 import 'package:fruits_app/core/widgets/custom_main_app_bar.dart';
 import 'package:fruits_app/core/widgets/search_text_field.dart';
-import 'package:fruits_app/features/home/presentation/views/widgets/show_more_best_selling.dart';
+import 'package:fruits_app/features/home/presentation/views/widgets/show_more_products.dart';
 import 'package:fruits_app/features/products/presentation/views/widgets/featured_product_list_view_bloc_builder.dart';
 import 'package:fruits_app/features/products/presentation/views/widgets/featured_products_header.dart';
 
@@ -51,7 +51,8 @@ class _ProductsViewBodyState extends State<ProductsViewBody> {
                   const FeaturedProductsHeader(),
                   const SizedBox(height: 8),
                   const FeaturedProductListViewBlocBuilder(),
-                  ShowMoreBestSelling(onTap: () {}),
+                  const SizedBox(height: 16),
+                  const ShowMoreProducts(isShowMore: false),
                   const SizedBox(height: 8),
                 ],
               ),

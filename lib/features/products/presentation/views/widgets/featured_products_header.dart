@@ -15,7 +15,7 @@ class FeaturedProductsHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         AppTextWidget(
-          'منتجاتنا',
+          'المنتجات المميزة',
           style: AppTextStyles.styleBold16.copyWith(
             color: AppColors.grayscale950,
           ),

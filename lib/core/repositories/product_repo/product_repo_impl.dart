@@ -4,13 +4,14 @@ import 'package:dartz/dartz.dart';
 import 'package:fruits_app/core/entities/product_entity.dart';
 import 'package:fruits_app/core/errors/failure.dart';
 import 'package:fruits_app/core/models/product_model.dart';
-import 'package:fruits_app/core/services/database_service.dart';
-import 'package:fruits_app/core/utils/backend_endpoints.dart';
+import 'package:fruits_app/core/services/store_services/database_service.dart';
+import 'package:fruits_app/core/utils/constants/backend_endpoints.dart';
 
 import 'product_repo.dart';
 
 class ProductRepoImpl implements ProductRepo {
   final DatabaseService databaseService;
+
   const ProductRepoImpl(this.databaseService);
 
   @override

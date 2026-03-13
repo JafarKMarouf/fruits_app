@@ -6,4 +6,6 @@ abstract class BackendEndpoints {
   static const String bestSellingProducts = 'products';
   static const String products = 'products';
   static const String featuredProducts = 'products';
+
+  static const String syncCart = 'cart';
 }

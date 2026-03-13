@@ -21,24 +21,27 @@ class CustomNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: borderRadius ?? BorderRadius.zero,
-      child: imageUrl != null && imageUrl!.isNotEmpty
-          ? CachedNetworkImage(
-              imageUrl: imageUrl!,
-              width: width ?? double.infinity,
-              height: height ?? double.infinity,
-              fit: fit,
-              color: color ?? const Color(0xFFF3F5F7),
-              colorBlendMode: BlendMode.multiply,
-              placeholder: (context, url) => Container(
+    return SizedBox(
+      width: double.infinity,
+      child: ClipRRect(
+        borderRadius: borderRadius ?? BorderRadius.zero,
+        child: imageUrl != null && imageUrl!.isNotEmpty
+            ? CachedNetworkImage(
+                imageUrl: imageUrl!,
                 width: width ?? double.infinity,
                 height: height ?? double.infinity,
+                fit: fit,
                 color: color ?? const Color(0xFFF3F5F7),
-              ),
-              errorWidget: (context, url, error) => _buildErrorWidget(),
-            )
-          : _buildErrorWidget(),
+                colorBlendMode: BlendMode.multiply,
+                placeholder: (context, url) => Container(
+                  width: width ?? double.infinity,
+                  height: height ?? double.infinity,
+                  color: color ?? const Color(0xFFF3F5F7),
+                ),
+                errorWidget: (context, url, error) => _buildErrorWidget(),
+              )
+            : _buildErrorWidget(),
+      ),
     );
   }
 
