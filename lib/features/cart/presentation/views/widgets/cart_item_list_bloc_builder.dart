@@ -6,7 +6,6 @@ import 'package:fruits_app/features/home/presentation/views/widgets/no_result_bo
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/helper/get_mock_cart.dart';
-import '../../../../../core/helper/get_user.dart';
 import '../../../../../core/widgets/custom_error_widget.dart';
 import 'cart_item_sliver_list_builder.dart';
 
@@ -28,7 +27,6 @@ class CartItemListBlocBuilder extends StatelessWidget {
               errorMessage: state.message,
               onRetry: () {
                 context.read<CartCubit>().loadCart();
-                context.read<CartCubit>().syncCart(getUser().uId);
               },
             ),
           );

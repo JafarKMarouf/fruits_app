@@ -15,11 +15,7 @@ class CartItemSliverListBuilder extends StatelessWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
-          child: CartItemWidget(
-            item: cartItems[index],
-            onRemove: (value) {},
-            onUpdateQuantity: (value, index) {},
-          ),
+          child: CartItemWidget(item: cartItems[index]),
         );
       },
       separatorBuilder: (context, index) {

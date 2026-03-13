@@ -6,7 +6,11 @@ class CartItemEntity {
 
   CartItemEntity({required this.productEntity, required this.count});
 
-  num calculateTotalPrice() {
-    return count * productEntity.price;
+  String get formatTotalItemPrice {
+    num total = count * productEntity.price;
+    if (total % 1 == 0) {
+      return total.toInt().toString();
+    }
+    return total.toString();
   }
 }

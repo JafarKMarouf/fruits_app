@@ -17,11 +17,13 @@ class ProductsGridViewBlocBuilder extends StatelessWidget {
         if (state is ProductSuccess) {
           return ProductsGridView(products: state.products);
         } else if (state is ProductFailure) {
-          return CustomErrorWidget(
-            errorMessage: state.errMessage,
-            onRetry: () {
-              context.read<ProductCubit>().getBestSelling();
-            },
+          return SliverToBoxAdapter(
+            child: CustomErrorWidget(
+              errorMessage: state.errMessage,
+              onRetry: () {
+                context.read<ProductCubit>().getBestSelling();
+              },
+            ),
           );
         } else {
           return Skeletonizer.sliver(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_app/core/cubits/product/product_cubit.dart';
-import 'package:fruits_app/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 
 import 'package:fruits_app/features/home/presentation/views/widgets/home_view_body.dart';
 
@@ -17,7 +16,7 @@ class HomeView extends StatelessWidget {
       body: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => getIt<ProductCubit>()),
-          BlocProvider(create: (context) => getIt<CartCubit>()),
+          // BlocProvider(create: (context) => getIt<CartCubit>()),
         ],
         child: const HomeViewBody(),
       ),

@@ -58,4 +58,10 @@ class CartCubit extends Cubit<CartState> {
       (cart) => emit(CartLoaded(cart)),
     );
   }
+
+  Future<void> saveToRemote(String userId) async {
+    emit(CartLoading());
+    final result = await cartRepo.saveToRemote(userId);
+    result.fold((failure) => emit(CartFailure(failure.message)), (_) => emit);
+  }
 }

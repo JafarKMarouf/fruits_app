@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:fruits_app/core/errors/failure.dart';
 import 'package:fruits_app/features/cart/data/data_source/cart_local_data_source.dart';
@@ -72,16 +74,26 @@ class CartRepoImpl implements CartRepo {
   @override
   Future<Either<Failure, void>> syncCartWithRemote(String userId) async {
     try {
-      final remoteCart = await remoteDataSource.fetchCart(userId: userId);
       final localCart = await localDataSource.getCart();
 
-      if (remoteCart != null) {
-        await localDataSource.saveCart(remoteCart);
+      if (localCart.cartItems.isEmpty) {
+        log('--- Local empty, checking remote ---');
+        final remoteCart = await remoteDataSource.fetchCart(userId: userId);
+
+        if (remoteCart != null && remoteCart.cartItems.isNotEmpty) {
+          log('--- Remote data found, saving to local ---');
+          await localDataSource.saveCart(remoteCart);
+        } else {
+          log('--- Remote also empty, pushing initial state ---');
+          await remoteDataSource.syncCart(userId, localCart);
+        }
       } else {
+        log('--- Local has data, pushing to remote ---');
         await remoteDataSource.syncCart(userId, localCart);
       }
       return const Right(null);
     } catch (e) {
+      log('--- Sync Error: $e');
       return Left(ServerFailure(e.toString()));
     }
   }
@@ -120,5 +132,16 @@ class CartRepoImpl implements CartRepo {
 
     await localDataSource.saveCart(updatedCart);
     return updatedCart.toEntity();
+  }
+
+  @override
+  Future<Either<Failure, void>> saveToRemote(String userId) async {
+    try {
+      final localCart = await localDataSource.getCart();
+      await remoteDataSource.syncCart(userId, localCart);
+      return const Right(null);
+    } catch (e) {
+      return Left(CacheFailure(e.toString()));
+    }
   }
 }

@@ -9,4 +9,5 @@ abstract class CartRepo {
   Future<Either<Failure, CartEntity>> decreaseCartItemCount(String productCode);
   Future<Either<Failure, CartEntity>> removeCartItem(String productCode);
   Future<Either<Failure, void>> syncCartWithRemote(String userId);
+  Future<Either<Failure, void>> saveToRemote(String userId);
 }

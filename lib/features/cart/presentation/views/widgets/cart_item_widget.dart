@@ -11,17 +11,12 @@ import 'package:fruits_app/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:fruits_app/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:fruits_app/features/cart/presentation/views/widgets/cart_item_action_buttons.dart';
 
+import '../../../../../core/helper/get_user.dart';
+
 class CartItemWidget extends StatelessWidget {
   final CartItemEntity item;
-  final Function(String) onRemove;
-  final Function(String, int) onUpdateQuantity;
 
-  const CartItemWidget({
-    super.key,
-    required this.item,
-    required this.onRemove,
-    required this.onUpdateQuantity,
-  });
+  const CartItemWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -55,19 +50,30 @@ class CartItemWidget extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          context.read<CartCubit>().removeItem(
-                            item.productEntity.code,
-                          );
+                      BlocListener<CartCubit, CartState>(
+                        listener: (context, state) {
+                          if (state is CartLoaded) {
+                            if (state.cart.cartItems.isEmpty) {
+                              context.read<CartCubit>().saveToRemote(
+                                getUser().uId,
+                              );
+                            }
+                          }
                         },
-                        child: SvgPicture.asset(AppImages.imagesTrash),
+                        child: GestureDetector(
+                          onTap: () {
+                            context.read<CartCubit>().removeItem(
+                              item.productEntity.code,
+                            );
+                          },
+                          child: SvgPicture.asset(AppImages.imagesTrash),
+                        ),
                       ),
                     ],
                   ),
 
                   AppTextWidget(
-                    '${item.count} كم',
+                    '${item.count} كغ',
                     textAlign: TextAlign.right,
                     style: AppTextStyles.styleRegular13.copyWith(
                       color: AppColors.orange500,
@@ -78,7 +84,7 @@ class CartItemWidget extends StatelessWidget {
                       CartItemActionButtons(cartItemEntity: item),
                       const Spacer(),
                       AppTextWidget(
-                        '${item.calculateTotalPrice()} ل.س',
+                        '${item.formatTotalItemPrice} ل.س',
                         style: AppTextStyles.styleBold16.copyWith(
                           color: AppColors.orange500,
                         ),

@@ -35,6 +35,7 @@ class CartRemoteDataSourceImpl extends CartRemoteDataSource {
       documentId: 'cart_data',
     );
     if (data == null || data.isEmpty) return null;
-    return CartModel.fromJson(Map<String, dynamic>.from(data));
+
+    return CartModel.fromJson(data);
   }
 }
