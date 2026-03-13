@@ -8,6 +8,7 @@ import 'package:fruits_app/core/widgets/app_text_widget.dart';
 import 'package:fruits_app/core/widgets/custom_network_image.dart';
 import 'package:fruits_app/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:fruits_app/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
+import 'package:fruits_app/features/cart/presentation/views/widgets/item_action_button.dart';
 
 import '../entities/product_entity.dart';
 
@@ -73,21 +74,16 @@ class ProductItem extends StatelessWidget {
                           ],
                         ),
                       ),
-                      GestureDetector(
+
+                      ItemActionButton(
+                        backgroundColor: AppColors.green1_500,
+                        iconColor: Colors.white,
+                        icon: Icons.add,
                         onTap: () {
                           context.read<CartCubit>().addItem(
                             CartItemEntity(productEntity: product, count: 1),
                           );
                         },
-                        child: Container(
-                          width: 30,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: AppColors.green1_500,
-                          ),
-                          child: const Icon(Icons.add, color: Colors.white),
-                        ),
                       ),
                     ],
                   ),

@@ -29,7 +29,6 @@ class CartRepoImpl implements CartRepo {
       final currentCart = await localDataSource.getCart();
       final items = List<CartItemModel>.from(currentCart.cartItems);
 
-      // Check if product already exists in cart
       final existingIndex = items.indexWhere(
         (i) => i.productModel.code == item.productEntity.code,
       );
@@ -40,13 +39,7 @@ class CartRepoImpl implements CartRepo {
         items.add(CartItemModel.fromEntity(item));
       }
 
-      final updatedCart = CartModel(
-        cartItems: items,
-        totalPrice: _calculateTotal(items),
-      );
-
-      await localDataSource.saveCart(updatedCart);
-      return Right(updatedCart.toEntity());
+      return Right(await _updateCart(items));
     } catch (e) {
       return Left(CacheFailure(e.toString()));
     }
@@ -63,20 +56,14 @@ class CartRepoImpl implements CartRepo {
   }
 
   @override
-  Future<Either<Failure, CartEntity>> removeCartItem(String productId) async {
+  Future<Either<Failure, CartEntity>> removeCartItem(String productCode) async {
     try {
       final currentCart = await localDataSource.getCart();
       final items = List<CartItemModel>.from(currentCart.cartItems);
 
-      items.removeWhere((i) => i.productModel.code == productId);
+      items.removeWhere((i) => i.productModel.code == productCode);
 
-      final updatedCart = CartModel(
-        cartItems: items,
-        totalPrice: _calculateTotal(items),
-      );
-
-      await localDataSource.saveCart(updatedCart);
-      return Right(updatedCart.toEntity());
+      return Right(await _updateCart(items));
     } catch (e) {
       return Left(CacheFailure(e.toString()));
     }
@@ -85,20 +72,53 @@ class CartRepoImpl implements CartRepo {
   @override
   Future<Either<Failure, void>> syncCartWithRemote(String userId) async {
     try {
-      // 1. Get remote cart
       final remoteCart = await remoteDataSource.fetchCart(userId: userId);
       final localCart = await localDataSource.getCart();
 
       if (remoteCart != null) {
-        // Simple Sync strategy: Remote overwrites Local (You can adjust this to merge them if needed)
         await localDataSource.saveCart(remoteCart);
       } else {
-        // If no remote cart exists, push the local one to Firestore
         await remoteDataSource.syncCart(userId, localCart);
       }
       return const Right(null);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failure, CartEntity>> decreaseCartItemCount(
+    String productCode,
+  ) async {
+    try {
+      final currentCart = await localDataSource.getCart();
+      final items = List<CartItemModel>.from(currentCart.cartItems);
+
+      final index = items.indexWhere((i) => i.productModel.code == productCode);
+
+      if (index >= 0) {
+        if (items[index].count > 1) {
+          items[index].count -= 1;
+        } else {
+          items.removeAt(index);
+        }
+
+        return Right(await _updateCart(items));
+      } else {
+        return const Left(CacheFailure('Product not found in cart'));
+      }
+    } catch (e) {
+      return Left(CacheFailure(e.toString()));
+    }
+  }
+
+  Future<CartEntity> _updateCart(List<CartItemModel> items) async {
+    final updatedCart = CartModel(
+      cartItems: items,
+      totalPrice: _calculateTotal(items),
+    );
+
+    await localDataSource.saveCart(updatedCart);
+    return updatedCart.toEntity();
   }
 }

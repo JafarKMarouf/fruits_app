@@ -33,9 +33,9 @@ class HiveStorage extends LocalStorageService {
     var box = Hive.isBoxOpen(boxName)
         ? Hive.box(boxName)
         : await Hive.openBox(boxName);
-    // if (!Hive.isBoxOpen(boxName)) {
-    //   throw Exception('Box $boxName is not open. Open it in main() or init().');
-    // }
+    if (!Hive.isBoxOpen(boxName)) {
+      throw Exception('Box $boxName is not open. Open it in main() or init().');
+    }
     return box.get(key);
   }
 

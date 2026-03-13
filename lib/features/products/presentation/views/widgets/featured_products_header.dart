@@ -31,7 +31,7 @@ class FeaturedProductsHeader extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
               ),
             ),
-            child: SvgPicture.asset(AppImages.imagesArrowSwap),
+            child: SvgPicture.asset(AppImages.imagesArrowSwapHorizontal),
           ),
         ),
       ],

@@ -32,6 +32,14 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
+  Future<void> decreaseCartItemCount(String productCode) async {
+    final result = await cartRepo.decreaseCartItemCount(productCode);
+    result.fold(
+      (failure) => emit(CartFailure(failure.message)),
+      (updatedCart) => emit(CartLoaded(updatedCart)),
+    );
+  }
+
   // Remove item and update UI
   Future<void> removeItem(String productId) async {
     final result = await cartRepo.removeCartItem(productId);
@@ -41,12 +49,13 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-  // Sync with Firestore (Call this after login or in background)
   Future<void> syncCart(String userId) async {
-    final result = await cartRepo.syncCartWithRemote(userId);
+    emit(CartLoading());
+    await cartRepo.syncCartWithRemote(userId);
+    final result = await cartRepo.getLocalCart();
     result.fold(
       (failure) => emit(CartFailure(failure.message)),
-      (_) => loadCart(), // Reload from local after sync is complete
+      (cart) => emit(CartLoaded(cart)),
     );
   }
 }
