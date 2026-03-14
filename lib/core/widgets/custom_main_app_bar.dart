@@ -7,10 +7,14 @@ import 'package:fruits_app/core/widgets/app_text_widget.dart';
 import 'package:fruits_app/features/home/presentation/views/widgets/custom_notification.dart';
 
 class CustomMainAppBar extends StatelessWidget {
-  const CustomMainAppBar({super.key, required this.title});
+  const CustomMainAppBar({
+    super.key,
+    required this.title,
+    this.isShowNotification = true,
+  });
 
   final String title;
-
+  final bool isShowNotification;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -31,18 +35,21 @@ class CustomMainAppBar extends StatelessWidget {
                     ),
                   ),
                   child: Center(
-                    child: SvgPicture.asset(AppImages.imagesArrowBack),
+                    child: SvgPicture.asset(AppImages.imagesArrowBackIos),
                   ),
                 ),
               )
             : const SizedBox(),
         AppTextWidget(
-          text: title,
+          title,
           style: AppTextStyles.styleBold19.copyWith(
             color: AppColors.grayscale950,
           ),
         ),
-        const CustomNotification(),
+        Visibility(
+          visible: isShowNotification,
+          child: const CustomNotification(),
+        ),
       ],
     );
   }

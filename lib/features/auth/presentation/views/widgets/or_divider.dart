@@ -13,7 +13,7 @@ class OrDivider extends StatelessWidget {
         Expanded(child: _customDivider()),
         const SizedBox(width: 18.88),
         AppTextWidget(
-          text: AppLocalizations.of(context).or,
+          AppLocalizations.of(context).or,
           style: AppTextStyles.styleSemiBold16,
         ),
         const SizedBox(width: 18.88),

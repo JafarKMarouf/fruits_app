@@ -24,7 +24,7 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
     default:
       return _fade(
         const Scaffold(
-          body: Center(child: AppTextWidget(text: '404 – Route not found')),
+          body: Center(child: AppTextWidget('404 – Route not found')),
         ),
       );
   }

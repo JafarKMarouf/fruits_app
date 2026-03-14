@@ -94,7 +94,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
 
             // ── Title ────────────────────────────────────────────────────
             const AppTextWidget(
-              text: 'تصنيف حسب :',
+              'تصنيف حسب :',
               style: AppTextStyles.styleBold19,
             ),
             const SizedBox(height: 20),
@@ -105,7 +105,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                 SvgPicture.asset(AppImages.imagesTag),
                 const SizedBox(width: 6),
                 const AppTextWidget(
-                  text: 'السعر :',
+                  'السعر :',
                   style: AppTextStyles.styleBold13,
                 ),
               ],
@@ -122,10 +122,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                   ),
                 ),
                 const SizedBox(width: 10),
-                const AppTextWidget(
-                  text: 'الى',
-                  style: AppTextStyles.styleBold13,
-                ),
+                const AppTextWidget('الى', style: AppTextStyles.styleBold13),
                 const SizedBox(width: 10),
                 Expanded(
                   child: _PriceField(
@@ -162,13 +159,13 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AppTextWidget(
-                    text: '\$${_priceRange.end.toInt()}',
+                    '\$${_priceRange.end.toInt()}',
                     style: AppTextStyles.styleSemiBold13.copyWith(
                       color: AppColors.green1_500,
                     ),
                   ),
                   AppTextWidget(
-                    text: '\$${_priceRange.start.toInt()}',
+                    '\$${_priceRange.start.toInt()}',
                     style: AppTextStyles.styleSemiBold13.copyWith(
                       color: AppColors.green1_500,
                     ),

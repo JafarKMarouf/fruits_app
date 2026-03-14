@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_app/core/utils/constants.dart';
+import 'package:fruits_app/core/utils/constants/app_constants.dart';
 import 'package:fruits_app/core/widgets/custom_main_app_bar.dart';
 import 'package:fruits_app/features/home/domain/entities/notification_entity.dart';
 import 'package:fruits_app/features/home/presentation/views/widgets/notification_item.dart';

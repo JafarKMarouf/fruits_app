@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruits_app/core/l10n/l10n.dart';
 import 'package:fruits_app/core/services/shared_preferences_service.dart';
-import 'package:fruits_app/core/utils/constants.dart';
+import 'package:fruits_app/core/utils/constants/app_constants.dart';
 import 'package:fruits_app/core/utils/styles/app_colors.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 import 'package:fruits_app/core/widgets/app_text_widget.dart';
@@ -52,7 +52,7 @@ class OnboardingImages extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, SigninView.routeName);
                 },
                 child: AppTextWidget(
-                  text: AppLocalizations.of(context).skip,
+                  AppLocalizations.of(context).skip,
                   style: AppTextStyles.styleRegular13.copyWith(
                     color: AppColors.grayscale400,
                   ),

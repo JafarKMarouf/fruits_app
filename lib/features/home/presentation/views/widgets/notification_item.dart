@@ -81,7 +81,7 @@ class NotificationItem extends StatelessWidget {
                 ),
                 const SizedBox(width: 13),
                 AppTextWidget(
-                  text: notification.time,
+                  notification.time,
                   style: AppTextStyles.styleRegular13.copyWith(
                     color: AppColors.grayscale400,
                   ),

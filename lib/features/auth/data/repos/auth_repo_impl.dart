@@ -5,15 +5,17 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruits_app/core/errors/custom_exceptions.dart';
 import 'package:fruits_app/core/errors/failure.dart';
-import 'package:fruits_app/core/services/database_service.dart';
 import 'package:fruits_app/core/services/firebase_auth_service.dart';
 import 'package:fruits_app/core/services/shared_preferences_service.dart';
-import 'package:fruits_app/core/utils/backend_endpoints.dart';
-import 'package:fruits_app/core/utils/constants.dart';
+import 'package:fruits_app/core/services/store_services/database_service.dart';
+import 'package:fruits_app/core/utils/constants/backend_endpoints.dart';
+import 'package:fruits_app/core/utils/constants/app_constants.dart';
+import 'package:fruits_app/core/utils/constants/hive_box_name.dart';
 import 'package:fruits_app/features/auth/data/models/user_model.dart';
 import 'package:fruits_app/features/auth/domain/entities/user_entity.dart';
 import 'package:fruits_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:fruits_app/features/auth/domain/requests/user_request.dart';
+import 'package:hive_ce/hive.dart';
 
 class AuthRepoImpl extends AuthRepo {
   final FirebaseAuthService firebaseAuthService;
@@ -137,7 +139,14 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<void> signOut() async {
-    await SharedPreferencesService.remove(kUserData);
-    await SharedPreferencesService.remove(kIsUserLoggedIn);
+    await Future.wait([
+      SharedPreferencesService.remove(kUserData),
+      SharedPreferencesService.remove(kIsUserLoggedIn),
+      _clearAllHiveData(),
+    ]);
+  }
+
+  Future<void> _clearAllHiveData() async {
+    await Hive.deleteBoxFromDisk(HiveBoxNames.cartBox);
   }
 }

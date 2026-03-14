@@ -50,7 +50,7 @@ class _SortBottomSheetState extends State<SortBottomSheet> {
 
             // ── Title ────────────────────────────────────────────────────
             const AppTextWidget(
-              text: 'ترتيب حسب :',
+              'ترتيب حسب :',
               style: AppTextStyles.styleBold19,
             ),
             const SizedBox(height: 10),
@@ -111,7 +111,7 @@ class _SortTile extends StatelessWidget {
       onChanged: onChanged,
       activeColor: AppColors.primaryDark,
       contentPadding: EdgeInsets.zero,
-      title: AppTextWidget(text: label, style: AppTextStyles.styleBold13),
+      title: AppTextWidget(label, style: AppTextStyles.styleBold13),
     );
   }
 }

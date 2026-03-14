@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_app/core/utils/constants.dart';
+import 'package:fruits_app/core/utils/constants/app_constants.dart';
 import 'package:fruits_app/core/utils/styles/app_colors.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 import 'package:fruits_app/core/widgets/app_text_widget.dart';
@@ -13,14 +13,12 @@ class AppPrimaryButton extends StatelessWidget {
     this.width,
     this.height,
     this.textColor = Colors.white,
-    this.isLoading = false,
     this.textStyle,
   });
 
   final Color? backgroundColor;
   final String text;
   final void Function()? onPressed;
-  final bool isLoading;
   final double? width;
   final double? height;
   final Color textColor;
@@ -53,14 +51,10 @@ class AppPrimaryButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Center(
-          child: isLoading
-              ? const CircularProgressIndicator()
-              : AppTextWidget(
-                  text: text,
-                  style: AppTextStyles.styleBold16.copyWith(
-                    color: Colors.white,
-                  ),
-                ),
+          child: AppTextWidget(
+            text,
+            style: AppTextStyles.styleBold16.copyWith(color: Colors.white),
+          ),
         ),
       ),
     );

@@ -18,13 +18,13 @@ class HomeAppBar extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       leading: Image.asset(AppImages.imagesProfileAvatar),
       title: AppTextWidget(
-        text: AppLocalizations.of(context).goodMorning,
+        AppLocalizations.of(context).goodMorning,
         style: AppTextStyles.styleRegular16.copyWith(
           color: AppColors.grayscale400,
         ),
       ),
       subtitle: AppTextWidget(
-        text: getUser().name,
+        getUser().name,
         style: AppTextStyles.styleBold16.copyWith(
           color: AppColors.grayscale950,
         ),

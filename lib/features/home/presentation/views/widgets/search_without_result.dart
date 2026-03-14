@@ -36,7 +36,7 @@ class SearchWithoutResult extends StatelessWidget {
                 children: [
                   SizedBox(
                     child: AppTextWidget(
-                      text: 'لاتوجد نتائج بحث',
+                      'لاتوجد نتائج بحث',
                       style: AppTextStyles.styleRegular13.copyWith(
                         color: AppColors.grayscale400,
                       ),

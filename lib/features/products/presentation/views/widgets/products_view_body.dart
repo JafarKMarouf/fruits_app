@@ -1,15 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_app/core/cubits/featured_products/featured_product_cubit.dart';
+import 'package:fruits_app/core/cubits/product/product_cubit.dart';
 import 'package:fruits_app/core/helper/show_filter_bottom_sheet.dart';
-import 'package:fruits_app/core/utils/constants.dart';
+import 'package:fruits_app/core/utils/constants/app_constants.dart';
 import 'package:fruits_app/core/widgets/custom_main_app_bar.dart';
 import 'package:fruits_app/core/widgets/search_text_field.dart';
-import 'package:fruits_app/features/home/presentation/views/widgets/fruit_item_grid_view.dart';
-import 'package:fruits_app/features/home/presentation/views/widgets/show_more_best_selling.dart';
-import 'package:fruits_app/features/products/presentation/views/widgets/our_product_list_view.dart';
-import 'package:fruits_app/features/products/presentation/views/widgets/our_products_header.dart';
+import 'package:fruits_app/features/home/presentation/views/widgets/show_more_products.dart';
+import 'package:fruits_app/features/products/presentation/views/widgets/featured_product_list_view_bloc_builder.dart';
+import 'package:fruits_app/features/products/presentation/views/widgets/featured_products_header.dart';
 
-class ProductsViewBody extends StatelessWidget {
+import '../../../../home/presentation/views/widgets/products_grid_view_bloc_builder.dart'
+    show ProductsGridViewBlocBuilder;
+
+class ProductsViewBody extends StatefulWidget {
   const ProductsViewBody({super.key});
+
+  @override
+  State<ProductsViewBody> createState() => _ProductsViewBodyState();
+}
+
+class _ProductsViewBodyState extends State<ProductsViewBody> {
+  @override
+  void initState() {
+    context.read<ProductCubit>().getProducts();
+    context.read<FeaturedProductCubit>().getFeaturedProducts();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +48,16 @@ class ProductsViewBody extends StatelessWidget {
                     filter: () => showFilterBottomSheet(context),
                   ),
                   const SizedBox(height: 17),
-                  const OurProductsHeader(),
+                  const FeaturedProductsHeader(),
                   const SizedBox(height: 8),
-                  const OurProductListView(),
-                  ShowMoreBestSelling(onTap: () {}),
+                  const FeaturedProductListViewBlocBuilder(),
+                  const SizedBox(height: 16),
+                  const ShowMoreProducts(isShowMore: false),
                   const SizedBox(height: 8),
                 ],
               ),
             ),
-            const FruitItemGridView(),
+            const ProductsGridViewBlocBuilder(),
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
           ],
         ),

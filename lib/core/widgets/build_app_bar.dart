@@ -14,6 +14,6 @@ AppBar buildAppBar(BuildContext context, {required String title}) {
           )
         : null,
     centerTitle: true,
-    title: AppTextWidget(text: title, style: AppTextStyles.styleBold19),
+    title: AppTextWidget(title, style: AppTextStyles.styleBold19),
   );
 }

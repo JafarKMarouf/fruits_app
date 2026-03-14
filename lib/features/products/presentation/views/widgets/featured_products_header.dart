@@ -6,8 +6,8 @@ import 'package:fruits_app/core/utils/styles/app_images.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 import 'package:fruits_app/core/widgets/app_text_widget.dart';
 
-class OurProductsHeader extends StatelessWidget {
-  const OurProductsHeader({super.key});
+class FeaturedProductsHeader extends StatelessWidget {
+  const FeaturedProductsHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class OurProductsHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         AppTextWidget(
-          text: 'منتجاتنا',
+          'المنتجات المميزة',
           style: AppTextStyles.styleBold16.copyWith(
             color: AppColors.grayscale950,
           ),
@@ -31,7 +31,7 @@ class OurProductsHeader extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
               ),
             ),
-            child: SvgPicture.asset(AppImages.imagesArrowSwap),
+            child: SvgPicture.asset(AppImages.imagesArrowSwapHorizontal),
           ),
         ),
       ],

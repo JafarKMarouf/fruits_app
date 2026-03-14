@@ -58,7 +58,7 @@ class NavBarItem extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     AppTextWidget(
-                      text: bottomNavigationBarEntity.title,
+                      bottomNavigationBarEntity.title,
                       style: AppTextStyles.styleSemiBold11.copyWith(
                         color: AppColors.green1_500,
                       ),

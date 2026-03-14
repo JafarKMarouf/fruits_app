@@ -8,16 +8,21 @@ import 'package:fruits_app/core/services/shared_preferences_service.dart';
 import 'package:fruits_app/features/fruits_app.dart';
 import 'package:fruits_app/firebase_options.dart';
 
+import 'core/services/local_storage_services/local_storage_service.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = const AppBlocObserver();
 
   await Future.wait([
-    SharedPreferencesService.init(),
     Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
     dotenv.load(fileName: '.env'),
+    SharedPreferencesService.init(),
   ]);
 
   await setupServiceLocator();
+
+  final storage = getIt<LocalStorageService>();
+  await storage.init();
   runApp(const FruitsApp());
 }
