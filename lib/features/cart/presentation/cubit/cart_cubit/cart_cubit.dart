@@ -17,10 +17,13 @@ class CartCubit extends Cubit<CartState> {
   Future<void> loadCart() async {
     emit(CartLoading());
     final result = await cartRepo.getLocalCart();
-    result.fold(
-      (failure) => emit(CartFailure(failure.message)),
-      (cart) => emit(CartLoaded(cart)),
-    );
+    result.fold((failure) => emit(CartFailure(failure.message)), (cart) {
+      if (cart.cartItems.isEmpty) {
+        emit(CartEmpty());
+      } else {
+        emit(CartLoaded(cart));
+      }
+    });
   }
 
   // Add item and update UI
@@ -62,6 +65,9 @@ class CartCubit extends Cubit<CartState> {
   Future<void> saveToRemote(String userId) async {
     emit(CartLoading());
     final result = await cartRepo.saveToRemote(userId);
-    result.fold((failure) => emit(CartFailure(failure.message)), (_) => emit);
+    result.fold(
+      (failure) => emit(CartFailure(failure.message)),
+      (success) => loadCart(),
+    );
   }
 }

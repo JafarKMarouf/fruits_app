@@ -72,33 +72,6 @@ class CartRepoImpl implements CartRepo {
   }
 
   @override
-  Future<Either<Failure, void>> syncCartWithRemote(String userId) async {
-    try {
-      final localCart = await localDataSource.getCart();
-
-      if (localCart.cartItems.isEmpty) {
-        log('--- Local empty, checking remote ---');
-        final remoteCart = await remoteDataSource.fetchCart(userId: userId);
-
-        if (remoteCart != null && remoteCart.cartItems.isNotEmpty) {
-          log('--- Remote data found, saving to local ---');
-          await localDataSource.saveCart(remoteCart);
-        } else {
-          log('--- Remote also empty, pushing initial state ---');
-          await remoteDataSource.syncCart(userId, localCart);
-        }
-      } else {
-        log('--- Local has data, pushing to remote ---');
-        await remoteDataSource.syncCart(userId, localCart);
-      }
-      return const Right(null);
-    } catch (e) {
-      log('--- Sync Error: $e');
-      return Left(ServerFailure(e.toString()));
-    }
-  }
-
-  @override
   Future<Either<Failure, CartEntity>> decreaseCartItemCount(
     String productCode,
   ) async {
@@ -121,6 +94,34 @@ class CartRepoImpl implements CartRepo {
       }
     } catch (e) {
       return Left(CacheFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> syncCartWithRemote(String userId) async {
+    try {
+      final localCart = await localDataSource.getCart();
+
+      if (localCart.cartItems.isEmpty) {
+        log('--- Local empty, checking remote ---');
+        final remoteCart = await remoteDataSource.fetchCart(userId: userId);
+
+        if (remoteCart != null && remoteCart.cartItems.isNotEmpty) {
+          log('--- Remote data found, saving to local ---');
+          await localDataSource.saveCart(remoteCart);
+        } else {
+          log('--- Remote also empty, pushing initial state ---');
+          return const Right(null);
+          // await remoteDataSource.syncCart(userId, localCart);
+        }
+      } else {
+        log('--- Local has data, pushing to remote ---');
+        await remoteDataSource.syncCart(userId, localCart);
+      }
+      return const Right(null);
+    } catch (e) {
+      log('--- Sync Error: $e');
+      return Left(ServerFailure(e.toString()));
     }
   }
 

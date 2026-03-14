@@ -15,14 +15,14 @@ class CheckoutButtonBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         if (state is CartLoaded) {
           final String price = state.cart.formatTotalPrice;
-          return state.cart.cartItems.isNotEmpty
-              ? AppPrimaryButton(
-                  text: 'الدفع $price ل.س',
-                  onPressed: () {
-                    context.read<CartCubit>().syncCart(getUser().uId);
-                  },
-                )
-              : const SizedBox.shrink();
+          return AppPrimaryButton(
+            text: 'الدفع $price ل.س',
+            onPressed: () {
+              context.read<CartCubit>().syncCart(getUser().uId);
+            },
+          );
+        } else if (state is CartEmpty) {
+          return const SizedBox.shrink();
         } else {
           return const Skeletonizer(
             enabled: true,

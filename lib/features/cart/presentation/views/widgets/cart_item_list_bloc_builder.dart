@@ -17,10 +17,9 @@ class CartItemListBlocBuilder extends StatelessWidget {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         if (state is CartLoaded) {
-          if (state.cart.cartItems.isEmpty) {
-            return const SliverToBoxAdapter(child: NoResultBody());
-          }
           return CartItemSliverListBuilder(cartItems: state.cart.cartItems);
+        } else if (state is CartEmpty) {
+          return const SliverToBoxAdapter(child: NoResultBody());
         } else if (state is CartFailure) {
           return SliverToBoxAdapter(
             child: CustomErrorWidget(
