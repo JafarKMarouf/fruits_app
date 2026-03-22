@@ -3,6 +3,7 @@ import 'package:fruits_app/features/auth/presentation/views/signin_view.dart';
 import 'package:fruits_app/features/auth/presentation/views/signup_view.dart';
 import 'package:fruits_app/features/onboarding/presentation/views/onboarding_view.dart';
 
+import '../../features/checkout/presentation/views/checkout_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
 import '../widgets/app_text_widget.dart';
 import '../widgets/bottom_nav_bar/app_shell.dart';
@@ -20,6 +21,9 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
 
     case AppShell.routeName:
       return _fade(const AppShell());
+
+    case CheckoutView.routeName:
+      return _slide(const CheckoutView());
 
     default:
       return _fade(

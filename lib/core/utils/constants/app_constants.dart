@@ -5,3 +5,4 @@ const kIsOnBoardingSeen = 'isOnBoardingSeen';
 const kUserData = 'user';
 const kIsUserLoggedIn = 'isUserLoggedIn';
 const String kCartKey = 'user_cart';
+const kAnimatedDuration = 350;

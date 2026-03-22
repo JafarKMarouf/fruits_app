@@ -14,6 +14,8 @@ class CartHeaderBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         if (state is CartLoaded) {
           return CartHeader(count: state.cart.cartItems.length);
+        } else if (state is CartEmpty) {
+          return const CartHeader(count: 0);
         } else {
           return const Skeletonizer(enabled: true, child: CartHeader(count: 1));
         }

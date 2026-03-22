@@ -26,7 +26,6 @@ class AppTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool showShadow;
   final void Function(String?)? onSaved;
-
   InputBorder _buildBorder([Color? color]) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(4),

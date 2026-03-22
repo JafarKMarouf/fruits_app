@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_app/features/checkout/presentation/views/checkout_view.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/helper/get_user.dart';
@@ -18,7 +19,13 @@ class CheckoutButtonBlocBuilder extends StatelessWidget {
           return AppPrimaryButton(
             text: 'الدفع $price ل.س',
             onPressed: () {
-              context.read<CartCubit>().syncCart(getUser().uId);
+              final cartCubit = context.read<CartCubit>();
+              Navigator.of(
+                context,
+                rootNavigator: true,
+              ).pushNamed(CheckoutView.routeName).then((_) {
+                cartCubit.syncCart(getUser().uId);
+              });
             },
           );
         } else if (state is CartEmpty) {
