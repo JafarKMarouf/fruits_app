@@ -18,10 +18,16 @@ class CheckoutViewBody extends StatefulWidget {
 
 class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   late PageController pageController;
+  int _currentStepIndex = 0;
 
   @override
   void initState() {
     pageController = PageController();
+    pageController.addListener(() {
+      setState(() {
+        _currentStepIndex = pageController.page!.toInt();
+      });
+    });
     super.initState();
   }
 
@@ -30,8 +36,6 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
     pageController.dispose();
     super.dispose();
   }
-
-  int _currentStepIndex = 0;
 
   final List<String> _stepLabels = ['الشحن', 'العنوان', 'المراجعه'];
   final List<String> _buttonLabels = ['التالي', 'التالي', 'تأكيد الطلب'];
@@ -52,9 +56,10 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
           CheckoutStepIndicator(
             currentStep: _currentStepIndex,
             steps: _stepLabels,
+            pageController: pageController,
           ),
+          const SizedBox(height: 20),
           Expanded(
-            flex: 2,
             child: CheckoutStepsPageView(
               pageController: pageController,
               stepLabels: _stepLabels,
@@ -66,17 +71,14 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             child: AppPrimaryButton(
               text: _buttonLabels[_currentStepIndex],
               onPressed: () {
-                pageController.nextPage(
+                pageController.animateToPage(
+                  _currentStepIndex + 1,
                   duration: const Duration(milliseconds: kAnimatedDuration),
-                  curve: Curves.easeIn,
+                  curve: kCurves,
                 );
-                setState(() {
-                  _currentStepIndex++;
-                });
               },
             ),
           ),
-          const Expanded(flex: 1, child: SizedBox()),
         ],
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/features/auth/presentation/views/signin_view.dart';
 import 'package:fruits_app/features/auth/presentation/views/signup_view.dart';
+import 'package:fruits_app/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:fruits_app/features/onboarding/presentation/views/onboarding_view.dart';
 
 import '../../features/checkout/presentation/views/checkout_view.dart';
@@ -23,7 +24,9 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       return _fade(const AppShell());
 
     case CheckoutView.routeName:
-      return _slide(const CheckoutView());
+      return _fade(
+        CheckoutView(cartItems: settings.arguments as List<CartItemEntity>),
+      );
 
     default:
       return _fade(

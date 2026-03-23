@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 const kHorizontalPadding = 16.0;
 const kTopPadding = 16.0;
 const kReleaseMode = false;
@@ -6,3 +8,4 @@ const kUserData = 'user';
 const kIsUserLoggedIn = 'isUserLoggedIn';
 const String kCartKey = 'user_cart';
 const kAnimatedDuration = 350;
+const kCurves = Curves.easeInOut;

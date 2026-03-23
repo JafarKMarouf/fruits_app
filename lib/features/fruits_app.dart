@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fruits_app/core/utils/styles/app_colors.dart';
-import 'package:fruits_app/features/checkout/presentation/views/checkout_view.dart';
+import 'package:fruits_app/features/splash/presentation/views/splash_view.dart';
 
 import '../core/helper/on_generate_routes.dart';
 import '../core/l10n/l10n.dart';
@@ -28,7 +28,7 @@ class FruitsApp extends StatelessWidget {
 
       debugShowCheckedModeBanner: false,
       onGenerateRoute: onGenerateRoutes,
-      initialRoute: CheckoutView.routeName,
+      initialRoute: SplashView.routeName,
     );
   }
 }
