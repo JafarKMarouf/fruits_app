@@ -32,6 +32,8 @@ class AppImages {
 
   static const String imagesCheck = "assets/images/check.svg";
 
+  static const String imagesEdit = "assets/images/edit.svg";
+
   static const String imagesFeatureCover = "assets/images/feature_cover.svg";
 
   static const String imagesFilter = "assets/images/filter.svg";
@@ -41,6 +43,8 @@ class AppImages {
   static const String imagesGoogle = "assets/images/google.svg";
 
   static const String imagesHeart = "assets/images/heart.svg";
+
+  static const String imagesLocation = "assets/images/location.svg";
 
   static const String imagesLogo = "assets/images/logo.svg";
 

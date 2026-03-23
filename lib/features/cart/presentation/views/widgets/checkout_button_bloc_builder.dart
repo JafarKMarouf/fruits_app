@@ -21,10 +21,7 @@ class CheckoutButtonBlocBuilder extends StatelessWidget {
             onPressed: () {
               final cartCubit = context.read<CartCubit>();
               Navigator.of(context, rootNavigator: true)
-                  .pushNamed(
-                    CheckoutView.routeName,
-                    arguments: state.cart.cartItems,
-                  )
+                  .pushNamed(CheckoutView.routeName, arguments: state.cart)
                   .then((_) {
                     cartCubit.syncCart(getUser().uId);
                   });

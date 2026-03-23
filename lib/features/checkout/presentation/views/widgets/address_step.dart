@@ -1,100 +1,107 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fruits_app/features/checkout/domain/entities/order_entity.dart';
+import 'package:provider/provider.dart';
 
-import '../../../../../core/utils/styles/app_colors.dart';
-import '../../../../../core/utils/styles/app_text_styles.dart';
 import '../../../../../core/widgets/app_text_form_field.dart';
-import '../../../../../core/widgets/app_text_widget.dart';
 
 class AddressStep extends StatefulWidget {
-  const AddressStep({super.key});
+  const AddressStep({
+    super.key,
+    required this.formKey,
+    required this.valueNotifier,
+  });
+
+  final GlobalKey<FormState> formKey;
+  final ValueListenable<AutovalidateMode> valueNotifier;
 
   @override
   State<AddressStep> createState() => _AddressStepState();
 }
 
-class _AddressStepState extends State<AddressStep> {
-  bool _saveAddress = true;
-
+class _AddressStepState extends State<AddressStep>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: .start,
-      children: [
-        AppTextFormField(
-          hintText: 'الاسم كامل',
-          textInputType: TextInputType.name,
-          textInputAction: TextInputAction.next,
-          showShadow: false,
-          validator: (_) => null,
-        ),
-        const SizedBox(height: 12),
-        AppTextFormField(
-          hintText: 'البريد الإلكتروني',
-          textInputType: TextInputType.emailAddress,
-          textInputAction: TextInputAction.next,
-          showShadow: false,
-          validator: (_) => null,
-        ),
-        const SizedBox(height: 12),
-        AppTextFormField(
-          hintText: 'العنوان',
-          textInputType: TextInputType.streetAddress,
-          textInputAction: TextInputAction.next,
-          showShadow: false,
-          validator: (_) => null,
-        ),
-        const SizedBox(height: 12),
-        AppTextFormField(
-          hintText: 'المدينه',
-          textInputType: TextInputType.text,
-          textInputAction: TextInputAction.next,
-          showShadow: false,
-          validator: (_) => null,
-        ),
-        const SizedBox(height: 12),
-        AppTextFormField(
-          hintText: 'رقم الطابق , رقم الشقه ..',
-          textInputType: TextInputType.text,
-          textInputAction: TextInputAction.done,
-          showShadow: false,
-          validator: (_) => null,
-        ),
-        const SizedBox(height: 16),
-        _SaveAddressToggle(
-          value: _saveAddress,
-          onChanged: (val) => setState(() => _saveAddress = val),
-        ),
-      ],
-    );
-  }
-}
-
-class _SaveAddressToggle extends StatelessWidget {
-  const _SaveAddressToggle({required this.value, required this.onChanged});
-
-  final bool value;
-  final ValueChanged<bool> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: .start,
-      children: [
-        Switch.adaptive(
-          value: value,
-          onChanged: onChanged,
-          activeThumbColor: Colors.white,
-          activeTrackColor: AppColors.green1_500,
-          inactiveThumbColor: AppColors.grayscale500,
-        ),
-        const SizedBox(width: 8),
-        AppTextWidget(
-          'حفظ العنوان',
-          style: AppTextStyles.styleSemiBold13.copyWith(
-            color: AppColors.grayscale400,
+    super.build(context);
+    var order = context.read<OrderEntity>();
+    return SingleChildScrollView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      child: ValueListenableBuilder<AutovalidateMode>(
+        valueListenable: widget.valueNotifier,
+        builder: (context, value, child) => Form(
+          key: widget.formKey,
+          autovalidateMode: value,
+          child: Column(
+            crossAxisAlignment: .start,
+            children: [
+              AppTextFormField(
+                hintText: 'الاسم كامل',
+                textInputType: TextInputType.name,
+                textInputAction: TextInputAction.next,
+                showShadow: false,
+                onSaved: (name) {
+                  order.shippingAddress!.name = name;
+                },
+              ),
+              const SizedBox(height: 12),
+              AppTextFormField(
+                hintText: 'البريد الإلكتروني',
+                textInputType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                showShadow: false,
+                onSaved: (email) {
+                  order.shippingAddress!.email = email;
+                },
+              ),
+              const SizedBox(height: 12),
+              AppTextFormField(
+                hintText: 'العنوان',
+                textInputType: TextInputType.streetAddress,
+                textInputAction: TextInputAction.next,
+                showShadow: false,
+                onSaved: (address) {
+                  order.shippingAddress!.address = address;
+                },
+              ),
+              const SizedBox(height: 12),
+              AppTextFormField(
+                hintText: 'المدينه',
+                textInputType: TextInputType.text,
+                textInputAction: TextInputAction.next,
+                showShadow: false,
+                onSaved: (city) {
+                  order.shippingAddress!.city = city;
+                },
+              ),
+              const SizedBox(height: 12),
+              AppTextFormField(
+                hintText: 'رقم الطابق , رقم الشقه ..',
+                textInputType: TextInputType.text,
+                textInputAction: TextInputAction.next,
+                showShadow: false,
+                onSaved: (addressDetails) {
+                  order.shippingAddress!.addressDetails = addressDetails;
+                },
+              ),
+              const SizedBox(height: 12),
+              AppTextFormField(
+                hintText: 'رقم الهاتف',
+                textInputType: TextInputType.phone,
+                textInputAction: TextInputAction.done,
+                showShadow: false,
+                onSaved: (phone) {
+                  order.shippingAddress!.phone = phone;
+                },
+              ),
+              const SizedBox(height: 16),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

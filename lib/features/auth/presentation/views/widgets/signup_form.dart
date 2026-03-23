@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruits_app/core/helper/build_messages_bar.dart';
+import 'package:fruits_app/core/helper/show_messages_bar.dart';
 import 'package:fruits_app/core/l10n/l10n.dart';
 import 'package:fruits_app/core/widgets/app_primary_button.dart';
 import 'package:fruits_app/core/widgets/app_text_form_field.dart';
@@ -28,7 +28,7 @@ class _SignupFormState extends State<SignupForm> {
     FocusManager.instance.primaryFocus?.unfocus();
     if (formKey.currentState!.validate()) {
       if (!isTermsAccepted) {
-        buildErrorBar(context, AppLocalizations.of(context).termsAcceptedError);
+        showErrorBar(context, AppLocalizations.of(context).termsAcceptedError);
         return;
       }
       formKey.currentState!.save();

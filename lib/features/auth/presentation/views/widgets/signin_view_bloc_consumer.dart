@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruits_app/core/helper/build_messages_bar.dart';
+import 'package:fruits_app/core/helper/show_messages_bar.dart';
 import 'package:fruits_app/core/l10n/l10n.dart';
 import 'package:fruits_app/core/widgets/bottom_nav_bar/app_shell.dart';
 import 'package:fruits_app/core/widgets/build_app_bar.dart';
@@ -23,10 +23,10 @@ class SigninViewBlocConsumer extends StatelessWidget {
             'networkRequestFailed' => locale.networkRequestFailed,
             _ => locale.genericError,
           };
-          buildErrorBar(context, localizedMessage);
+          showErrorBar(context, localizedMessage);
         }
         if (state is SigninSuccess) {
-          buildSuccessMessage(
+          showSuccessMessage(
             context,
             AppLocalizations.of(context).loginSuccess,
           );
