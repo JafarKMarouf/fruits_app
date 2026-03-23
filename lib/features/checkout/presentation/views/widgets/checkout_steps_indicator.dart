@@ -37,60 +37,9 @@ class CheckoutStepIndicator extends StatelessWidget {
     if (tappedIndex == controller.currentStepIndex) return;
 
     if (tappedIndex < controller.currentStepIndex) {
-      controller.goBack();
+      controller.goBack(tappedIndex);
     } else {
       controller.validateAndGoNext(context);
     }
   }
 }
-
-// class CheckoutStepIndicator extends StatelessWidget {
-//   const CheckoutStepIndicator({
-//     super.key,
-//     required this.currentStep,
-//     required this.steps,
-//     required this.pageController,
-//     required this.valueNotifier,
-//     required this.formKey,
-//   });
-
-//   final int currentStep;
-//   final List<String> steps;
-//   final PageController pageController;
-//   final ValueNotifier<AutovalidateMode> valueNotifier;
-//   final GlobalKey<FormState> formKey;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: .center,
-//       children: List.generate(steps.length, (index) {
-//         return Expanded(
-//           child: GestureDetector(
-//             onTap: () {
-//               if (index == 0) {
-//                 CheckoutStepValidator.handleShippingSectionValidation(
-//                   context,
-//                   pageController: pageController,
-//                   currentStepIndex: index,
-//                 );
-//               } else if (index == 1) {
-//                 CheckoutStepValidator.handleAddressSectionValidation(
-//                   context,
-//                   pageController: pageController,
-//                   formKey: formKey,
-//                   currentStepIndex: index,
-//                   valueNotifier: valueNotifier,
-//                 );
-//               }
-//             },
-//             child: StepItem(
-//               index: index,
-//               isActive: index <= currentStep,
-//               stepLabel: steps[index],
-//             ),
-//           ),
-//         );
-//       }),
-//     );
-//   }
-// }

@@ -1,19 +1,22 @@
+import '../../../../core/l10n/l10n.dart';
+
 class ShippingAddressEntity {
   String? name;
   String? email;
-  String? address;
+  String? street;
   String? city;
-  String? addressDetails;
+  String? floor;
   String? phone;
 
   ShippingAddressEntity({
     this.name,
     this.email,
-    this.address,
+    this.street,
     this.city,
-    this.addressDetails,
+    this.floor,
     this.phone,
   });
-
-  String get formattedAddress => '$address $addressDetails, مدينة $city';
+  String formattedAddress(AppLocalizations l10n) {
+    return l10n.formattedAddress(street ?? '', floor ?? '', city ?? '');
+  }
 }

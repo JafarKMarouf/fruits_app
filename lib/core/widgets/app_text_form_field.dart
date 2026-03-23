@@ -8,6 +8,7 @@ class AppTextFormField extends StatelessWidget {
     super.key,
     this.controller,
     required this.hintText,
+    this.label,
     this.obscureText = false,
     this.suffixIcon,
     required this.textInputType,
@@ -18,7 +19,7 @@ class AppTextFormField extends StatelessWidget {
   });
 
   final TextEditingController? controller;
-  final String? hintText;
+  final String? hintText, label;
   final bool obscureText;
   final Widget? suffixIcon;
   final TextInputType? textInputType;
@@ -63,13 +64,21 @@ class AppTextFormField extends StatelessWidget {
           filled: true,
           fillColor: const Color(0xFFF9FAFA),
           hintText: hintText,
+          label: label != null
+              ? Text(
+                  label!,
+                  style: AppTextStyles.styleSemiBold13.copyWith(
+                    color: AppColors.grayscale500,
+                  ),
+                )
+              : null,
           suffixIcon: suffixIcon,
           hintStyle: AppTextStyles.styleBold13.copyWith(
             color: AppColors.grayscale400,
           ),
           border: _buildBorder(),
           enabledBorder: _buildBorder(),
-          focusedBorder: _buildBorder(),
+          focusedBorder: _buildBorder(AppColors.green1_500),
           errorBorder: _buildBorder(AppColors.error),
           focusedErrorBorder: _buildBorder(AppColors.error),
           errorStyle: AppTextStyles.styleBold13.copyWith(

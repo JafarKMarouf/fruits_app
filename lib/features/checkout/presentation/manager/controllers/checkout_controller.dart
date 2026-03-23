@@ -58,7 +58,7 @@ class CheckoutController extends ChangeNotifier {
       return null;
     }
     autovalidateNotifier.value = AutovalidateMode.always;
-    return ''; // form shows inline errors
+    return '';
   }
 
   void _goToNextStep() {
@@ -69,10 +69,10 @@ class CheckoutController extends ChangeNotifier {
     );
   }
 
-  void goBack() {
+  void goBack(int index) {
     if (currentStepIndex == 0) return;
     pageController.animateToPage(
-      currentStepIndex - 1,
+      index,
       duration: const Duration(milliseconds: kAnimatedDuration),
       curve: kCurves,
     );

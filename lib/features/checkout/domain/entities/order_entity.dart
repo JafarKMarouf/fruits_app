@@ -1,24 +1,3 @@
-// import 'package:fruits_app/features/cart/domain/entities/cart_entity.dart';
-// import 'package:fruits_app/features/checkout/domain/entities/shipping_address_entity.dart';
-
-// class OrderEntity {
-//   final CartEntity cartEntity;
-//   bool? payWithCash;
-//   ShippingAddressEntity? shippingAddress = ShippingAddressEntity();
-
-//   OrderEntity(this.cartEntity, {this.payWithCash});
-
-//   static const num _cashTax = 40;
-
-//   num get shippingFee => payWithCash! ? _cashTax : 0;
-
-//   num get finalTotal => cartEntity.totalPrice + shippingFee;
-
-//   String get formatFinalTotal {
-//     final total = finalTotal;
-//     return total % 1 == 0 ? total.toInt().toString() : total.toString();
-//   }
-// }
 import 'package:flutter/foundation.dart';
 import 'package:fruits_app/features/cart/domain/entities/cart_entity.dart';
 import 'package:fruits_app/features/checkout/domain/entities/shipping_address_entity.dart';

@@ -22,86 +22,103 @@ class AddressStep extends StatefulWidget {
 class _AddressStepState extends State<AddressStep>
     with AutomaticKeepAliveClientMixin {
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
-    var order = context.read<OrderEntity>();
+    final order = context.read<OrderEntity>();
+
     return SingleChildScrollView(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       child: ValueListenableBuilder<AutovalidateMode>(
         valueListenable: widget.valueNotifier,
-        builder: (context, value, child) => Form(
+        builder: (context, autovalidateMode, _) => Form(
           key: widget.formKey,
-          autovalidateMode: value,
+          autovalidateMode: autovalidateMode,
           child: Column(
-            crossAxisAlignment: .start,
-            children: [
-              AppTextFormField(
-                hintText: 'الاسم كامل',
-                textInputType: TextInputType.name,
-                textInputAction: TextInputAction.next,
-                showShadow: false,
-                onSaved: (name) {
-                  order.shippingAddress!.name = name;
-                },
-              ),
-              const SizedBox(height: 12),
-              AppTextFormField(
-                hintText: 'البريد الإلكتروني',
-                textInputType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-                showShadow: false,
-                onSaved: (email) {
-                  order.shippingAddress!.email = email;
-                },
-              ),
-              const SizedBox(height: 12),
-              AppTextFormField(
-                hintText: 'العنوان',
-                textInputType: TextInputType.streetAddress,
-                textInputAction: TextInputAction.next,
-                showShadow: false,
-                onSaved: (address) {
-                  order.shippingAddress!.address = address;
-                },
-              ),
-              const SizedBox(height: 12),
-              AppTextFormField(
-                hintText: 'المدينه',
-                textInputType: TextInputType.text,
-                textInputAction: TextInputAction.next,
-                showShadow: false,
-                onSaved: (city) {
-                  order.shippingAddress!.city = city;
-                },
-              ),
-              const SizedBox(height: 12),
-              AppTextFormField(
-                hintText: 'رقم الطابق , رقم الشقه ..',
-                textInputType: TextInputType.text,
-                textInputAction: TextInputAction.next,
-                showShadow: false,
-                onSaved: (addressDetails) {
-                  order.shippingAddress!.addressDetails = addressDetails;
-                },
-              ),
-              const SizedBox(height: 12),
-              AppTextFormField(
-                hintText: 'رقم الهاتف',
-                textInputType: TextInputType.phone,
-                textInputAction: TextInputAction.done,
-                showShadow: false,
-                onSaved: (phone) {
-                  order.shippingAddress!.phone = phone;
-                },
-              ),
-              const SizedBox(height: 16),
-            ],
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: _fields(order)
+                .map(
+                  (f) => Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: AppTextFormField(
+                      label: f.label,
+                      hintText: f.hint,
+                      textInputType: f.inputType,
+                      textInputAction: f.inputAction,
+                      showShadow: false,
+                      onSaved: f.onSaved,
+                    ),
+                  ),
+                )
+                .toList(),
           ),
         ),
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
+
+// ─── Field config ─────────────────────────────────────────────────────────────
+
+class _FieldConfig {
+  const _FieldConfig({
+    required this.label,
+    required this.hint,
+    required this.inputType,
+    required this.inputAction,
+    required this.onSaved,
+  });
+
+  final String label;
+  final String hint;
+  final TextInputType inputType;
+  final TextInputAction inputAction;
+  final void Function(String?) onSaved;
+}
+
+List<_FieldConfig> _fields(OrderEntity order) => [
+  _FieldConfig(
+    label: 'الاسم كامل',
+    hint: 'أدخل اسمك كامل',
+    inputType: TextInputType.name,
+    inputAction: TextInputAction.next,
+    onSaved: (v) => order.shippingAddress!.name = v,
+  ),
+  _FieldConfig(
+    label: 'البريد الإلكتروني',
+    hint: 'example@email.com',
+    inputType: TextInputType.emailAddress,
+    inputAction: TextInputAction.next,
+    onSaved: (v) => order.shippingAddress!.email = v,
+  ),
+  _FieldConfig(
+    label: 'رقم الهاتف',
+    hint: '0963xxxxxxxxx',
+    inputType: TextInputType.phone,
+    inputAction: TextInputAction.next,
+    onSaved: (v) => order.shippingAddress!.phone = v,
+  ),
+  _FieldConfig(
+    label: 'الشارع',
+    hint: 'اسم الشارع',
+    inputType: TextInputType.streetAddress,
+    inputAction: TextInputAction.next,
+    onSaved: (v) => order.shippingAddress!.street = v,
+  ),
+  _FieldConfig(
+    label: 'المدينة',
+    hint: 'اسم المدينة',
+    inputType: TextInputType.text,
+    inputAction: TextInputAction.next,
+    onSaved: (v) => order.shippingAddress!.city = v,
+  ),
+  _FieldConfig(
+    label: 'الطابق',
+    hint: 'مثال: ٣',
+    inputType: TextInputType.number,
+    inputAction: TextInputAction.send,
+    onSaved: (v) => order.shippingAddress!.floor = v,
+  ),
+];

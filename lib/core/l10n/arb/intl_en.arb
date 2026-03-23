@@ -33,5 +33,13 @@
   "emailAlreadyInUse": "The account already exists for that email.",
   "homeTitle": "Home",
   "goodMorning": "Good Morning !..",
-  "searchAbout": "search about......."
+  "searchAbout": "search about.......",
+  "formattedAddress": "{street} St., Floor {floor}, {city}",
+  "@formattedAddress": {
+    "placeholders": {
+      "street":    { "type": "String" },
+      "floor":     { "type": "String" },
+      "city":      { "type": "String" }
+    }
+  }
 }

@@ -33,5 +33,14 @@
   "loginSuccess": "تم تسجيل الدخول بنجاح",
   "homeTitle": "الصفحة الرئيسية",
   "goodMorning": "صباح الخير !..",
-  "searchAbout": "ابحث عن......."
+  "searchAbout": "ابحث عن.......",
+
+  "formattedAddress": "شارع {street}، الطابق {floor}، مدينة {city}",
+  "@formattedAddress": {
+    "placeholders": {
+      "street":    { "type": "String" },
+      "floor":     { "type": "String" },
+      "city":      { "type": "String" }
+    }
+  }
 }

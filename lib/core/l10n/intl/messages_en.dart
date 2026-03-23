@@ -20,6 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(String street, floor, city) =>
+      "${street} St., Floor ${floor}, ${city}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
@@ -37,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "The account already exists for that email.",
     ),
     "forgetPassword": MessageLookupByLibrary.simpleMessage("?forget password"),
+    "formattedAddress": m0,
     "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
     "genericError": MessageLookupByLibrary.simpleMessage(
       "Something went wrong. Please try again later.",

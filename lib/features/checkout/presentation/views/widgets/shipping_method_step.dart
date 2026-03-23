@@ -14,8 +14,11 @@ class ShippingMethodStep extends StatefulWidget {
 
 class _ShippingMethodStepState extends State<ShippingMethodStep>
     with AutomaticKeepAliveClientMixin {
-  int _selectedIndex = -1;
-  final List<ShippingOption> _options = const [
+  @override
+  bool get wantKeepAlive => true;
+
+  static int _selectedIndex = -1;
+  static const List<ShippingOption> _options = [
     ShippingOption(
       title: 'الدفع عند الاستلام',
       subtitle: 'التسليم من المكان',
@@ -46,7 +49,4 @@ class _ShippingMethodStepState extends State<ShippingMethodStep>
       }),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
