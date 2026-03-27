@@ -1,4 +1,6 @@
 import 'package:fruits_app/core/cubits/product/product_cubit.dart';
+import 'package:fruits_app/core/repositories/order_repo/order_repo.dart';
+import 'package:fruits_app/core/repositories/order_repo/order_repo_impl.dart';
 import 'package:fruits_app/core/services/firebase_auth_service.dart';
 import 'package:fruits_app/core/services/store_services/database_service.dart';
 import 'package:fruits_app/core/services/store_services/firestore_service.dart';
@@ -11,6 +13,7 @@ import 'package:fruits_app/features/cart/data/data_source/cart_remote_data_sourc
 import 'package:fruits_app/features/cart/data/repo/cart_repo_impl.dart';
 import 'package:fruits_app/features/cart/domain/repo/cart_repo.dart';
 import 'package:fruits_app/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
+import 'package:fruits_app/features/checkout/presentation/manager/cubit/add_order_cubit/add_order_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import '../cubits/featured_products/featured_product_cubit.dart';
@@ -58,6 +61,10 @@ void _registerRepositories() {
       remoteDataSource: getIt<CartRemoteDataSource>(),
     ),
   );
+
+  getIt.registerLazySingleton<OrderRepo>(
+    () => OrderRepoImpl(getIt<DatabaseService>()),
+  );
 }
 
 void _registerCubits() {
@@ -71,6 +78,9 @@ void _registerCubits() {
     () => FeaturedProductCubit(getIt<ProductRepo>()),
   );
 
-  // cart Cubit
+  /// cart Cubit
   getIt.registerFactory<CartCubit>(() => CartCubit(getIt<CartRepo>()));
+
+  /// order cubit
+  getIt.registerFactory<AddOrderCubit>(() => AddOrderCubit(getIt<OrderRepo>()));
 }

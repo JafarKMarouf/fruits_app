@@ -145,4 +145,18 @@ class CartRepoImpl implements CartRepo {
       return Left(CacheFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> clearCart(String userId) async {
+    try {
+      await localDataSource.clearCart();
+      await remoteDataSource.syncCart(
+        userId,
+        const CartModel(cartItems: [], totalPrice: 0),
+      );
+      return const Right(null);
+    } catch (e) {
+      return Left(CacheFailure(e.toString()));
+    }
+  }
 }

@@ -34,11 +34,10 @@
   "homeTitle": "Home",
   "goodMorning": "Good Morning !..",
   "searchAbout": "search about.......",
-  "formattedAddress": "{street} St., Floor {floor}, {city}",
+  "formattedAddress": "{State {state}, {city}",
   "@formattedAddress": {
     "placeholders": {
-      "street":    { "type": "String" },
-      "floor":     { "type": "String" },
+      "state":     { "type": "String" },
       "city":      { "type": "String" }
     }
   }

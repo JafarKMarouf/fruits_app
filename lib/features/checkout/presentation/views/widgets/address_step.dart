@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fruits_app/features/checkout/domain/entities/order_entity.dart';
+import 'package:fruits_app/features/checkout/domain/entities/order_input_entity.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/widgets/app_text_form_field.dart';
@@ -27,33 +27,30 @@ class _AddressStepState extends State<AddressStep>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final order = context.read<OrderEntity>();
+    final order = context.read<OrderInputEntity>();
 
-    return SingleChildScrollView(
-      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      child: ValueListenableBuilder<AutovalidateMode>(
-        valueListenable: widget.valueNotifier,
-        builder: (context, autovalidateMode, _) => Form(
-          key: widget.formKey,
-          autovalidateMode: autovalidateMode,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: _fields(order)
-                .map(
-                  (f) => Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: AppTextFormField(
-                      label: f.label,
-                      hintText: f.hint,
-                      textInputType: f.inputType,
-                      textInputAction: f.inputAction,
-                      showShadow: false,
-                      onSaved: f.onSaved,
-                    ),
+    return ValueListenableBuilder<AutovalidateMode>(
+      valueListenable: widget.valueNotifier,
+      builder: (context, autovalidateMode, _) => Form(
+        key: widget.formKey,
+        autovalidateMode: autovalidateMode,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: _fields(order)
+              .map(
+                (f) => Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: AppTextFormField(
+                    label: f.label,
+                    hintText: f.hint,
+                    textInputType: f.inputType,
+                    textInputAction: f.inputAction,
+                    showShadow: false,
+                    onSaved: f.onSaved,
                   ),
-                )
-                .toList(),
-          ),
+                ),
+              )
+              .toList(),
         ),
       ),
     );
@@ -78,7 +75,7 @@ class _FieldConfig {
   final void Function(String?) onSaved;
 }
 
-List<_FieldConfig> _fields(OrderEntity order) => [
+List<_FieldConfig> _fields(OrderInputEntity order) => [
   _FieldConfig(
     label: 'الاسم كامل',
     hint: 'أدخل اسمك كامل',
@@ -101,24 +98,17 @@ List<_FieldConfig> _fields(OrderEntity order) => [
     onSaved: (v) => order.shippingAddress!.phone = v,
   ),
   _FieldConfig(
-    label: 'الشارع',
-    hint: 'اسم الشارع',
-    inputType: TextInputType.streetAddress,
+    label: 'المحافظة',
+    hint: 'مثال: طرطوس',
+    inputType: TextInputType.text,
     inputAction: TextInputAction.next,
-    onSaved: (v) => order.shippingAddress!.street = v,
+    onSaved: (v) => order.shippingAddress!.state = v,
   ),
   _FieldConfig(
     label: 'المدينة',
     hint: 'اسم المدينة',
     inputType: TextInputType.text,
-    inputAction: TextInputAction.next,
+    inputAction: TextInputAction.done,
     onSaved: (v) => order.shippingAddress!.city = v,
-  ),
-  _FieldConfig(
-    label: 'الطابق',
-    hint: 'مثال: ٣',
-    inputType: TextInputType.number,
-    inputAction: TextInputAction.send,
-    onSaved: (v) => order.shippingAddress!.floor = v,
   ),
 ];

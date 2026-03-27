@@ -8,14 +8,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 import 'package:fruits_app/core/widgets/app_text_widget.dart';
 
-import '../../../domain/entities/order_entity.dart';
+import '../../../domain/entities/order_input_entity.dart';
 
 class DeliveryAddressSection extends StatelessWidget {
   const DeliveryAddressSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final order = context.read<OrderEntity>();
+    final order = context.read<OrderInputEntity>();
     final l10n = AppLocalizations.of(context);
     final address = order.shippingAddress!.formattedAddress(l10n);
 

@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:fruits_app/features/cart/domain/entities/cart_entity.dart';
 import 'package:fruits_app/features/checkout/domain/entities/shipping_address_entity.dart';
 
-class OrderEntity extends ChangeNotifier {
-  OrderEntity(this.cartEntity);
+class OrderInputEntity extends ChangeNotifier {
+  final String uId;
+  OrderInputEntity(this.uId, this.cartEntity);
 
   final CartEntity cartEntity;
 

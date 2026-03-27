@@ -18,13 +18,22 @@ class CheckoutButtonBlocBuilder extends StatelessWidget {
           final String price = state.cart.formatTotalPrice;
           return AppPrimaryButton(
             text: 'الدفع $price ل.س',
-            onPressed: () {
+            onPressed: () async {
               final cartCubit = context.read<CartCubit>();
-              Navigator.of(context, rootNavigator: true)
-                  .pushNamed(CheckoutView.routeName, arguments: state.cart)
-                  .then((_) {
-                    cartCubit.syncCart(getUser().uId);
-                  });
+              final orderPlaced = await Navigator.of(
+                context,
+                rootNavigator: true,
+              ).pushNamed(CheckoutView.routeName, arguments: state.cart);
+
+              if (orderPlaced == true) {
+                cartCubit.syncCart(getUser().uId);
+              }
+
+              // Navigator.of(context, rootNavigator: true)
+              //     .pushNamed(CheckoutView.routeName, arguments: state.cart)
+              //     .then((_) {
+              //       cartCubit.syncCart(getUser().uId);
+              //     });
             },
           );
         } else if (state is CartEmpty) {

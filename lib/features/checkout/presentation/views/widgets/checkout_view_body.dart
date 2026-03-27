@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/widgets/app_primary_button.dart';
+import 'package:fruits_app/features/checkout/domain/entities/order_input_entity.dart';
+import 'package:fruits_app/features/checkout/presentation/manager/cubit/add_order_cubit/add_order_cubit.dart';
 import 'package:fruits_app/features/checkout/presentation/views/widgets/address_step.dart';
 import 'package:fruits_app/features/checkout/presentation/views/widgets/review_step.dart';
 import 'package:fruits_app/features/checkout/presentation/views/widgets/shipping_method_step.dart';
@@ -15,10 +17,12 @@ class CheckoutViewBody extends StatelessWidget {
   const CheckoutViewBody({super.key});
   static const _stepLabels = ['الشحن', 'العنوان', 'المراجعه'];
   static const _buttonLabels = ['التالي', 'التالي', 'تأكيد الطلب'];
+  static const int _lastStepIndex = 2;
 
   @override
   Widget build(BuildContext context) {
     final controller = context.watch<CheckoutController>();
+    final isLastStep = controller.currentStepIndex == _lastStepIndex;
     return SafeArea(
       child: Column(
         children: [
@@ -33,15 +37,27 @@ class CheckoutViewBody extends StatelessWidget {
               stepLabels: _stepLabels,
             ),
           ),
+
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+            padding: const EdgeInsets.symmetric(
+              horizontal: kHorizontalPadding,
+              vertical: kTopPadding,
+            ),
             child: AppPrimaryButton(
               text: _buttonLabels[controller.currentStepIndex],
-              onPressed: () => controller.validateAndGoNext(context),
+              onPressed: () => isLastStep
+                  ? _placeOrder(context)
+                  : controller.validateAndGoNext(context),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  void _placeOrder(BuildContext context) {
+    context.read<AddOrderCubit>().placeOrder(
+      orderEntity: context.read<OrderInputEntity>(),
     );
   }
 

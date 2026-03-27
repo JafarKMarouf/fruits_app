@@ -359,13 +359,13 @@ class AppLocalizations {
     );
   }
 
-  /// `{street} St., Floor {floor}, {city}`
-  String formattedAddress(String street, String floor, String city) {
+  /// `{State {state}, {city}`
+  String formattedAddress(String state, String city) {
     return Intl.message(
-      '$street St., Floor $floor, $city',
+      '{State $state, $city',
       name: 'formattedAddress',
       desc: '',
-      args: [street, floor, city],
+      args: [state, city],
     );
   }
 }

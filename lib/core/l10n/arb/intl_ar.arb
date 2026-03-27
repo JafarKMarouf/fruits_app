@@ -35,11 +35,10 @@
   "goodMorning": "صباح الخير !..",
   "searchAbout": "ابحث عن.......",
 
-  "formattedAddress": "شارع {street}، الطابق {floor}، مدينة {city}",
+  "formattedAddress": "المحافظة {state}، مدينة {city}",
   "@formattedAddress": {
     "placeholders": {
-      "street":    { "type": "String" },
-      "floor":     { "type": "String" },
+      "state":     { "type": "String" },
       "city":      { "type": "String" }
     }
   }

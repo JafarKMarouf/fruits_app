@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/helper/show_messages_bar.dart';
 import '../../../../core/utils/constants/app_constants.dart';
-import '../entities/order_entity.dart';
+import '../entities/order_input_entity.dart';
 
 abstract class CheckoutStepValidator {
   static void handleShippingSectionValidation(
@@ -11,7 +11,7 @@ abstract class CheckoutStepValidator {
     required PageController pageController,
     required int currentStepIndex,
   }) {
-    if (context.read<OrderEntity>().payWithCash != null) {
+    if (context.read<OrderInputEntity>().payWithCash != null) {
       pageController.animateToPage(
         currentStepIndex,
         duration: const Duration(milliseconds: kAnimatedDuration),

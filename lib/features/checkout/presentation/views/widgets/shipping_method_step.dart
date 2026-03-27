@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_app/features/checkout/domain/entities/order_entity.dart';
+import 'package:fruits_app/features/checkout/domain/entities/order_input_entity.dart';
 import 'package:fruits_app/features/checkout/presentation/views/widgets/shipping_item.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +17,7 @@ class _ShippingMethodStepState extends State<ShippingMethodStep>
   @override
   bool get wantKeepAlive => true;
 
-  static int _selectedIndex = -1;
+  int _selectedIndex = -1;
   static const List<ShippingOption> _options = [
     ShippingOption(
       title: 'الدفع عند الاستلام',
@@ -42,7 +42,7 @@ class _ShippingMethodStepState extends State<ShippingMethodStep>
           option: _options[index],
           isSelected: _selectedIndex == index,
           onTap: () => setState(() {
-            context.read<OrderEntity>().payWithCash = index == 0;
+            context.read<OrderInputEntity>().payWithCash = index == 0;
             setState(() => _selectedIndex = index);
           }),
         );
