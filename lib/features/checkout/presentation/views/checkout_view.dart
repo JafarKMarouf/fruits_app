@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_app/core/helper/get_user.dart';
 import 'package:fruits_app/features/cart/domain/entities/cart_entity.dart';
 import 'package:fruits_app/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
-import 'package:fruits_app/features/checkout/domain/entities/order_input_entity.dart';
+import 'package:fruits_app/features/checkout/domain/entities/order_input_entity/order_input_entity.dart';
 import 'package:fruits_app/features/checkout/presentation/views/widgets/add_order_cubit_bloc_consumer.dart';
 import 'package:fruits_app/features/checkout/presentation/views/widgets/checkout_view_body.dart';
 import 'package:provider/provider.dart';

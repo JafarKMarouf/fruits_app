@@ -18,7 +18,7 @@ class CartItemModelAdapter extends TypeAdapter<CartItemModel> {
     };
     return CartItemModel(
       productModel: fields[0] as ProductModel,
-      count: (fields[1] as num).toInt(),
+      quantity: (fields[1] as num).toInt(),
     );
   }
 
@@ -29,7 +29,7 @@ class CartItemModelAdapter extends TypeAdapter<CartItemModel> {
       ..writeByte(0)
       ..write(obj.productModel)
       ..writeByte(1)
-      ..write(obj.count);
+      ..write(obj.quantity);
   }
 
   @override

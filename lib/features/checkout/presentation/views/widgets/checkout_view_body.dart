@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:fruits_app/core/widgets/app_primary_button.dart';
-import 'package:fruits_app/features/checkout/domain/entities/order_input_entity.dart';
+import 'package:fruits_app/features/checkout/domain/entities/order_input_entity/order_input_entity.dart';
+import 'package:fruits_app/features/checkout/domain/entities/paypal_entity/paypal_payment_entity/paypal_payment_entity.dart';
 import 'package:fruits_app/features/checkout/presentation/manager/cubit/add_order_cubit/add_order_cubit.dart';
 import 'package:fruits_app/features/checkout/presentation/views/widgets/address_step.dart';
 import 'package:fruits_app/features/checkout/presentation/views/widgets/review_step.dart';
@@ -16,7 +21,7 @@ import 'checkout_steps_page_view.dart';
 class CheckoutViewBody extends StatelessWidget {
   const CheckoutViewBody({super.key});
   static const _stepLabels = ['الشحن', 'العنوان', 'المراجعه'];
-  static const _buttonLabels = ['التالي', 'التالي', 'تأكيد الطلب'];
+  static const _buttonLabels = ['التالي', 'التالي', 'الدفع عبر Paypal'];
   static const int _lastStepIndex = 2;
 
   @override
@@ -46,7 +51,7 @@ class CheckoutViewBody extends StatelessWidget {
             child: AppPrimaryButton(
               text: _buttonLabels[controller.currentStepIndex],
               onPressed: () => isLastStep
-                  ? _placeOrder(context)
+                  ? _processPayment(context)
                   : controller.validateAndGoNext(context),
             ),
           ),
@@ -55,9 +60,30 @@ class CheckoutViewBody extends StatelessWidget {
     );
   }
 
-  void _placeOrder(BuildContext context) {
-    context.read<AddOrderCubit>().placeOrder(
-      orderEntity: context.read<OrderInputEntity>(),
+  void _processPayment(BuildContext context) {
+    OrderInputEntity orderEntity = context.read<OrderInputEntity>();
+    var order = context.read<AddOrderCubit>();
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => PaypalCheckoutView(
+          sandboxMode: true,
+          clientId: dotenv.env['PAYPAL_CLIENT_ID'],
+          secretKey: dotenv.env['PAYPAL_SECRET_KEY'],
+          transactions: [PaypalPaymentEntity.fromEntity(orderEntity)],
+          note: 'Contact us for any questions on your order.',
+          onSuccess: (Map params) async {
+            log('onSuccess: $params');
+            order.placeOrder(orderEntity: orderEntity);
+          },
+          onError: (error) {
+            log('onError: $error');
+            Navigator.pop(context);
+          },
+          onCancel: () {
+            log('cancelled:');
+          },
+        ),
+      ),
     );
   }
 

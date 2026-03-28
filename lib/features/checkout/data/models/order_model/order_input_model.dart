@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fruits_app/features/cart/data/models/cart_model.dart';
 import 'package:fruits_app/features/checkout/data/models/order_model/shipping_address_model.dart';
-import 'package:fruits_app/features/checkout/domain/entities/order_input_entity.dart';
+import 'package:fruits_app/features/checkout/domain/entities/order_input_entity/order_input_entity.dart';
 
 class OrderInputModel {
   final String uId;
@@ -44,7 +44,7 @@ class OrderInputModel {
               'product_name': item.productModel.name,
               'price_at_purchase': item.productModel.price,
               'image_url': item.productModel.imageUrl,
-              'count': item.count,
+              'count': item.quantity,
             },
           )
           .toList(),

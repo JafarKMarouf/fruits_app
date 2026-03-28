@@ -1,4 +1,4 @@
-import '../../../../core/l10n/l10n.dart';
+import '../../../../../core/l10n/l10n.dart';
 
 class ShippingAddressEntity {
   String? name;

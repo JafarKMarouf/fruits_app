@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_app/features/checkout/domain/entities/order_input_entity.dart';
+import 'package:fruits_app/features/checkout/domain/entities/order_input_entity/order_input_entity.dart';
 import 'package:fruits_app/features/checkout/presentation/views/widgets/shipping_item.dart';
 import 'package:provider/provider.dart';
 
-import '../../../domain/entities/shipping_option.dart';
+import '../../../domain/entities/order_input_entity/shipping_option.dart';
 
 class ShippingMethodStep extends StatefulWidget {
   const ShippingMethodStep({super.key});

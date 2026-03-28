@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fruits_app/features/checkout/domain/entities/order_input_entity.dart';
+import 'package:fruits_app/features/checkout/domain/entities/order_input_entity/order_input_entity.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/widgets/app_text_form_field.dart';

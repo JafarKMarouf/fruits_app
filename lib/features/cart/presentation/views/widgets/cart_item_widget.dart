@@ -73,7 +73,7 @@ class CartItemWidget extends StatelessWidget {
                   ),
 
                   AppTextWidget(
-                    '${item.count} كغ',
+                    '${item.quantity} كغ',
                     textAlign: TextAlign.right,
                     style: AppTextStyles.styleRegular13.copyWith(
                       color: AppColors.orange500,

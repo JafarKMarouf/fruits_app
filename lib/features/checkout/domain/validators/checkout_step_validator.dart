@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/helper/show_messages_bar.dart';
 import '../../../../core/utils/constants/app_constants.dart';
-import '../entities/order_input_entity.dart';
+import '../entities/order_input_entity/order_input_entity.dart';
 
 abstract class CheckoutStepValidator {
   static void handleShippingSectionValidation(

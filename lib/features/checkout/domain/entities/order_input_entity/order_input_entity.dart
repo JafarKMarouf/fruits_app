@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:fruits_app/features/cart/domain/entities/cart_entity.dart';
-import 'package:fruits_app/features/checkout/domain/entities/shipping_address_entity.dart';
+import 'package:fruits_app/features/checkout/domain/entities/order_input_entity/shipping_address_entity.dart';
 
 class OrderInputEntity extends ChangeNotifier {
   final String uId;
@@ -34,8 +34,23 @@ class OrderInputEntity extends ChangeNotifier {
 
   num get finalTotal => cartEntity.totalPrice + shippingFee;
 
+  String calShippingFee() {
+    return shippingFee.toString();
+  }
+
   String get formatFinalTotal {
     final total = finalTotal;
     return total % 1 == 0 ? total.toInt().toString() : total.toString();
+  }
+
+  int calShippingDiscount() {
+    return 0;
+  }
+
+  String? _selectedPaymentMethod;
+  String? get selectedPaymentMethod => _selectedPaymentMethod;
+  set selectedPaymentMethod(String? value) {
+    _selectedPaymentMethod = value;
+    notifyListeners();
   }
 }

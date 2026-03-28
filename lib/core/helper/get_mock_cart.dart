@@ -22,7 +22,7 @@ List<CartItemEntity> getMockCartItems() {
         countRate: 10,
         reviews: [],
       ),
-      count: 30,
+      quantity: 30,
     ),
   );
 }

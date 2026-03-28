@@ -28,14 +28,14 @@ class CartItemActionButtons extends StatelessWidget {
             context.read<CartCubit>().addItem(
               CartItemEntity(
                 productEntity: cartItemEntity.productEntity,
-                count: 1,
+                quantity: 1,
               ),
             );
           },
         ),
 
         AppTextWidget(
-          '${cartItemEntity.count}',
+          '${cartItemEntity.quantity}',
           textAlign: TextAlign.center,
           style: AppTextStyles.styleBold16.copyWith(
             color: AppColors.green1_950,

@@ -20,7 +20,7 @@ class CartRepoImpl implements CartRepo {
   num _calculateTotal(List<CartItemModel> items) {
     num total = 0;
     for (var item in items) {
-      total += (item.productModel.price * item.count);
+      total += (item.productModel.price * item.quantity);
     }
     return total;
   }
@@ -36,7 +36,7 @@ class CartRepoImpl implements CartRepo {
       );
 
       if (existingIndex >= 0) {
-        items[existingIndex].count += item.count;
+        items[existingIndex].quantity += item.quantity;
       } else {
         items.add(CartItemModel.fromEntity(item));
       }
@@ -82,8 +82,8 @@ class CartRepoImpl implements CartRepo {
       final index = items.indexWhere((i) => i.productModel.code == productCode);
 
       if (index >= 0) {
-        if (items[index].count > 1) {
-          items[index].count -= 1;
+        if (items[index].quantity > 1) {
+          items[index].quantity -= 1;
         } else {
           items.removeAt(index);
         }
