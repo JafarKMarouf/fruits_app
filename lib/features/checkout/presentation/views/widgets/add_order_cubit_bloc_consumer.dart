@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_app/core/helper/show_messages_bar.dart';
-import 'package:fruits_app/core/widgets/bottom_nav_bar/app_shell.dart';
 import 'package:fruits_app/core/widgets/custom_progress_hud.dart';
 import 'package:fruits_app/features/checkout/presentation/manager/cubit/add_order_cubit/add_order_cubit.dart';
+import 'package:fruits_app/features/checkout/presentation/views/order_success_view.dart';
 
 import '../../../../../core/helper/get_user.dart';
 import '../../../../cart/presentation/cubit/cart_cubit/cart_cubit.dart'
@@ -21,7 +21,11 @@ class AddOrderCubitBlocConsumer extends StatelessWidget {
           showErrorBar(context, state.errMessage);
         }
         if (state is AddOrderSuccess) {
-          Navigator.pushReplacementNamed(context, AppShell.routeName);
+          Navigator.pushReplacementNamed(
+            context,
+            OrderSuccessView.routeName,
+            arguments: state.orderId,
+          );
           context.read<CartCubit>().clearCart(getUser().uId);
         }
       },

@@ -28,12 +28,6 @@ class CheckoutButtonBlocBuilder extends StatelessWidget {
               if (orderPlaced == true) {
                 cartCubit.syncCart(getUser().uId);
               }
-
-              // Navigator.of(context, rootNavigator: true)
-              //     .pushNamed(CheckoutView.routeName, arguments: state.cart)
-              //     .then((_) {
-              //       cartCubit.syncCart(getUser().uId);
-              //     });
             },
           );
         } else if (state is CartEmpty) {

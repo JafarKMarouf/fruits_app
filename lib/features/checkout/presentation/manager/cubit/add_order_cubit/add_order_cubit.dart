@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_app/core/repositories/order_repo/order_repo.dart';
 import 'package:fruits_app/features/checkout/domain/entities/order_input_entity.dart';
 
@@ -12,12 +12,8 @@ class AddOrderCubit extends Cubit<AddOrderState> {
     emit(AddOrderLoading());
     var result = await orderRepo.addOrder(orderEntity: orderEntity);
     result.fold(
-      (fail) {
-        emit(AddOrderFailure(fail.message));
-      },
-      (success) {
-        emit(AddOrderSuccess());
-      },
+      (fail) => emit(AddOrderFailure(fail.message)),
+      (orderId) => emit(AddOrderSuccess(orderId)),
     );
   }
 }

@@ -54,6 +54,8 @@ class AppImages {
 
   static const String imagesNotificationSale = "assets/images/notification_sale.png";
 
+  static const String imagesOrderSuccess = "assets/images/order_success.svg";
+
   static const String imagesPineapple = "assets/images/pineapple.svg";
 
   static const String imagesPlant = "assets/images/plant.svg";

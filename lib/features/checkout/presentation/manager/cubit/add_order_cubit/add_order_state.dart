@@ -13,4 +13,7 @@ final class AddOrderFailure extends AddOrderState {
   const AddOrderFailure(this.errMessage);
 }
 
-final class AddOrderSuccess extends AddOrderState {}
+final class AddOrderSuccess extends AddOrderState {
+  final String orderId;
+  const AddOrderSuccess(this.orderId);
+}

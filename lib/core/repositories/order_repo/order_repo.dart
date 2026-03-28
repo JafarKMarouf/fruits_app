@@ -4,7 +4,7 @@ import '../../../features/checkout/domain/entities/order_input_entity.dart';
 import '../../errors/failure.dart';
 
 abstract class OrderRepo {
-  Future<Either<Failure, void>> addOrder({
+  Future<Either<Failure, String>> addOrder({
     required OrderInputEntity orderEntity,
   });
 }

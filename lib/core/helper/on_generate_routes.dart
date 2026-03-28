@@ -5,6 +5,7 @@ import 'package:fruits_app/features/cart/domain/entities/cart_entity.dart';
 import 'package:fruits_app/features/onboarding/presentation/views/onboarding_view.dart';
 
 import '../../features/checkout/presentation/views/checkout_view.dart';
+import '../../features/checkout/presentation/views/order_success_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
 import '../widgets/app_text_widget.dart';
 import '../widgets/bottom_nav_bar/app_shell.dart';
@@ -25,6 +26,8 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
 
     case CheckoutView.routeName:
       return _fade(CheckoutView(cartEntity: settings.arguments as CartEntity));
+    case OrderSuccessView.routeName:
+      return _scale(OrderSuccessView(orderId: settings.arguments as String));
 
     default:
       return _fade(
@@ -54,4 +57,22 @@ PageRoute<T> _slide<T>(Widget page) => PageRouteBuilder<T>(
     child: child,
   ),
   transitionDuration: const Duration(milliseconds: 350),
+);
+
+PageRoute<T> _scale<T>(Widget page) => PageRouteBuilder<T>(
+  pageBuilder: (_, _, _) => page,
+  transitionsBuilder: (_, animation, _, child) {
+    final curved = CurvedAnimation(
+      parent: animation,
+      curve: Curves.easeOutBack,
+    );
+    return ScaleTransition(
+      scale: Tween<double>(begin: 0.85, end: 1.0).animate(curved),
+      child: FadeTransition(
+        opacity: CurvedAnimation(parent: animation, curve: Curves.easeIn),
+        child: child,
+      ),
+    );
+  },
+  transitionDuration: const Duration(milliseconds: 450),
 );

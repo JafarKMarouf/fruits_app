@@ -13,15 +13,15 @@ class OrderRepoImpl implements OrderRepo {
   const OrderRepoImpl(this.databaseService);
 
   @override
-  Future<Either<Failure, void>> addOrder({
+  Future<Either<Failure, String>> addOrder({
     required OrderInputEntity orderEntity,
   }) async {
     try {
-      await databaseService.addData(
+      final docId = await databaseService.addData(
         path: BackendEndpoints.addOrder,
         data: OrderInputModel.fromEntity(orderEntity).toJson(),
       );
-      return const Right(null);
+      return Right(docId);
     } catch (e) {
       log('Exception in OrderRepoImpl.addOrder: ${e.toString()}');
       return Left(ServerFailure('Failed in add Order Repo'));
