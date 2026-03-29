@@ -8,6 +8,7 @@ import 'package:fruits_app/core/widgets/app_text_widget.dart';
 import 'package:fruits_app/core/widgets/bottom_nav_bar/app_shell.dart';
 
 import '../../../../core/widgets/app_primary_button.dart';
+import 'order_tracking_view.dart';
 
 class OrderSuccessView extends StatefulWidget {
   const OrderSuccessView({super.key, required this.orderId});
@@ -159,12 +160,12 @@ class _OrderSuccessViewState extends State<OrderSuccessView>
         children: [
           AppPrimaryButton(
             text: 'تتبع الطلب',
-            // onPressed: () => Navigator.pushReplacementNamed(
-            //   context,
-            //   OrderTrackingView.routeName,
-            //   // arguments: widget.orderId,
-            // ),
-            onPressed: () {},
+            onPressed: () => Navigator.pushReplacementNamed(
+              context,
+              OrderTrackingView.routeName,
+              arguments: widget.orderId,
+            ),
+            // onPressed: () {},
           ),
           const SizedBox(height: 12),
           GestureDetector(

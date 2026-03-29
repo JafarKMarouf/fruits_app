@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fruits_app/features/checkout/domain/entities/order_input_entity/order_input_entity.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../core/widgets/app_text_form_field.dart';
+import '../../../../../../core/widgets/app_text_form_field.dart';
 
 class AddressStep extends StatefulWidget {
   const AddressStep({
@@ -24,6 +24,14 @@ class _AddressStepState extends State<AddressStep>
   @override
   bool get wantKeepAlive => true;
 
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -34,23 +42,30 @@ class _AddressStepState extends State<AddressStep>
       builder: (context, autovalidateMode, _) => Form(
         key: widget.formKey,
         autovalidateMode: autovalidateMode,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: _fields(order)
-              .map(
-                (f) => Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: AppTextFormField(
-                    label: f.label,
-                    hintText: f.hint,
-                    textInputType: f.inputType,
-                    textInputAction: f.inputAction,
-                    showShadow: false,
-                    onSaved: f.onSaved,
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          physics: const BouncingScrollPhysics(),
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.viewInsetsOf(context).bottom,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: _fields(order)
+                .map(
+                  (f) => Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: AppTextFormField(
+                      label: f.label,
+                      hintText: f.hint,
+                      textInputType: f.inputType,
+                      textInputAction: f.inputAction,
+                      showShadow: false,
+                      onSaved: f.onSaved,
+                    ),
                   ),
-                ),
-              )
-              .toList(),
+                )
+                .toList(),
+          ),
         ),
       ),
     );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/widgets/app_decoration.dart';
 
-import '../../../../../core/utils/styles/app_colors.dart';
-import '../../../../../core/utils/styles/app_text_styles.dart';
-import '../../../../../core/widgets/app_text_widget.dart';
+import '../../../../../../core/utils/styles/app_colors.dart';
+import '../../../../../../core/utils/styles/app_text_styles.dart';
+import '../../../../../../core/widgets/app_text_widget.dart';
 
 class ReviewItem extends StatelessWidget {
   const ReviewItem({super.key, required this.title, required this.child});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_app/features/checkout/presentation/views/widgets/review_item.dart';
+import 'package:fruits_app/features/checkout/presentation/views/widgets/checkout_widgets/review_item.dart';
 
 import 'delivery_address_section.dart';
 import 'order_summary_section.dart';

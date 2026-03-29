@@ -6,6 +6,7 @@ import 'package:fruits_app/features/onboarding/presentation/views/onboarding_vie
 
 import '../../features/checkout/presentation/views/checkout_view.dart';
 import '../../features/checkout/presentation/views/order_success_view.dart';
+import '../../features/checkout/presentation/views/order_tracking_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
 import '../widgets/app_text_widget.dart';
 import '../widgets/bottom_nav_bar/app_shell.dart';
@@ -28,6 +29,9 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       return _fade(CheckoutView(cartEntity: settings.arguments as CartEntity));
     case OrderSuccessView.routeName:
       return _scale(OrderSuccessView(orderId: settings.arguments as String));
+
+    case OrderTrackingView.routeName:
+      return _slide(OrderTrackingView(orderId: settings.arguments as String));
 
     default:
       return _fade(

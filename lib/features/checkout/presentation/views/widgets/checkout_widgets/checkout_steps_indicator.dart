@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../manager/controllers/checkout_controller.dart';
+import '../../../manager/controllers/checkout_controller.dart';
 import 'step_item.dart';
 
 class CheckoutStepIndicator extends StatelessWidget {

@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:fruits_app/core/errors/failure.dart';
 import 'package:fruits_app/core/repositories/order_repo/order_repo.dart';
@@ -21,6 +20,7 @@ class OrderRepoImpl implements OrderRepo {
         path: BackendEndpoints.addOrder,
         data: OrderInputModel.fromEntity(orderEntity).toJson(),
       );
+
       return Right(docId);
     } catch (e) {
       log('Exception in OrderRepoImpl.addOrder: ${e.toString()}');

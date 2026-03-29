@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/styles/app_colors.dart';
-import '../../../../../core/utils/styles/app_text_styles.dart';
-import '../../../../../core/widgets/app_text_widget.dart';
+import '../../../../../../core/utils/styles/app_colors.dart';
+import '../../../../../../core/utils/styles/app_text_styles.dart';
+import '../../../../../../core/widgets/app_text_widget.dart';
 
 class InactiveStepItem extends StatelessWidget {
   const InactiveStepItem({

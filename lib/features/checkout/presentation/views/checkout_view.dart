@@ -4,8 +4,8 @@ import 'package:fruits_app/core/helper/get_user.dart';
 import 'package:fruits_app/features/cart/domain/entities/cart_entity.dart';
 import 'package:fruits_app/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
 import 'package:fruits_app/features/checkout/domain/entities/order_input_entity/order_input_entity.dart';
-import 'package:fruits_app/features/checkout/presentation/views/widgets/add_order_cubit_bloc_consumer.dart';
-import 'package:fruits_app/features/checkout/presentation/views/widgets/checkout_view_body.dart';
+import 'package:fruits_app/features/checkout/presentation/views/widgets/checkout_widgets/add_order_cubit_bloc_consumer.dart';
+import 'package:fruits_app/features/checkout/presentation/views/widgets/checkout_widgets/checkout_view_body.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/services/get_it_service.dart';
@@ -21,6 +21,7 @@ class CheckoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: MultiProvider(
         providers: [
           ChangeNotifierProvider(

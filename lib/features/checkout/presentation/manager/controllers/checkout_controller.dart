@@ -10,6 +10,10 @@ class CheckoutController extends ChangeNotifier {
     pageController = PageController();
     pageController.addListener(_onPageChanged);
   }
+  // أضف هذا الـ getter في CheckoutController
+  static const int _lastStep = 2;
+
+  bool get isLastStep => currentStepIndex == _lastStep;
 
   // ── Page state ───────────────────────────────────────────
   late final PageController pageController;

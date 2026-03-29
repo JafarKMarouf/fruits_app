@@ -1,14 +1,14 @@
 import 'package:fruits_app/core/l10n/l10n.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../core/utils/styles/app_colors.dart';
-import '../../../../../core/utils/styles/app_images.dart';
+import '../../../../../../core/utils/styles/app_colors.dart';
+import '../../../../../../core/utils/styles/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
 import 'package:fruits_app/core/widgets/app_text_widget.dart';
 
-import '../../../domain/entities/order_input_entity/order_input_entity.dart';
+import '../../../../domain/entities/order_input_entity/order_input_entity.dart';
 
 class DeliveryAddressSection extends StatelessWidget {
   const DeliveryAddressSection({super.key});

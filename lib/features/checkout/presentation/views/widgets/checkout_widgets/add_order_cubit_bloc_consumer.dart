@@ -5,8 +5,8 @@ import 'package:fruits_app/core/widgets/custom_progress_hud.dart';
 import 'package:fruits_app/features/checkout/presentation/manager/cubit/add_order_cubit/add_order_cubit.dart';
 import 'package:fruits_app/features/checkout/presentation/views/order_success_view.dart';
 
-import '../../../../../core/helper/get_user.dart';
-import '../../../../cart/presentation/cubit/cart_cubit/cart_cubit.dart'
+import '../../../../../../core/helper/get_user.dart';
+import '../../../../../cart/presentation/cubit/cart_cubit/cart_cubit.dart'
     show CartCubit;
 
 class AddOrderCubitBlocConsumer extends StatelessWidget {

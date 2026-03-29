@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/utils/constants/app_constants.dart';
 
-import '../../../../../core/utils/styles/app_colors.dart';
-import '../../../../../core/utils/styles/app_text_styles.dart';
-import '../../../../../core/widgets/app_text_widget.dart';
-import '../../../domain/entities/order_input_entity/shipping_option.dart';
+import '../../../../../../core/utils/styles/app_colors.dart';
+import '../../../../../../core/utils/styles/app_text_styles.dart';
+import '../../../../../../core/widgets/app_text_widget.dart';
+import '../../../../domain/entities/order_input_entity/shipping_option.dart';
 
 class ShippingItem extends StatelessWidget {
   const ShippingItem({
