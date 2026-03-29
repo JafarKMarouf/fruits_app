@@ -18,6 +18,8 @@ workflows:
         script: |
           cat > $CM_BUILD_DIR/.env << EOF
           GOOGLE_WEB_CLIENT_ID=$GOOGLE_WEB_CLIENT_ID
+          PAYPAL_CLIENT_ID=$PAYPAL_CLIENT_ID
+          PAYPAL_SECRET_KEY=$PAYPAL_SECRET_KEY
           EOF
 
       - name: Get Flutter packages
@@ -25,17 +27,35 @@ workflows:
 
       - name: Build Android release
         script: |
-          flutter build apk --release --split-per-abi
+          flutter build apk --release
           flutter build appbundle --release
 
-    artifacts:
-      - build/**/outputs/**/*.aab
-      - build/**/outputs/**/*.apk
+      - name: Install GitHub CLI
+        script: |
+          brew install gh
 
-    publishing:
-      github:
-        artifact_patterns:
-          - '**/*.aab'
-          - '**/*.apk'  
-        release: true
-        prerelease: false
+      - name: Publish to GitHub Releases
+        script: |
+          export GH_TOKEN="$GITHUB_TOKEN"
+          
+          # Priority: 1) FCI_TAG (git tag trigger) 2) CM_TAG 3) RELEASE_TAG (manual variable)
+          RELEASE_TAG="${FCI_TAG:-${CM_TAG:-$RELEASE_TAG}}"
+          
+          if [ -z "$RELEASE_TAG" ]; then
+            echo "ERROR: Could not determine release tag."
+            echo "Either push a git tag (v1.0.0) or pass RELEASE_TAG as a build variable."
+            exit 1
+          fi
+          
+          echo "Publishing release for tag: $RELEASE_TAG"
+          
+          gh release create "$RELEASE_TAG" \
+            "build/app/outputs/flutter-apk/app-release.apk#app-release.apk" \
+            "build/app/outputs/bundle/release/app-release.aab#app-release.aab" \
+            --title "Release $RELEASE_TAG" \
+            --notes "Release $RELEASE_TAG" \
+            --repo "$GITHUB_REPO"
+
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/bundle/release/app-release.aab
