@@ -358,6 +358,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `{State {state}, {city}`
+  String formattedAddress(String state, String city) {
+    return Intl.message(
+      '{State $state, $city',
+      name: 'formattedAddress',
+      desc: '',
+      args: [state, city],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -81,7 +81,7 @@ class ProductItem extends StatelessWidget {
                         icon: Icons.add,
                         onTap: () {
                           context.read<CartCubit>().addItem(
-                            CartItemEntity(productEntity: product, count: 1),
+                            CartItemEntity(productEntity: product, quantity: 1),
                           );
                         },
                       ),

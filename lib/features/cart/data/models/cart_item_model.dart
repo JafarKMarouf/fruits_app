@@ -10,33 +10,36 @@ class CartItemModel {
   final ProductModel productModel;
 
   @HiveField(1)
-  int count;
+  int quantity;
 
-  CartItemModel({required this.productModel, required this.count});
+  CartItemModel({required this.productModel, required this.quantity});
 
   // ── Entity Mapping ─────────────────────────────
 
   CartItemEntity toEntity() {
-    return CartItemEntity(productEntity: productModel.toEntity(), count: count);
+    return CartItemEntity(
+      productEntity: productModel.toEntity(),
+      quantity: quantity,
+    );
   }
 
   factory CartItemModel.fromEntity(CartItemEntity entity) {
     return CartItemModel(
       productModel: ProductModel.fromEntity(entity.productEntity),
-      count: entity.count,
+      quantity: entity.quantity,
     );
   }
 
   // ── JSON Mapping ───────────────────────────────
 
   Map<String, dynamic> toJson() {
-    return {'product': productModel.toJson(), 'count': count};
+    return {'product': productModel.toJson(), 'quantity': quantity};
   }
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
     return CartItemModel(
       productModel: ProductModel.fromJson(json['product']),
-      count: json['count'],
+      quantity: json['quantity'],
     );
   }
 }

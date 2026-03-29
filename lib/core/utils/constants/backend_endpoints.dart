@@ -8,4 +8,7 @@ abstract class BackendEndpoints {
   static const String featuredProducts = 'products';
 
   static const String syncCart = 'cart';
+
+  static const String addOrder = 'orders';
+  static const String getOrder = 'orders';
 }

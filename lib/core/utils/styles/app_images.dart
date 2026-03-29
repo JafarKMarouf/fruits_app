@@ -32,6 +32,8 @@ class AppImages {
 
   static const String imagesCheck = "assets/images/check.svg";
 
+  static const String imagesEdit = "assets/images/edit.svg";
+
   static const String imagesFeatureCover = "assets/images/feature_cover.svg";
 
   static const String imagesFilter = "assets/images/filter.svg";
@@ -42,6 +44,8 @@ class AppImages {
 
   static const String imagesHeart = "assets/images/heart.svg";
 
+  static const String imagesLocation = "assets/images/location.svg";
+
   static const String imagesLogo = "assets/images/logo.svg";
 
   static const String imagesNotification = "assets/images/notification.svg";
@@ -49,6 +53,8 @@ class AppImages {
   static const String imagesNotificationDiscount = "assets/images/notification_discount.png";
 
   static const String imagesNotificationSale = "assets/images/notification_sale.png";
+
+  static const String imagesOrderSuccess = "assets/images/order_success.svg";
 
   static const String imagesPineapple = "assets/images/pineapple.svg";
 

@@ -1,4 +1,6 @@
 import 'package:fruits_app/core/cubits/product/product_cubit.dart';
+import 'package:fruits_app/core/repositories/order_repo/order_repo.dart';
+import 'package:fruits_app/core/repositories/order_repo/order_repo_impl.dart';
 import 'package:fruits_app/core/services/firebase_auth_service.dart';
 import 'package:fruits_app/core/services/store_services/database_service.dart';
 import 'package:fruits_app/core/services/store_services/firestore_service.dart';
@@ -11,8 +13,12 @@ import 'package:fruits_app/features/cart/data/data_source/cart_remote_data_sourc
 import 'package:fruits_app/features/cart/data/repo/cart_repo_impl.dart';
 import 'package:fruits_app/features/cart/domain/repo/cart_repo.dart';
 import 'package:fruits_app/features/cart/presentation/cubit/cart_cubit/cart_cubit.dart';
+import 'package:fruits_app/features/checkout/domain/repos/order_tracking_repo.dart';
+import 'package:fruits_app/features/checkout/presentation/manager/cubit/add_order_cubit/add_order_cubit.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/checkout/data/repo/order_tracking_repo_impl.dart';
+import '../../features/checkout/presentation/manager/cubit/order_tracking_cubit/order_tracking_cubit.dart';
 import '../cubits/featured_products/featured_product_cubit.dart';
 import '../repositories/product_repo/product_repo.dart';
 import '../repositories/product_repo/product_repo_impl.dart';
@@ -32,6 +38,7 @@ Future<void> setupServiceLocator() async {
 void _registerServices() {
   getIt.registerLazySingleton<FirebaseAuthService>(() => FirebaseAuthService());
   getIt.registerLazySingleton<DatabaseService>(() => FirestoreService());
+
   getIt.registerLazySingleton<LocalStorageService>(() => HiveStorage());
 }
 
@@ -58,6 +65,12 @@ void _registerRepositories() {
       remoteDataSource: getIt<CartRemoteDataSource>(),
     ),
   );
+
+  getIt.registerLazySingleton<OrderRepo>(
+    () => OrderRepoImpl(getIt<DatabaseService>()),
+  );
+
+  getIt.registerLazySingleton<OrderTrackingRepo>(() => OrderTrackingRepoImpl());
 }
 
 void _registerCubits() {
@@ -71,6 +84,12 @@ void _registerCubits() {
     () => FeaturedProductCubit(getIt<ProductRepo>()),
   );
 
-  // cart Cubit
+  /// cart Cubit
   getIt.registerFactory<CartCubit>(() => CartCubit(getIt<CartRepo>()));
+
+  /// order cubit
+  getIt.registerFactory<AddOrderCubit>(() => AddOrderCubit(getIt<OrderRepo>()));
+  getIt.registerFactory<OrderTrackingCubit>(
+    () => OrderTrackingCubit(getIt<OrderTrackingRepo>()),
+  );
 }

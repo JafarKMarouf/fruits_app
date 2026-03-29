@@ -13,11 +13,8 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => getIt<ProductCubit>()),
-          // BlocProvider(create: (context) => getIt<CartCubit>()),
-        ],
+      body: BlocProvider(
+        create: (context) => getIt<ProductCubit>(),
         child: const HomeViewBody(),
       ),
     );

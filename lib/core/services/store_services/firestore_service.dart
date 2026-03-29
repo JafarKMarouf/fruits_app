@@ -7,7 +7,7 @@ class FirestoreService extends DatabaseService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
-  Future<void> addData({
+  Future<String> addData({
     required String path,
     required Map<String, dynamic> data,
     String? documentId,
@@ -16,8 +16,10 @@ class FirestoreService extends DatabaseService {
       final collectionRef = firestore.collection(path);
       if (documentId != null) {
         await collectionRef.doc(documentId).set(data, SetOptions(merge: true));
+        return documentId;
       } else {
-        await collectionRef.add(data);
+        final ref = await collectionRef.add(data);
+        return ref.id;
       }
     } on FirebaseException catch (e) {
       log('FirebaseException in FirestoreService.addData: ${e.toString()}');
