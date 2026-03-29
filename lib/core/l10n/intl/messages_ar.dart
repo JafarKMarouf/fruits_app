@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(String state, city) => "المحافظة ${state}، مدينة ${city}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
@@ -35,10 +37,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "الحساب موجود بالفعل لهذا البريد الإلكتروني.",
     ),
     "forgetPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+    "formattedAddress": m0,
     "fullName": MessageLookupByLibrary.simpleMessage("الاسم كامل"),
     "genericError": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ ما. يرجى المحاولة مرة أخرى في وقت لاحق.",
     ),
+    "goodMorning": MessageLookupByLibrary.simpleMessage("صباح الخير !.."),
     "homeTitle": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
     "invalidCredential": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني أو كلمة المرور غير صالحة.",
@@ -74,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم إنشاء الحساب بنجاح",
     ),
     "requiredField": MessageLookupByLibrary.simpleMessage(" هذا الحقل مطلوب"),
+    "searchAbout": MessageLookupByLibrary.simpleMessage("ابحث عن......."),
     "signupTitle": MessageLookupByLibrary.simpleMessage("حساب جديد"),
     "skip": MessageLookupByLibrary.simpleMessage("تخطِ"),
     "startNowButton": MessageLookupByLibrary.simpleMessage("ابدأ الان"),

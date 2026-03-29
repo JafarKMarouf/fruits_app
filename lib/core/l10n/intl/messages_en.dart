@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(String state, city) => "{State ${state}, ${city}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
@@ -37,10 +39,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "The account already exists for that email.",
     ),
     "forgetPassword": MessageLookupByLibrary.simpleMessage("?forget password"),
+    "formattedAddress": m0,
     "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
     "genericError": MessageLookupByLibrary.simpleMessage(
       "Something went wrong. Please try again later.",
     ),
+    "goodMorning": MessageLookupByLibrary.simpleMessage("Good Morning !.."),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Home"),
     "invalidCredential": MessageLookupByLibrary.simpleMessage(
       "Email or password invalid.",
@@ -80,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "requiredField": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),
+    "searchAbout": MessageLookupByLibrary.simpleMessage("search about......."),
     "signupTitle": MessageLookupByLibrary.simpleMessage("Sign up"),
     "skip": MessageLookupByLibrary.simpleMessage("skip"),
     "startNowButton": MessageLookupByLibrary.simpleMessage("Start Now"),

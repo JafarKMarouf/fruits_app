@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruits_app/core/helper/build_messages_bar.dart';
+import 'package:fruits_app/core/helper/show_messages_bar.dart';
 import 'package:fruits_app/core/l10n/l10n.dart';
 import 'package:fruits_app/core/widgets/build_app_bar.dart';
 import 'package:fruits_app/core/widgets/custom_progress_hud.dart';
@@ -23,10 +23,10 @@ class SignupViewBlocConsumer extends StatelessWidget {
             'invalidEmail' => locale.invalidEmail,
             _ => locale.genericError,
           };
-          buildErrorBar(context, localizedMessage);
+          showErrorBar(context, localizedMessage);
         }
         if (state is SignupSuccess) {
-          buildSuccessMessage(
+          showSuccessMessage(
             context,
             AppLocalizations.of(context).registerSuccess,
           );

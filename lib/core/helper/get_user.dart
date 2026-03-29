@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:fruits_app/core/services/shared_preferences_service.dart';
-import 'package:fruits_app/core/utils/constants.dart';
+import 'package:fruits_app/core/utils/constants/app_constants.dart';
 import 'package:fruits_app/features/auth/data/models/user_model.dart';
 import 'package:fruits_app/features/auth/domain/entities/user_entity.dart';
 

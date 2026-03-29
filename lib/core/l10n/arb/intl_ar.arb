@@ -31,5 +31,15 @@
   "requiredField": " هذا الحقل مطلوب",
   "invalidCredential": "البريد الإلكتروني أو كلمة المرور غير صالحة.",
   "loginSuccess": "تم تسجيل الدخول بنجاح",
-  "homeTitle": "الصفحة الرئيسية"
+  "homeTitle": "الصفحة الرئيسية",
+  "goodMorning": "صباح الخير !..",
+  "searchAbout": "ابحث عن.......",
+
+  "formattedAddress": "المحافظة {state}، مدينة {city}",
+  "@formattedAddress": {
+    "placeholders": {
+      "state":     { "type": "String" },
+      "city":      { "type": "String" }
+    }
+  }
 }

@@ -51,9 +51,9 @@ class OnboardingPageView extends StatelessWidget {
         PageViewItem(
           isVisible: false,
           backgroundImage: AppImages.imagesBackgroundOnboarding2,
-          image: AppImages.imagesPineappleCuate,
+          image: AppImages.imagesPineapple,
           title: AppTextWidget(
-            text: locale.onBoardingSearchTitle,
+            locale.onBoardingSearchTitle,
             textAlign: TextAlign.center,
             style: AppTextStyles.styleBold23.copyWith(
               color: AppColors.grayscale950,
