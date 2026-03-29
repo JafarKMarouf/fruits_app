@@ -3,12 +3,10 @@ workflows:
     name: Android Release
     triggering:
       events:
-        - push
         - tag
-      branch_patterns:
-        - pattern: main
       tag_patterns:
-        pattern: 'v*'
+        - pattern: 'v*'
+          include: true
 
     environment:
       groups:
@@ -37,7 +35,7 @@ workflows:
     publishing:
       github:
         artifact_patterns:
-          - build/**/outputs/**/*.aab
-          - build/**/outputs/**/*.apk
+          - '**/*.aab'
+          - '**/*.apk'  
         release: true
         prerelease: false
