@@ -15,4 +15,6 @@ abstract class LocalNotificationService {
     String? payload,
   });
   void Function(String?)? get onNotificationTap;
+
+  set onNotificationTap(void Function(String?)? callback);
 }

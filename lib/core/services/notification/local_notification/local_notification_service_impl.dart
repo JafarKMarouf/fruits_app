@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fruits_app/core/services/notification/local_notification/local_notification_service.dart';
+import 'package:fruits_app/core/utils/constants/app_constants.dart';
+import 'package:http/http.dart' as http;
 
 class LocalNotificationServiceImpl implements LocalNotificationService {
   final FlutterLocalNotificationsPlugin _plugin =
@@ -13,15 +15,20 @@ class LocalNotificationServiceImpl implements LocalNotificationService {
   void Function(String?)? get onNotificationTap => _onNotificationTap;
 
   @override
+  set onNotificationTap(void Function(String?)? callback) {
+    _onNotificationTap = callback;
+  }
+
+  @override
   Future<void> init() async {
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const DarwinInitializationSettings iosSettings =
         DarwinInitializationSettings(
-          requestAlertPermission: true,
-          requestBadgePermission: true,
-          requestSoundPermission: true,
+          requestAlertPermission: false,
+          requestBadgePermission: false,
+          requestSoundPermission: false,
         );
 
     const InitializationSettings settings = InitializationSettings(
@@ -56,9 +63,9 @@ class LocalNotificationServiceImpl implements LocalNotificationService {
   }) async {
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
-          'fruits_hub_channel',
-          'Fruits Hub Notifications',
-          channelDescription: 'Fruits Hub push notifications',
+          kNotificationChannelId,
+          kNotificationChannelName,
+          channelDescription: kNotificationChannnelDescription,
           importance: Importance.max,
           priority: Priority.high,
           showWhen: true,
@@ -91,38 +98,60 @@ class LocalNotificationServiceImpl implements LocalNotificationService {
     required String imageUrl,
     String? payload,
   }) async {
-    final BigPictureStyleInformation bigPicture = BigPictureStyleInformation(
-      const DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
-      largeIcon: const DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
-      contentTitle: title,
-      summaryText: body,
-    );
+    StyleInformation styleInfo;
+
+    if (imageUrl.isNotEmpty) {
+      try {
+        final response = await http
+            .get(Uri.parse(imageUrl))
+            .timeout(const Duration(seconds: 5));
+
+        if (response.statusCode == 200) {
+          final imageBytes = response.bodyBytes;
+          styleInfo = BigPictureStyleInformation(
+            ByteArrayAndroidBitmap(imageBytes),
+            largeIcon: ByteArrayAndroidBitmap(imageBytes),
+            contentTitle: title,
+            summaryText: body,
+            htmlFormatContentTitle: false,
+            htmlFormatSummaryText: false,
+          );
+        } else {
+          styleInfo = const DefaultStyleInformation(true, true);
+        }
+      } catch (_) {
+        styleInfo = const DefaultStyleInformation(true, true);
+      }
+    } else {
+      styleInfo = const DefaultStyleInformation(true, true);
+    }
 
     final AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
-          'fruits_hub_channel',
-          'Fruits Hub Notifications',
-          channelDescription: 'Fruits Hub push notifications',
+          kNotificationChannelId,
+          kNotificationChannelName,
+          channelDescription: kNotificationChannnelDescription,
           importance: Importance.max,
           priority: Priority.high,
-          styleInformation: bigPicture,
+          styleInformation: styleInfo,
+          showWhen: true,
         );
 
-    final NotificationDetails details = NotificationDetails(
-      android: androidDetails,
-      iOS: const DarwinNotificationDetails(
-        presentAlert: true,
-        presentBadge: true,
-        presentSound: true,
-      ),
+    const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
     );
 
     await _plugin.show(
+      id: id,
       title: title,
       body: body,
-      notificationDetails: details,
+      notificationDetails: NotificationDetails(
+        android: androidDetails,
+        iOS: iosDetails,
+      ),
       payload: payload,
-      id: id,
     );
   }
 }

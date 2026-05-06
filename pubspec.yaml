@@ -40,6 +40,7 @@ dependencies:
   flutter_paypal_payment: ^1.0.8
   flutter_local_notifications: ^21.0.0
   firebase_messaging: ^16.2.0
+  http: ^1.6.0
 
 dev_dependencies:
   flutter_test:

@@ -1,12 +1,66 @@
 import 'dart:developer';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:fruits_app/core/utils/constants/app_constants.dart';
+import '../../../../features/home/presentation/views/notification_view.dart';
+import '../../../../features/products/presentation/views/products_view.dart';
+import '../../../../firebase_options.dart';
+import '../../../helper/app_navigator.dart';
 import '../local_notification/local_notification_service.dart';
 import 'push_notification_service.dart';
 
-// ⚠️ Must be top-level for FCM background handler
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // 1. Initialize Firebase for this isolate
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   log('FCM Background message: ${message.messageId}');
+
+  // 2. Initialize Local Notifications independently
+  final plugin = FlutterLocalNotificationsPlugin();
+
+  await plugin.initialize(
+    settings: const InitializationSettings(
+      android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+      iOS: DarwinInitializationSettings(
+        requestAlertPermission: false,
+        requestBadgePermission: false,
+        requestSoundPermission: false,
+      ),
+    ),
+  );
+
+  // 3. Extract notification or data to show the alert
+  final notification = message.notification;
+
+  final title = notification?.title ?? message.data['title'] ?? '';
+  final body = notification?.body ?? message.data['body'] ?? '';
+
+  if (title.isEmpty && body.isEmpty) return;
+
+  if (notification != null) {
+    await plugin.show(
+      id: notification.hashCode,
+      title: title,
+      body: body,
+      notificationDetails: const NotificationDetails(
+        android: AndroidNotificationDetails(
+          kNotificationChannelId,
+          kNotificationChannelName,
+          channelDescription: kNotificationChannnelDescription,
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+        iOS: DarwinNotificationDetails(
+          presentAlert: true,
+          presentBadge: true,
+          presentSound: true,
+        ),
+      ),
+      payload: message.data['productId'],
+    );
+  }
 }
 
 class PushNotificationServiceImpl implements PushNotificationService {
@@ -17,7 +71,7 @@ class PushNotificationServiceImpl implements PushNotificationService {
 
   @override
   Future<void> init() async {
-    // 1. Request permission
+    // ── 1. Request permission
     final NotificationSettings settings = await _messaging.requestPermission(
       alert: true,
       badge: true,
@@ -46,17 +100,35 @@ class PushNotificationServiceImpl implements PushNotificationService {
     // 4. App opened from notification (background → foreground)
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       log('FCM onMessageOpenedApp: ${message.data}');
-      // Navigation handled by payload in local notification tap
+      _handleMessageNavigation(message);
     });
 
     // 5. App launched from terminated state via notification
     final RemoteMessage? initialMessage = await _messaging.getInitialMessage();
     if (initialMessage != null) {
       log('FCM Initial message: ${initialMessage.data}');
+      Future.delayed(const Duration(milliseconds: 500), () {
+        _handleMessageNavigation(initialMessage);
+      });
     }
-
+    _localNotification.onNotificationTap = (String? payload) {
+      _navigateByPayload(payload);
+    };
     // 6. Subscribe all customers to global topic
     await subscribeToTopic('new_products');
+  }
+
+  void _handleMessageNavigation(RemoteMessage message) {
+    final productId = message.data['productId'];
+    _navigateByPayload(productId);
+  }
+
+  void _navigateByPayload(String? productId) {
+    if (productId != null && productId.isNotEmpty) {
+      AppNavigator.pushNamed(ProductsView.routeName, arguments: productId);
+    } else {
+      AppNavigator.pushNamed(NotificationView.routeName);
+    }
   }
 
   @override
@@ -72,6 +144,16 @@ class PushNotificationServiceImpl implements PushNotificationService {
   }
 
   @override
+  Future<void> deleteToken() async {
+    try {
+      await _messaging.deleteToken();
+      log('FCM token deleted');
+    } catch (e) {
+      log('Error deleting FCM token: $e');
+    }
+  }
+
+  @override
   Future<void> subscribeToTopic(String topic) async {
     await _messaging.subscribeToTopic(topic);
     log('Subscribed to topic: $topic');
@@ -80,6 +162,7 @@ class PushNotificationServiceImpl implements PushNotificationService {
   @override
   Future<void> unsubscribeFromTopic(String topic) async {
     await _messaging.unsubscribeFromTopic(topic);
+    log('Unsubscribed from topic: $topic');
   }
 
   @override

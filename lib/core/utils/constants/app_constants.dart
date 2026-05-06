@@ -9,3 +9,6 @@ const kIsUserLoggedIn = 'isUserLoggedIn';
 const String kCartKey = 'user_cart';
 const kAnimatedDuration = 350;
 const kCurves = Curves.easeInOut;
+const String kNotificationChannelId = 'fruits_hub_channel';
+const String kNotificationChannelName = 'Fruits Hub Notifications';
+const String kNotificationChannnelDescription = 'Fruits Hub push notifications';

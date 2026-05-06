@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,10 +16,6 @@ import 'core/services/local_storage/local_storage_service.dart';
 import 'core/services/notification/push_notifications/push_notification_service.dart';
 import 'features/auth/domain/repos/auth_repo.dart';
 
-@pragma('vm:entry-point')
-Future<void> firebaseMessagingBackgroundHandler(message) async =>
-    firebaseMessagingBackgroundHandler(message);
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = const AppBlocObserver();
@@ -33,16 +31,17 @@ void main() async {
   final storage = getIt<LocalStorageService>();
   await storage.init();
 
-  // Init local notifications
   await getIt<LocalNotificationService>().init();
 
-  // Init push notifications (request permissions, subscribe to topic)
   await getIt<PushNotificationService>().init();
 
-  // Listen for token refresh → update Firestore
   getIt<PushNotificationService>().onTokenRefresh.listen((newToken) async {
-    final user = getUser();
-    await getIt<AuthRepo>().updateFcmToken(uid: user.uId, token: newToken);
+    try {
+      final user = getUser();
+      await getIt<AuthRepo>().updateFcmToken(uid: user.uId, token: newToken);
+    } catch (_) {
+      log('Not logged in yet — new token will be persisted on next sign-in');
+    }
   });
 
   runApp(const FruitsApp());

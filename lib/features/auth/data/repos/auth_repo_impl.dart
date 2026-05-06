@@ -96,37 +96,44 @@ class AuthRepoImpl extends AuthRepo {
     try {
       user = await firebaseAuthService.signInWithGoogle();
       final fcmToken = await pushNotificationService.getToken();
-      if (fcmToken != null) {
-        await updateFcmToken(uid: user.uid, token: fcmToken);
-      }
-      UserEntity userEntity = UserEntity(
-        uId: user.uid,
-        name: user.displayName ?? '',
-        email: user.email ?? '',
-        fcmToken: fcmToken,
-        createdAt: Timestamp.now(),
-      );
-      bool isUserExists = await databaseService.isDataExists(
+
+      final bool isUserExists = await databaseService.isDataExists(
         path: BackendEndpoints.isUserExists,
         documentId: user.uid,
       );
+
+      // UserEntity userEntity = UserEntity(
+      //   uId: user.uid,
+      //   name: user.displayName ?? '',
+      //   email: user.email ?? '',
+      //   fcmToken: fcmToken,
+      //   createdAt: Timestamp.now(),
+      // );
+      UserEntity userEntity;
+
       if (!isUserExists) {
+        userEntity = UserEntity(
+          uId: user.uid,
+          name: user.displayName ?? '',
+          email: user.email ?? '',
+          fcmToken: fcmToken,
+          createdAt: Timestamp.now(),
+        );
         await addUserData(user: userEntity);
       } else {
-        await getUserData(uid: user.uid);
+        userEntity = await getUserData(uid: user.uid);
+      }
+      if (fcmToken != null) {
+        await updateFcmToken(uid: user.uid, token: fcmToken);
       }
       await saveUserData(user: userEntity);
       return Right(userEntity);
     } on CustomException catch (e) {
-      if (user != null) {
-        await firebaseAuthService.deleteAuthUser();
-      }
+      if (user != null) await firebaseAuthService.deleteAuthUser();
       return Left(ServerFailure(e.message));
     } catch (e) {
       log('Exception in AuthRepoImpl.signInWithGoogle: ${e.toString()}');
-      if (user != null) {
-        await firebaseAuthService.deleteAuthUser();
-      }
+      if (user != null) await firebaseAuthService.deleteAuthUser();
       return Left(ServerFailure('genericError'));
     }
   }
@@ -158,15 +165,21 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<void> signOut() async {
+    try {
+      final currentUser = await _getCurrentUserId();
+      if (currentUser != null) {
+        await updateFcmToken(uid: currentUser, token: '');
+      }
+      await pushNotificationService.deleteToken();
+    } catch (e) {
+      log('Warning: could not delete FCM token on sign-out: $e');
+    }
+
     await Future.wait([
       SharedPreferencesService.remove(kUserData),
       SharedPreferencesService.remove(kIsUserLoggedIn),
       _clearAllHiveData(),
     ]);
-  }
-
-  Future<void> _clearAllHiveData() async {
-    await Hive.deleteBoxFromDisk(HiveBoxNames.cartBox);
   }
 
   @override
@@ -179,5 +192,20 @@ class AuthRepoImpl extends AuthRepo {
       documentId: uid,
       data: {'fcm_token': token},
     );
+  }
+
+  Future<void> _clearAllHiveData() async {
+    await Hive.deleteBoxFromDisk(HiveBoxNames.cartBox);
+  }
+
+  Future<String?> _getCurrentUserId() async {
+    try {
+      final jsonData = SharedPreferencesService.getString(kUserData);
+      if (jsonData == null) return null;
+      final model = UserModel.fromJson(jsonDecode(jsonData));
+      return model.uId;
+    } catch (_) {
+      return null;
+    }
   }
 }
