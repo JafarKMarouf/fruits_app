@@ -8,7 +8,7 @@ class NotificationEntity {
   final String? productId;
   final String type;
   final Timestamp createdAt;
-  bool isRead;
+  final bool isRead;
 
   NotificationEntity({
     required this.id,
@@ -20,4 +20,37 @@ class NotificationEntity {
     required this.createdAt,
     this.isRead = false,
   });
+
+  NotificationEntity copyWith({
+    String? id,
+    String? title,
+    String? body,
+    String? imageUrl,
+    String? productId,
+    String? type,
+    Timestamp? createdAt,
+    bool? isRead,
+  }) {
+    return NotificationEntity(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      body: body ?? this.body,
+      imageUrl: imageUrl ?? this.imageUrl,
+      productId: productId ?? this.productId,
+      type: type ?? this.type,
+      createdAt: createdAt ?? this.createdAt,
+      isRead: isRead ?? this.isRead,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is NotificationEntity &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          isRead == other.isRead;
+
+  @override
+  int get hashCode => id.hashCode ^ isRead.hashCode;
 }

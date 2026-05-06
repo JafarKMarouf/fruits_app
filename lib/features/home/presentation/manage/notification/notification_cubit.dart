@@ -6,13 +6,14 @@ import '../../../domain/repo/notification_repo.dart';
 part 'notification_state.dart';
 
 class NotificationCubit extends Cubit<NotificationState> {
-  final NotificationRepo notificationRepo;
+  final NotificationRepo _notificationRepo;
 
-  NotificationCubit(this.notificationRepo) : super(NotificationInitial());
+  NotificationCubit(this._notificationRepo)
+    : super(const NotificationInitial());
 
   Future<void> getNotifications() async {
-    emit(NotificationLoading());
-    final result = await notificationRepo.getNotifications();
+    emit(const NotificationLoading());
+    final result = await _notificationRepo.getNotifications();
     result.fold(
       (failure) => emit(NotificationFailure(failure.message)),
       (notifications) => emit(NotificationLoaded(notifications)),
@@ -20,39 +21,36 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
   Future<void> markAsRead(String id) async {
-    await notificationRepo.markAsRead(notificationId: id);
-    if (state is NotificationLoaded) {
-      final current = (state as NotificationLoaded).notifications;
-      final updated = current.map((n) {
-        if (n.id == id) {
-          return NotificationEntity(
-            id: n.id,
-            title: n.title,
-            body: n.body,
-            imageUrl: n.imageUrl,
-            productId: n.productId,
-            type: n.type,
-            createdAt: n.createdAt,
-            isRead: true,
-          );
-        }
-        return n;
-      }).toList();
-      emit(NotificationLoaded(updated));
-    }
+    final current = state;
+    if (current is! NotificationLoaded) return;
+
+    final updatedList = current.notifications.map((n) {
+      return n.id == id ? n.copyWith(isRead: true) : n;
+    }).toList();
+    emit(current.copyWith(notifications: updatedList));
+
+    final result = await _notificationRepo.markAsRead(notificationId: id);
+    result.fold((failure) {
+      emit(current);
+    }, (_) {});
   }
 
   Future<void> markAllAsRead() async {
-    await notificationRepo.markAllAsRead();
-    await getNotifications();
+    final current = state;
+    if (current is! NotificationLoaded) return;
+    if (!current.hasUnread) return; // nothing to do
+
+    final updatedList = current.notifications
+        .map((n) => n.copyWith(isRead: true))
+        .toList();
+    emit(current.copyWith(notifications: updatedList));
+
+    final result = await _notificationRepo.markAllAsRead();
+    result.fold((failure) => emit(current), (_) {});
   }
 
   int get unreadCount {
-    if (state is NotificationLoaded) {
-      return (state as NotificationLoaded).notifications
-          .where((n) => !n.isRead)
-          .length;
-    }
-    return 0;
+    final current = state;
+    return current is NotificationLoaded ? current.unreadCount : 0;
   }
 }

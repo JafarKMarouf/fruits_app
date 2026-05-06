@@ -1,13 +1,20 @@
-// import 'package:flutter/material.dart';
-// import 'package:fruits_app/features/home/presentation/views/widgets/notification_view_body.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_app/features/home/presentation/views/widgets/notification_view_body.dart';
 
-// class NotificationView extends StatelessWidget {
-//   const NotificationView({super.key});
+import '../../../../core/services/get_it_service.dart';
+import '../manage/notification/notification_cubit.dart';
 
-//   static const routeName = 'notification-view';
+class NotificationView extends StatelessWidget {
+  const NotificationView({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-// return const Scaffold(body: NotificationViewBody());
-//   }
-// }
+  static const routeName = 'notification-view';
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<NotificationCubit>()..getNotifications(),
+      child: const Scaffold(body: NotificationViewBody()),
+    );
+  }
+}

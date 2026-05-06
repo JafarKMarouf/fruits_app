@@ -1,126 +1,135 @@
-// import 'package:flutter/material.dart';
-// import 'package:fruits_app/core/utils/constants/app_constants.dart';
-// import 'package:fruits_app/core/widgets/custom_main_app_bar.dart';
-// import 'package:fruits_app/features/home/domain/entities/notification_entity.dart';
-// import 'package:fruits_app/features/home/presentation/views/widgets/notification_item.dart';
-// import 'package:fruits_app/features/home/presentation/views/widgets/notification_section_header.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_app/core/utils/constants/app_constants.dart';
+import 'package:fruits_app/core/utils/styles/app_text_styles.dart';
+import 'package:fruits_app/core/widgets/app_text_widget.dart';
+import 'package:fruits_app/core/widgets/custom_error_widget.dart';
+import 'package:fruits_app/core/widgets/custom_main_app_bar.dart';
+import 'package:fruits_app/features/home/presentation/manage/notification/notification_cubit.dart';
+import 'package:fruits_app/features/home/presentation/views/widgets/notification_loading_ui.dart';
 
-// class NotificationViewBody extends StatefulWidget {
-//   const NotificationViewBody({super.key});
+import 'notification_item.dart';
+import 'notification_section_header.dart';
 
-//   @override
-//   State<NotificationViewBody> createState() => _NotificationViewBodyState();
-// }
+class NotificationViewBody extends StatelessWidget {
+  const NotificationViewBody({super.key});
 
-// class _NotificationViewBodyState extends State<NotificationViewBody> {
-//   late List<NotificationEntity> _newNotifications;
-//   late List<NotificationEntity> _earlierNotifications;
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+            child: CustomMainAppBar(title: 'الاشعارات'),
+          ),
+          // const SizedBox(height: 16),
+          Expanded(
+            child: BlocBuilder<NotificationCubit, NotificationState>(
+              builder: (context, state) {
+                return switch (state) {
+                  NotificationInitial() => const SizedBox.shrink(),
+                  NotificationLoading() => const NotificationLoadingUI(),
+                  NotificationFailure(:final message) => CustomErrorWidget(
+                    errorMessage: message,
+                    onRetry: () =>
+                        context.read<NotificationCubit>().getNotifications(),
+                  ),
+                  NotificationLoaded() => _NotificationsContent(state: state),
+                };
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     _newNotifications = NotificationEntity.mockNewList();
-//     _earlierNotifications = NotificationEntity.mockEarlierList();
-//   }
+class _NotificationsContent extends StatelessWidget {
+  const _NotificationsContent({required this.state});
 
-//   // ── Select All ─────────────────────────────────────────────────
-//   void _selectAllNew(bool selectAll) {
-//     setState(() {
-//       for (var n in _newNotifications) {
-//         n.isSelected = selectAll;
-//       }
-//     });
-//   }
+  final NotificationLoaded state;
 
-//   void _selectAllEarlier(bool selectAll) {
-//     setState(() {
-//       for (var n in _earlierNotifications) {
-//         n.isSelected = selectAll;
-//       }
-//     });
-//   }
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<NotificationCubit>();
+    final unread = state.unreadNotifications;
+    final read = state.readNotifications;
 
-//   // ── Toggle single item ─────────────────────────────────────────
-//   void _toggleNew(int index) {
-//     setState(
-//       () => _newNotifications[index].isSelected =
-//           !_newNotifications[index].isSelected,
-//     );
-//   }
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              if (unread.isNotEmpty) ...[
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: kHorizontalPadding,
+                  ),
+                  child: NotificationSectionHeader(
+                    label: 'جديد',
+                    count: unread.length,
+                    isAllSelected:
+                        false, // unread items are never "all selected"
+                    onSelectAll: (_) => cubit.markAllAsRead(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                ...unread.map(
+                  (n) => NotificationItem(
+                    notification: n,
+                    onTap: () => cubit.markAsRead(n.id),
+                  ),
+                ),
+                const SizedBox(height: 11),
+              ],
 
-//   void _toggleEarlier(int index) {
-//     setState(
-//       () => _earlierNotifications[index].isSelected =
-//           !_earlierNotifications[index].isSelected,
-//     );
-//   }
+              // ── Read / earlier section ──────────────────────────────────
+              if (read.isNotEmpty) ...[
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: kHorizontalPadding,
+                  ),
+                  child: NotificationSectionHeader(
+                    label: 'في وقت سابق',
+                    count: read.length,
+                    isAllSelected: true,
+                    onSelectAll: (_) {},
+                  ),
+                ),
+                const SizedBox(height: 16),
+                ...read.map(
+                  (n) => NotificationItem(notification: n, onTap: () {}),
+                ),
+              ],
 
-//   bool get _allNewSelected => _newNotifications.every((n) => n.isSelected);
+              // ── Empty state ─────────────────────────────────────────────
+              if (state.notifications.isEmpty)
+                const _EmptyNotificationsWidget(),
 
-//   bool get _allEarlierSelected =>
-//       _earlierNotifications.every((n) => n.isSelected);
+              const SizedBox(height: 24),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: CustomScrollView(
-//         slivers: [
-//           SliverToBoxAdapter(
-//             child: Column(
-//               children: [
-//                 const SizedBox(height: kTopPadding),
-//                 const Padding(
-//                   padding: EdgeInsetsGeometry.symmetric(
-//                     horizontal: kHorizontalPadding,
-//                   ),
-//                   child: CustomMainAppBar(title: 'الاشعارات'),
-//                 ),
-//                 const SizedBox(height: 16),
-//                 Padding(
-//                   padding: const EdgeInsetsGeometry.symmetric(
-//                     horizontal: kHorizontalPadding,
-//                   ),
-//                   child: NotificationSectionHeader(
-//                     label: 'جديد',
-//                     count: _newNotifications.length,
-//                     isAllSelected: _allNewSelected,
-//                     onSelectAll: _selectAllNew,
-//                   ),
-//                 ),
-//                 const SizedBox(height: 16),
-//                 ..._newNotifications.asMap().entries.map(
-//                   (e) => NotificationItem(
-//                     notification: e.value,
-//                     onTap: () => _toggleNew(e.key),
-//                   ),
-//                 ),
-//                 const SizedBox(height: 11),
+class _EmptyNotificationsWidget extends StatelessWidget {
+  const _EmptyNotificationsWidget();
 
-//                 Padding(
-//                   padding: const EdgeInsetsGeometry.symmetric(
-//                     horizontal: kHorizontalPadding,
-//                   ),
-//                   child: NotificationSectionHeader(
-//                     label: 'في وقت سابق',
-//                     count: _earlierNotifications.length,
-//                     isAllSelected: _allEarlierSelected,
-//                     onSelectAll: _selectAllEarlier,
-//                   ),
-//                 ),
-//                 const SizedBox(height: 16),
-//                 ..._earlierNotifications.asMap().entries.map(
-//                   (e) => NotificationItem(
-//                     notification: e.value,
-//                     onTap: () => _toggleEarlier(e.key),
-//                   ),
-//                 ),
-
-//                 const SizedBox(height: 24),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 60),
+      child: Center(
+        child: AppTextWidget(
+          'لا توجد اشعارات',
+          style: AppTextStyles.styleBold16,
+        ),
+      ),
+    );
+  }
+}

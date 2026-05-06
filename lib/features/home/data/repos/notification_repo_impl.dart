@@ -17,20 +17,20 @@ class NotificationRepoImpl implements NotificationRepo {
   @override
   Future<Either<Failure, List<NotificationEntity>>> getNotifications() async {
     try {
-      final data = await databaseService.getData(
-        path: BackendEndpoints.notifications,
-      );
-      final notifications =
-          data
-              .map(
-                (e) => NotificationModel.fromJson(
-                  e['data'] as Map<String, dynamic>,
-                  e['id'] as String,
-                ),
+      final data =
+          await databaseService.getData(
+                path: BackendEndpoints.notifications,
+                query: {'orderBy': 'createdAt', 'descending': true},
               )
-              .toList()
-            ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
-
+              as List<Map<String, dynamic>>;
+      List<NotificationEntity> notifications = data
+          .map(
+            (notification) => NotificationModel.fromJson(
+              notification,
+              notification['id'] as String,
+            ).toEntity(),
+          )
+          .toList();
       return Right(notifications);
     } catch (e) {
       log('Exception in NotificationRepoImpl.getNotifications: $e');
