@@ -12,4 +12,15 @@ abstract class DatabaseService {
   });
 
   Future<bool> isDataExists({required String path, required String documentId});
+
+  Future<void> updateData({
+    required String path,
+    required Map<String, dynamic> data,
+    required String documentId,
+  });
+
+  Future<List<Map<String, dynamic>>> getDataCollection({
+    required String path,
+    Map<String, dynamic>? filters,
+  });
 }

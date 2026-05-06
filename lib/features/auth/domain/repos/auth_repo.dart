@@ -19,6 +19,6 @@ abstract class AuthRepo {
   Future<void> saveUserData({required UserEntity user});
 
   Future<UserEntity> getUserData({required String uid});
-
+  Future<void> updateFcmToken({required String uid, required String token});
   Future<void> signOut();
 }

@@ -7,7 +7,6 @@ import 'package:fruits_app/features/home/presentation/views/widgets/show_more_pr
 import '../../../../../core/utils/constants/app_constants.dart';
 import '../../../../../core/widgets/search_text_field.dart';
 import '../best_selling_view.dart';
-import '../notification_view.dart';
 import '../search_view.dart';
 import 'featured_list.dart';
 import 'home_app_bar.dart';
@@ -38,9 +37,10 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 children: [
                   const SizedBox(height: kTopPadding),
                   HomeAppBar(
-                    onNotificationTapped: () => Navigator.of(
-                      context,
-                    ).pushNamed(NotificationView.routeName),
+                    onNotificationTapped: () {},
+                    // onNotificationTapped: () => Navigator.of(
+                    //   context,
+                    // ).pushNamed(NotificationView.routeName),
                   ),
                   const SizedBox(height: 16),
                   SearchTextField(

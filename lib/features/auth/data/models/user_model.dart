@@ -10,6 +10,7 @@ class UserModel extends UserEntity {
     super.role,
     super.status,
     super.createdAt,
+    super.fcmToken,
   });
 
   factory UserModel.fromFirebaseUser(User user) {
@@ -27,9 +28,12 @@ class UserModel extends UserEntity {
       email: jsonData['email'],
       role: jsonData['role'],
       status: jsonData['status'],
-      createdAt: jsonData['created_at'] != null
-          ? Timestamp.fromDate(DateTime.parse(jsonData['created_at']))
-          : null,
+      fcmToken: jsonData['fcm_token'],
+      createdAt: jsonData['created_at'] == null
+          ? null
+          : (jsonData['created_at'] is Timestamp
+                ? jsonData['created_at'] as Timestamp
+                : Timestamp.fromDate(DateTime.parse(jsonData['created_at']))),
     );
   }
 
@@ -40,17 +44,30 @@ class UserModel extends UserEntity {
       email: userEntity.email,
       role: userEntity.role,
       status: userEntity.status,
+      fcmToken: userEntity.fcmToken,
       createdAt: userEntity.createdAt,
     );
   }
-
   Map<String, dynamic> toMap() {
     return {
+      'uid': uId,
       'name': name,
       'email': email,
-      'uid': uId,
       'role': role ?? 'customer',
       'status': status ?? 'active',
+      'created_at': createdAt,
+      if (fcmToken != null) 'fcm_token': fcmToken,
+    };
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'uid': uId,
+      'name': name,
+      'email': email,
+      'role': role,
+      'status': status,
+      'fcm_token': fcmToken,
       'created_at': createdAt?.toDate().toIso8601String(),
     };
   }

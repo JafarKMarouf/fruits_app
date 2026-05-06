@@ -1,6 +1,6 @@
 import 'package:fruits_app/core/models/product_model.dart';
 import 'package:fruits_app/core/models/review_model.dart';
-import 'package:fruits_app/core/services/local_storage_services/local_storage_service.dart';
+import 'package:fruits_app/core/services/local_storage/local_storage_service.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
 import '../../../features/cart/data/models/cart_item_model.dart';

@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:fruits_app/core/errors/failure.dart';
 import 'package:fruits_app/core/repositories/order_repo/order_repo.dart';
-import 'package:fruits_app/core/services/store_services/database_service.dart';
+import 'package:fruits_app/core/services/database/database_service.dart';
 import 'package:fruits_app/core/utils/constants/backend_endpoints.dart';
 import 'package:fruits_app/features/checkout/data/models/order_model/order_input_model.dart';
 import 'package:fruits_app/features/checkout/domain/entities/order_input_entity/order_input_entity.dart';

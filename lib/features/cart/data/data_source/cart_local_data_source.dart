@@ -1,4 +1,4 @@
-import 'package:fruits_app/core/services/local_storage_services/local_storage_service.dart';
+import 'package:fruits_app/core/services/local_storage/local_storage_service.dart';
 import 'package:fruits_app/core/utils/constants/app_constants.dart';
 
 import '../../../../core/utils/constants/hive_box_name.dart';

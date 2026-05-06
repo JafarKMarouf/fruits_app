@@ -1,4 +1,4 @@
-import 'package:fruits_app/core/services/store_services/database_service.dart';
+import 'package:fruits_app/core/services/database/database_service.dart';
 import 'package:fruits_app/core/utils/constants/backend_endpoints.dart';
 import 'package:fruits_app/features/cart/data/models/cart_model.dart';
 

@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruits_app/core/errors/custom_exceptions.dart';
 import 'package:fruits_app/core/errors/failure.dart';
-import 'package:fruits_app/core/services/firebase_auth_service.dart';
-import 'package:fruits_app/core/services/shared_preferences_service.dart';
-import 'package:fruits_app/core/services/store_services/database_service.dart';
+import 'package:fruits_app/core/services/auth/firebase_auth_service.dart';
+import 'package:fruits_app/core/services/local_storage/shared_preferences_service.dart';
+import 'package:fruits_app/core/services/database/database_service.dart';
 import 'package:fruits_app/core/utils/constants/backend_endpoints.dart';
 import 'package:fruits_app/core/utils/constants/app_constants.dart';
 import 'package:fruits_app/core/utils/constants/hive_box_name.dart';
@@ -17,11 +18,17 @@ import 'package:fruits_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:fruits_app/features/auth/domain/requests/user_request.dart';
 import 'package:hive_ce/hive.dart';
 
+import '../../../../core/services/notification/push_notifications/push_notification_service.dart';
+
 class AuthRepoImpl extends AuthRepo {
   final FirebaseAuthService firebaseAuthService;
   final DatabaseService databaseService;
-
-  AuthRepoImpl(this.firebaseAuthService, this.databaseService);
+  final PushNotificationService pushNotificationService;
+  AuthRepoImpl(
+    this.firebaseAuthService,
+    this.databaseService,
+    this.pushNotificationService,
+  );
 
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword({
@@ -32,10 +39,13 @@ class AuthRepoImpl extends AuthRepo {
       user = await firebaseAuthService.createUserWithEmailAndPassword(
         request: request,
       );
+      final fcmToken = await pushNotificationService.getToken();
       UserEntity userEntity = UserEntity(
         uId: user.uid,
         name: request.name!,
         email: request.email,
+        fcmToken: fcmToken,
+        createdAt: Timestamp.now(),
       );
       await addUserData(user: userEntity);
       return Right(userEntity);
@@ -65,7 +75,10 @@ class AuthRepoImpl extends AuthRepo {
       );
       UserEntity userEntity = await getUserData(uid: user.uid);
       await saveUserData(user: userEntity);
-
+      final fcmToken = await pushNotificationService.getToken();
+      if (fcmToken != null) {
+        await updateFcmToken(uid: user.uid, token: fcmToken);
+      }
       return Right(userEntity);
     } on CustomException catch (e) {
       return Left(ServerFailure(e.message));
@@ -82,10 +95,16 @@ class AuthRepoImpl extends AuthRepo {
     User? user;
     try {
       user = await firebaseAuthService.signInWithGoogle();
+      final fcmToken = await pushNotificationService.getToken();
+      if (fcmToken != null) {
+        await updateFcmToken(uid: user.uid, token: fcmToken);
+      }
       UserEntity userEntity = UserEntity(
         uId: user.uid,
         name: user.displayName ?? '',
         email: user.email ?? '',
+        fcmToken: fcmToken,
+        createdAt: Timestamp.now(),
       );
       bool isUserExists = await databaseService.isDataExists(
         path: BackendEndpoints.isUserExists,
@@ -132,7 +151,7 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<void> saveUserData({required UserEntity user}) async {
-    var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
+    var jsonData = jsonEncode(UserModel.fromEntity(user).toJson());
     await SharedPreferencesService.setString(kUserData, jsonData);
     await SharedPreferencesService.setBool(kIsUserLoggedIn, true);
   }
@@ -148,5 +167,17 @@ class AuthRepoImpl extends AuthRepo {
 
   Future<void> _clearAllHiveData() async {
     await Hive.deleteBoxFromDisk(HiveBoxNames.cartBox);
+  }
+
+  @override
+  Future<void> updateFcmToken({
+    required String uid,
+    required String token,
+  }) async {
+    await databaseService.updateData(
+      path: BackendEndpoints.updateUser,
+      documentId: uid,
+      data: {'fcm_token': token},
+    );
   }
 }

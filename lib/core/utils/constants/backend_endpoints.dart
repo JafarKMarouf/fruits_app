@@ -2,6 +2,7 @@ abstract class BackendEndpoints {
   static const String addUser = 'users';
   static const String getUser = 'users';
   static const String isUserExists = 'users';
+  static const String updateUser = 'users';
 
   static const String bestSellingProducts = 'products';
   static const String products = 'products';
@@ -11,4 +12,6 @@ abstract class BackendEndpoints {
 
   static const String addOrder = 'orders';
   static const String getOrder = 'orders';
+
+  static const String notifications = 'notifications';
 }

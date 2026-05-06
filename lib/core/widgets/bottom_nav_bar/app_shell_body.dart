@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../features/home/presentation/views/best_selling_view.dart';
-import '../../../features/home/presentation/views/notification_view.dart';
 import '../../../features/home/presentation/views/search_view.dart';
 import 'package:fruits_app/features/cart/presentation/views/cart_view.dart';
 import 'package:fruits_app/features/home/presentation/views/home_view.dart';
@@ -79,8 +78,8 @@ class _AppShellBodyState extends State<AppShellBody> {
         return const BestSellingView();
       case SearchView.routeName:
         return const SearchView();
-      case NotificationView.routeName:
-        return const NotificationView();
+      // case NotificationView.routeName:
+      //   return const NotificationView();
 
       default:
         return _tabRoots[tabIndex];

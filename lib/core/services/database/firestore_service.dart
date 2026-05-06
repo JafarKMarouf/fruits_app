@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fruits_app/core/services/store_services/database_service.dart';
+import 'package:fruits_app/core/services/database/database_service.dart';
 
 class FirestoreService extends DatabaseService {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -83,5 +83,41 @@ class FirestoreService extends DatabaseService {
   }) async {
     var data = await firestore.collection(path).doc(documentId).get();
     return data.exists;
+  }
+
+  @override
+  Future<void> updateData({
+    required String path,
+    required Map<String, dynamic> data,
+    required String documentId,
+  }) async {
+    try {
+      await firestore.collection(path).doc(documentId).update(data);
+    } on FirebaseException catch (e) {
+      log('FirebaseException in FirestoreService.updateData: ${e.toString()}');
+      rethrow;
+    } catch (e) {
+      log('Exception in FirestoreService.updateData: ${e.toString()}');
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getDataCollection({
+    required String path,
+    Map<String, dynamic>? filters,
+  }) async {
+    Query<Map<String, dynamic>> query = FirebaseFirestore.instance.collection(
+      path,
+    );
+
+    filters?.forEach((field, value) {
+      query = query.where(field, isEqualTo: value);
+    });
+
+    final snapshot = await query.get();
+    return snapshot.docs
+        .map((doc) => {'id': doc.id, 'data': doc.data()})
+        .toList();
   }
 }

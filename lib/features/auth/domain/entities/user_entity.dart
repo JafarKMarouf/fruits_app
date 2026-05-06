@@ -7,7 +7,7 @@ class UserEntity {
   final String? role;
   final Timestamp? createdAt;
   final String? status;
-
+  final String? fcmToken;
   const UserEntity({
     required this.uId,
     required this.name,
@@ -15,5 +15,6 @@ class UserEntity {
     this.role,
     this.createdAt,
     this.status,
+    this.fcmToken,
   });
 }
