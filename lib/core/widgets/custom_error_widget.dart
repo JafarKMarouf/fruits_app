@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_app/core/widgets/app_text_widget.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   final String errorMessage;
@@ -51,7 +52,7 @@ class CustomErrorWidget extends StatelessWidget {
                 children: [
                   Icon(Icons.refresh),
                   SizedBox(width: 8),
-                  Text('Try Again'),
+                  AppTextWidget('Try Again'),
                 ],
               ),
             ),

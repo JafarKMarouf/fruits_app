@@ -4,7 +4,6 @@ import 'package:fruits_app/core/widgets/app_text_widget.dart';
 
 AppBar buildAppBar(BuildContext context, {required String title}) {
   return AppBar(
-    backgroundColor: Colors.white,
     leading: Navigator.canPop(context)
         ? IconButton(
             onPressed: () {
